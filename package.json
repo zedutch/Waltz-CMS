@@ -1,0 +1,48 @@
+{
+  "name": "waltz-cms",
+  "version": "0.0.1",
+  "description": "A JavaScript CMS",
+  "main": "server.js",
+  "scripts": {
+    "start": "tsc && concurrently \"npm run tsc:w\" \"node server.js\"",
+    "postinstall": "typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
+  },
+  "keywords": [
+    "CMS",
+    "prismic",
+    "Waltz"
+  ],
+  "author": "Zedutchgandalf",
+  "license": "Unlicense",
+  "dependencies": {
+    "angular2": "^2.0.0-beta.16",
+    "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
+    "errorhandler": "^1.4.3",
+    "es6-shim": "^0.35.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "mkdirs": "0.0.2",
+    "mongoose": "^4.4.14",
+    "morgan": "^1.7.0",
+    "ng2-bootstrap": "^1.0.14",
+    "prismic.io": "^2.1.6",
+    "pug": "^2.0.0-alpha6",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "stylus": "^0.54.3",
+    "systemjs": "^0.19.26",
+    "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "express-livereload": "0.0.24",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-stylus": "^2.3.1",
+    "gulp-typescript": "^2.13.0",
+    "typings": "^0.8.1"
+  }
+}

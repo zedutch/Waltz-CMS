@@ -1,0 +1,31 @@
+extends skeleton
+
+block body
+
+    waltz-main Loading...
+
+    script(src='lib/prismic.io/dist/prismic.io.js')
+    
+    // IE required polyfills
+    script(src='lib/es6-shim/es6-shim.min.js')
+    script(src='lib/systemjs/dist/system-polyfills.js')
+    script(src='lib/angular2/es6/dev/src/testing/shims_for_IE.js')
+
+    script(src='lib/angular2/bundles/angular2-polyfills.js')
+    script(src='lib/systemjs/dist/system.src.js')
+    script(src='lib/rxjs/bundles/Rx.js')
+    script(src='lib/angular2/bundles/angular2.dev.js')
+
+    script(src='lib/ng2-bootstrap/bundles/ng2-bootstrap.min.js')
+
+    script.
+        System.config({
+            packages: {
+                dist: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('dist/main')
+              .then(null, console.error.bind(console));
