@@ -52,11 +52,11 @@ gulp.task('watch', function () {
     gulp.watch('./app/scripts/**/*.ts', ['typescript']);
 });
 
-gulp.task('dev', ['start-mongo'], function () {
+gulp.task('dev', ['typescript', 'start-mongo'], function () {
     nmon({
         script : 'server.js',
         ext    : 'js'
     });
 });
 
-gulp.task('default', ['typescript', 'dev', 'watch']);
+gulp.task('default', ['dev', 'watch']);
