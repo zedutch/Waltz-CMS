@@ -1,6 +1,6 @@
 app/dist/
 data/
 logs/
-node_modules/.bin/concurrent
 node_modules/
 typings/
+*.log
