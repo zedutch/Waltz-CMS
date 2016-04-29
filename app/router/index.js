@@ -10,6 +10,11 @@ router.get('/views/:name', function(req, res) {
     res.render('views/' + name);
 });
 
+router.get('/components/:name', function(req, res) {
+    var name = req.params.name;
+    res.render('components/' + name);
+});
+
 router.use('*', function (req, res){
     res.status(404).send({
         "error" : "Page not found."

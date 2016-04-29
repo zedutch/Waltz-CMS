@@ -1,40 +1,5 @@
-h1 The data currently on {{url}}:
+h1 All posts currently on {{url}}:
 
-p {{data | json}}
-
-h2 Bookmarks:
-span(*ngIf="data.bookmarks") {{data.bookmarks | json}}
-span(*ngIf="!data.bookmarks") No bookmarks found!
-
-h2 Refs:
-ul
-    li(*ngFor="#ref of data.refs") {{ref | json}}
-    
-h2 Forms:
-span(*ngIf="data.forms") {{data.forms | json}}
-span(*ngIf="!data.forms") No forms found!
-
-h2 Master:
-span(*ngIf="data.master") {{data.master | json}}
-span(*ngIf="!data.master") No master found!
-
-h2 Types:
-span(*ngIf="data.types") {{data.types | json}}
-span(*ngIf="!data.types") No types found!
-
-h2 Tags:
-ul(*ngIf="data.tags && data.tags.length > 0")
-    li(*ngFor="#tag of data.tags") {{tag | json}}
-span(*ngIf="!data.tags || data.tags.length <= 0") No tags found!
-    
-h2 Experiments:
-span(*ngIf="data.experiments") {{data.experiments | json}}
-span(*ngIf="!data.experiments") No experiments found!
-
-h2 OAuthInitiate:
-span(*ngIf="data.oauthInitiate") {{data.oauthInitiate | json}}
-span(*ngIf="!data.oauthInitiate") No oauthInitiate found!
-
-h2 OAuthToken:
-span(*ngIf="data.oauthToken") {{data.oauthToken | json}}
-span(*ngIf="!data.oauthToken") No oauthToken found!
+ul.posts-list
+    li(*ngFor="#post of posts")
+        post([post]='post')
