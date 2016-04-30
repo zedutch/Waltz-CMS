@@ -3,15 +3,19 @@ var mongoose = require('mongoose'),
 var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
-    title : String,
-    content     : String,
+    title      : String,
+    content    : String,
     datePosted : {
-        type : Date,
+        type    : Date,
         default : Date.now
+    },
+    author     : {
+        type    : String,
+        default : "Admin"
     }
 }, {
-    toJSON: {
-        virtuals: true 
+    toJSON     : {
+        virtuals : true 
     }
 });
 
