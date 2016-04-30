@@ -5,15 +5,17 @@ normalize-css()
 
 html,
 body
-    margin 0
+    margin  0
+    color   text-main
 
 a,
 a:hover
+    color           text-link
     text-decoration none
     font-weight     bold
 
 a:visited
-    color   inherit
+    color   text-link
     
 .navbar
     color            white
@@ -30,9 +32,14 @@ a:visited
     border-top       2px solid color-main-li
     margin-bottom    20px
 
-.navbar-title
+.navbar-title,
+a.navbar-title,
+a.navbar-title:visited,
+a.navbar-title:hover
     font-size   1.2em
     margin-left 64px
+    color       navbar-title
+    text-shadow 1px 1px 2px navbar-shadow
 
 .navbar-icon
     width       48px
@@ -40,27 +47,41 @@ a:visited
     margin      5px
     margin-top  0
     position    absolute
-    shadowed-image("/img/waltz-example_logo.png", 0px, 1px, 3px, black)
+    shadowed-image("/img/waltz-example_logo.png", 0px, 1px, 3px, navbar-shadow)
+
+footer
+    text-align  center
+    padding-top 16px
 
 .posts-list
     list-style  none
     margin      0
     padding     0
 
-.post
-    font-weight normal
-    color       black
-    display     block
-    padding     5px
-    margin      0
+.post,
+.post:visited
+    font-weight   normal
+    color         text-main
+    display       block
+    padding       5px
+    margin        0
+    border-bottom 1px solid text-main-li
 
 .post:hover
     background-color alpha(color-main, 0.1)
     font-weight      normal
-    color            black
+    color            text-main
 
 .post-title
     font-weight bold
+    color       color-main-da
+
+.post-metadata
+    text-align  right
+    color       text-main-li
 
 .post-date
+    font-style  italic
+
+.post-author
     font-style  italic

@@ -1,5 +1,14 @@
-h1 All posts currently on {{url}}:
+div.row
+    div.col-xs-12.col-sm-9.main-container
+        h1 All posts currently on {{url}}:
 
-ul.posts-list
-    li(*ngFor="#post of posts")
-        post([post]='post')
+        ul.posts-list
+            li(*ngFor="#post of posts")
+                post([post]='post')
+    div.col-xs-12.col-sm-3.sidebar-container
+        div.sidebar-widget
+            h3 Upcoming Events
+        div.sidebar-widget
+            h3 About Us
+        div.sidebar-widget
+            h3 F.A.Q.
