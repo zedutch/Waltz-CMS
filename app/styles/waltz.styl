@@ -1,7 +1,6 @@
 normalize-css()
 
-color-main    = rgb(126, 18, 44);
-color-main-50 = rgba(126, 18, 44, 0.5);
+@import colours
 
 html,
 body
@@ -17,7 +16,7 @@ a:visited
     
 .navbar
     color            white
-    background-color black
+    background-color navbar-main
     padding          16px
     border-radius    0
 
@@ -37,7 +36,7 @@ a:visited
     margin      0
 
 .post:hover
-    background-color color-main-50
+    background-color alpha(color-main, 0.1)
     font-weight      normal
     color            black
 
