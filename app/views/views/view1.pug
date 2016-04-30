@@ -1,14 +1,15 @@
 div.row
     div.col-xs-12.col-sm-9.main-container
-        h1 All posts currently on {{url}}:
-
-        ul.posts-list
-            li(*ngFor="#post of posts")
-                post([post]='post')
+        div.main-widget
+            h1 {{'welcome' | translate}}
+        div.main-widget
+            ul.posts-list
+                li(*ngFor="#post of posts")
+                    post([post]='post')
     div.col-xs-12.col-sm-3.sidebar-container
         div.sidebar-widget
-            h3 Upcoming Events
+            h3 {{'widget.upcoming' | translate}}
         div.sidebar-widget
-            h3 About Us
+            h3 {{'widget.about' | translate}}
         div.sidebar-widget
-            h3 F.A.Q.
+            h3 {{'widget.faq' | translate}}
