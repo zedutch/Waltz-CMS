@@ -52,7 +52,7 @@ gulp.task('watch', function () {
     gulp.watch('./app/scripts/**/*.ts', ['typescript']);
 });
 
-gulp.task('dev', ['typescript', 'start-mongo'], function () {
+gulp.task('dev', ['typescript', 'stylus', 'start-mongo'], function () {
     nmon({
         script : 'server.js',
         ext    : 'js'
