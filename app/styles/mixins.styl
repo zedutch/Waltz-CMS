@@ -1,0 +1,6 @@
+shadowed-image(imgUrl, x, y, blur, shadowColour)
+    filter url(imgUrl#drop-shadow);
+    -webkit-filter: drop-shadow(x y blur shadowColour);
+    filter drop-shadow(x y blur shadowColour);
+    -ms-filter  "progid:DXImageTransform.Microsoft.Dropshadow(OffX="+x+", OffY="+y+", Color='"+shadowColour+"')"
+    filter "progid:DXImageTransform.Microsoft.Dropshadow(OffX="++x", OffY="+y+", Color='"+shadowColour+"')"
