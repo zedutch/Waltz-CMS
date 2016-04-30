@@ -1,31 +1,38 @@
-extends skeleton
+doctype html
 
-block body
+html
 
-    waltz-main Loading...
-    
-    // IE required polyfills
-    script(src='lib/es6-shim/es6-shim.min.js')
-    script(src='lib/systemjs/dist/system-polyfills.js')
-    script(src='lib/angular2/es6/dev/src/testing/shims_for_IE.js')
+    include head
 
-    script(src='lib/angular2/bundles/angular2-polyfills.js')
-    script(src='lib/systemjs/dist/system.src.js')
-    script(src='lib/rxjs/bundles/Rx.js')
-    script(src='lib/angular2/bundles/angular2.dev.js')
+    body
+        waltz-main Loading...
 
-    script(src='lib/ng2-bootstrap/bundles/ng2-bootstrap.min.js')
+        // IE required polyfills
+        script(src='lib/es6-shim/es6-shim.min.js')
+        script(src='lib/systemjs/dist/system-polyfills.js')
+        script(src='lib/angular2/es6/dev/src/testing/shims_for_IE.js')
 
-    script(src='lib/angular2/bundles/http.js')
+        script(src='lib/angular2/bundles/angular2-polyfills.js')
+        script(src='lib/systemjs/dist/system.src.js')
+        script(src='lib/rxjs/bundles/Rx.js')
+        script(src='lib/angular2/bundles/angular2.dev.js')
 
-    script.
-        System.config({
-            packages: {
-                dist: {
-                    format: 'register',
-                    defaultExtension: 'js'
+        // Internationalization support
+        script(src='https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.nl-BE,Intl.~locale.en-US')
+
+        script(src='lib/ng2-bootstrap/bundles/ng2-bootstrap.min.js')
+        script(src='lib/angular2localization/bundles/angular2localization.js')
+
+        script(src='lib/angular2/bundles/http.js')
+
+        script.
+            System.config({
+                packages: {
+                    dist: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    }
                 }
-            }
-        });
-        System.import('dist/main')
-              .then(null, console.error.bind(console));
+            });
+            System.import('dist/main')
+                  .then(null, console.error.bind(console));
