@@ -12,7 +12,9 @@ export class CMSBackendService {
         var data = this.http.get(this.URL + this._epPosts);
         data.subscribe(res => {
             if (res.status === 200) {
-                callback(res.json());
+                var posts = res.json();
+                posts.map(p => p.datePosted = new Date(p.datePosted));
+                callback(posts);
             } else {
                 console.error("Error retrieving all posts!", res)
             }
