@@ -1,3 +1,4 @@
+app/styles/*.css
 app/dist/
 data/
 logs/
