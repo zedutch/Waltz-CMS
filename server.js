@@ -15,6 +15,7 @@ app.set(morgan('dev'));
 app.use('/styles', express.static(__dirname + '/app/styles'));
 app.use('/lib',    express.static(__dirname + '/node_modules'));
 app.use('/dist',   express.static(__dirname + '/app/dist'));
+app.use('/img',    express.static(__dirname + '/app/images'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function(err, req, res, next){res.status(err.status || 500);});
