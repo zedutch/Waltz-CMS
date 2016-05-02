@@ -5,3 +5,5 @@ exports.logDir  = "./logs/";
 
 exports.dbData  = "./data";
 exports.dbLog   = "mongo.log";
+
+exports.secret  = "REPLACE_WITH_A_RANDOM_STRING";
