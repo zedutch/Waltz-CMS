@@ -6,6 +6,7 @@ var express      = require('express'),
 var config       = require('./app/config/express.conf'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
+    session      = require('express-session'),
     errorHandler = require('errorhandler'),
     morgan       = require('morgan');
 
@@ -21,6 +22,11 @@ app.use('/lib',    express.static(__dirname + '/node_modules'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser(config.secret));
+app.use(session({
+    secret            : config.secret,
+    resave            : false,
+    saveUninitialized : false
+}));
 app.use(function(err, req, res, next){res.status(err.status || 500);});
 
 if (config.env === 'development') {

@@ -1,6 +1,6 @@
 exports.getURL = function(req) {
     return req.protocol + '://' + req.get('host') + req.originalUrl;
-}
+};
 
 exports.getMethods = function (methods) {
     var methString = "(";
@@ -9,7 +9,7 @@ exports.getMethods = function (methods) {
     }
     methString = methString.substr(0, methString.length - 2) + ")";
     return methString;
-}
+};
 
 exports.checkBody = function (body, requiredFields, objectName, res) {
     if (!body) {
@@ -29,4 +29,14 @@ exports.checkBody = function (body, requiredFields, objectName, res) {
         }
     }
     return true;
-}
+};
+
+exports.checkSession = function (req, res, callback) {
+    if (req.session.user) {
+        callback();
+    } else {
+        response.send(401, {
+            error : "Authorization failed."
+        });
+    }
+};

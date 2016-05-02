@@ -1,6 +1,6 @@
-var express   = require('express'),
-    Post      = require('../models/post.js'),
-    checkBody = require('./helpers.js').checkBody;
+var express      = require('express'),
+    checkSession = require('./helpers.js').checkSession;
+    Post         = require('../models/post.js');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -13,21 +13,19 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', function(req, res) {
-    if (checkBody(req.body, ["title", "content"], "post", res)) {
-        var post = new Post({
-            title : req.body.title,
-            content : req.body.content
-        });
+router.post('/', checkSession, function(req, res) {
+    var post = new Post({
+        title : req.body.title,
+        content : req.body.content
+    });
 
-        post.save(function(err) {
-            if (!err) {
-                return res.status(200).send(post);
-            } else {
-                return res.status(500).send(err);
-            }
-        });
-    }
+    post.save(function(err) {
+        if (!err) {
+            return res.status(200).send(post);
+        } else {
+            return res.status(500).send(err);
+        }
+    });
 });
 
 router.get('/:id', function(req, res) {
@@ -39,12 +37,13 @@ router.get('/:id', function(req, res) {
         if (err) {
             return console.error(err);
         } else {
+            post.handleUser(req.session.user);
             return res.send(post);
         }
     })
 });
 
-router.put('/:id', function(req, res) {
+router.put('/:id', checkSession, function(req, res) {
     var id = req.params.id;
 
     Post.update({
@@ -59,7 +58,7 @@ router.put('/:id', function(req, res) {
     return res.sendStatus(204);
 });
 
-router.delete('/:id', function(req, res) {
+router.delete('/:id', checkSession, function(req, res) {
     var id = req.params.id;
 
     Post.remove({

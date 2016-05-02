@@ -1,5 +1,6 @@
 var express   = require('express'),
     mongoose  = require('mongoose'),
+    bcrypt    = require('bcrypt-nodejs'),
     config    = require('../config/waltz.conf');
 var router = express.Router();
 
@@ -13,6 +14,10 @@ router.get('/', function(req, res) {
 // POSTS
 var postsRouter = require('./posts.js');
 router.use(config.epPosts, postsRouter);
+
+// USERS
+var usersRouter = require('./users.js');
+router.use(config.epUsers, usersRouter);
 
 // 404
 router.use('*', function (req, res){
