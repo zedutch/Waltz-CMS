@@ -9,12 +9,11 @@
 	`npm install`
 4. Install Gulp globally:
 	`npm install -g gulp`
+5. Copy `app/config/express.conf.example` to `app/config/express.conf` and edit it according to the configuration you want to use on your machine.
 
 ##Running Locally:
-1. Open a terminal window and start the MongoDB server:
-	`mongod`
-2. Open a separate terminal window and start the application:
+1. Open a terminal window and start the application:
 	`gulp`
-3. Open a browser window and navigate to `localhost:8080`.
+2. Open a browser window and navigate to `localhost:8080`.
 
 You can install the [LiveReload browser extension](http://livereload.com/extensions/) to automatically reload the browser window whenever a file changes.
