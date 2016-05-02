@@ -10,30 +10,34 @@ var tsProject = ts.createProject('tsconfig.json');
 
 function run(command) {
     return function (callback) {
+        console.log("Running", command);
         exec(command, function(err, stdout, stderr) {
             console.log(stdout);
             console.error(stderr);
-            callback(err);
+            if (callback) {
+                callback(err);
+            }
         });
     };
 }
 
 // http://stackoverflow.com/a/29504192
-gulp.task('start-mongo', function() {
-    var cmd = 'mongod --fork --dbpath ' + config.dbData + '/ --logpath ' + config.logDir + config.dbLog;
+gulp.task('start-mongo', ['install'], function() {
+    var cmd = 'mongod --dbpath ' + config.dbData + '/ --logpath ' + config.logDir + config.dbLog;
     mkdirs(config.dbData);
     mkdirs(config.logDir);
-    run(cmd);
+    run(cmd)();
 });
-gulp.task('stop-mongo', run('mongo --eval "db.shutdownServer();"'));
 
-gulp.task('stylus', function () {
+gulp.task('stop-mongo', ['install'], run('mongo --eval "db.shutdownServer();"'));
+
+gulp.task('stylus', ['install'], function () {
     return gulp.src('./app/styles/**/*.styl')
         .pipe(stylus())
         .pipe(gulp.dest('./app/styles'));
 });
 
-gulp.task('compress', function () {
+gulp.task('compress', ['install'], function () {
     return gulp.src('./app/styles/**/*.styl')
         .pipe(stylus({
             compress: true
@@ -41,22 +45,26 @@ gulp.task('compress', function () {
         .pipe(gulp.dest('./app/styles'));
 });
 
-gulp.task('typescript', function() {
+gulp.task('typescript', ['install'], function() {
     return tsProject.src()
         .pipe(ts(tsProject))
         .js.pipe(gulp.dest('app/dist'));
 });
 
-gulp.task('watch', function () {
+gulp.task('install', function (cb) {
+    run("npm install")(cb);
+});
+
+gulp.task('watch', ['install'], function () {
     gulp.watch('./app/styles/**/*.styl', ['stylus']);
     gulp.watch('./app/scripts/**/*.ts', ['typescript']);
 });
 
-gulp.task('dev', ['typescript', 'stylus', 'start-mongo'], function () {
+gulp.task('dev', ['install', 'typescript', 'stylus', 'start-mongo'], function () {
     nmon({
         script : 'server.js',
         ext    : 'js'
     });
 });
 
-gulp.task('default', ['dev', 'watch']);
+gulp.task('default', ['install', 'dev', 'watch']);
