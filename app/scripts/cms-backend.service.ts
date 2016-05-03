@@ -20,4 +20,17 @@ export class CMSBackendService {
             }
         });
     }
+
+    getPost(id, callback) {
+        var data = this.http.get(this.URL + this._epPosts + "/" + id);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                var post = res.json();
+                post.datePosted = new Date(post.datePosted);
+                callback(post);
+            } else {
+                console.error("Error retrieving post with id '" + id + "'!", res)
+            }
+        });
+    }
 }

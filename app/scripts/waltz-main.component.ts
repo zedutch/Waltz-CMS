@@ -7,7 +7,8 @@ import {ROUTER_DIRECTIVES}  from 'angular2/router';
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 import {LocaleService, LocalizationService} from 'angular2localization/angular2localization';
 
-import {WaltzViewComponent} from './waltz-view.component';
+import {WaltzViewComponent}  from './waltz-view.component';
+import {PostDetailComponent} from './post-detail.component';
 
 @Component({
     selector    : 'waltz-main',
@@ -29,7 +30,9 @@ import {WaltzViewComponent} from './waltz-view.component';
         name         : 'Home',
         component    : WaltzViewComponent,
         useAsDefault : true
-    }
+    },
+    
+    { path : '/posts/:id',  name : 'PostDetail',  component: PostDetailComponent }
 ])
 
 export class WaltzMainComponent {

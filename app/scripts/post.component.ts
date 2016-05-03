@@ -1,5 +1,7 @@
-import {Component, Input}              from 'angular2/core';
-import {TranslatePipe, LocaleDatePipe} from 'angular2localization/angular2localization';
+import {Component, Input} from 'angular2/core';
+import {Router}           from 'angular2/router';
+import {TranslatePipe}    from 'angular2localization/angular2localization';
+import {LocaleDatePipe}   from 'angular2localization/angular2localization';
 
 @Component({
     selector    : 'post',
@@ -10,5 +12,9 @@ import {TranslatePipe, LocaleDatePipe} from 'angular2localization/angular2locali
 export class PostComponent {
     @Input() post : Object;
 
-    constructor() {}
+    constructor(private _router : Router) {}
+
+    openPost() {
+        this._router.navigate( ['PostDetail', { id : this.post._id }] );
+    }
 }
