@@ -6,8 +6,8 @@ Here are some of the things that might help you along the way:
  - [Questions or Problems?](#questions)
  - [Issues or Bugs](#issues)
  - [Requests for Features](#features)
- - [Installing Waltz Locally](#installation)
- - [Running Waltz Locally](#running)
+ - [Installing Locally](#installation)
+ - [Running Locally](#running)
  
  ## <a name="questions"></a> Do you have Questions or Problems?
 If you have questions about how to use Waltz or are finding some problems using it, please [contact zedutchgandalf](mailto:contact@zedutchgandalf.be) instead of posting an issue here.
