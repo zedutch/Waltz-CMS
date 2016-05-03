@@ -2,5 +2,5 @@ a.post(href='{{post?.url}}')
     div.post-title   {{post?.title}}
     div.post-content {{post?.content}}
     div.post-metadata
-        span.post-author(*ngIf="post?.author") {{'post.author' | translate}} {{post?.author}} &bull;
+        span.post-author(*ngIf='post?.author') {{'post.author' | translate}} {{post?.author}} &bull;
         span.post-date    {{post?.datePosted | localedate:'fullDate'}}

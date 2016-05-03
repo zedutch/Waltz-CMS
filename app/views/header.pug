@@ -1,5 +1,6 @@
 div.navbar
     div.container
-        img.navbar-icon(src="/img/waltz-example_logo.png")
-        a.navbar-title(href="/") Waltz-Example
+        a((click)='goHome()')
+            img.navbar-icon(src="/img/waltz-example_logo.png")
+        a.navbar-title((click)='goHome()') Waltz-Example
 div.navbar-border

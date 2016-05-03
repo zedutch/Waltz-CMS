@@ -15,10 +15,6 @@ var envVariables = {
     }
 };
 
-router.get('/', function(req, res) {
-    res.render('index', envVariables);
-});
-
 router.get('/views/:name', function(req, res) {
     var name = req.params.name;
     res.render('views/' + name, envVariables);
@@ -27,6 +23,10 @@ router.get('/views/:name', function(req, res) {
 router.get('/components/:name', function(req, res) {
     var name = req.params.name;
     res.render('components/' + name, envVariables);
+});
+
+router.get('*', function(req, res) {
+    res.render('index', envVariables);
 });
 
 router.use('*', function (req, res){

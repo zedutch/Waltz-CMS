@@ -17,11 +17,9 @@ import {PostComponent}      from './post.component';
 })
 
 export class WaltzViewComponent implements OnInit {
-    data = {};
     posts = [];
     
-    constructor(private _cmsBackendService: CMSBackendService) {
-    }
+    constructor(private _cmsBackendService : CMSBackendService) {}
 
     ngOnInit() {
         var self = this;
