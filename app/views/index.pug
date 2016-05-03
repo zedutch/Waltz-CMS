@@ -5,7 +5,7 @@ html
     include head
 
     body
-        waltz-main Loading...
+        waltz-main #{env('main.loadingMsg')}
 
         // IE required polyfills
         script(src='lib/es6-shim/es6-shim.min.js')
