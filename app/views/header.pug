@@ -2,5 +2,5 @@ div.navbar
     div.container
         a((click)='goHome()')
             img.navbar-icon(src="/img/waltz-example_logo.png")
-        a.navbar-title((click)='goHome()') Waltz-Example
+        a.navbar-title((click)='goHome()') #{env('main.title')}
 div.navbar-border
