@@ -1,5 +1,7 @@
 import {Component}          from 'angular2/core';
 import {HTTP_PROVIDERS}     from 'angular2/http';
+import {RouteConfig}        from 'angular2/router';
+import {ROUTER_DIRECTIVES}  from 'angular2/router';
 
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 import {LocaleService, LocalizationService} from 'angular2localization/angular2localization';
@@ -14,9 +16,20 @@ import {WaltzViewComponent} from './waltz-view.component';
                     LocaleService,
                     LocalizationService
                   ],
-    directives  : [WaltzViewComponent],
+    directives  : [
+                    WaltzViewComponent,
+                    ROUTER_DIRECTIVES
+                  ],
     pipes       : [TranslatePipe]
 })
+
+@RouteConfig([{
+        path         : '/',
+        name         : 'WaltzView',
+        component    : WaltzViewComponent,
+        useAsDefault : true
+    }
+])
 
 export class WaltzMainComponent {
     data = {};
