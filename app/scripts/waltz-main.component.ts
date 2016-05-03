@@ -61,4 +61,8 @@ export class WaltzMainComponent {
     goHome() {
         this._router.navigate(['Home']);
     }
+
+    login() {
+        alert('We\'re waiting on ng2-bootstrap to update before we can support logging in...');
+    }
 }

@@ -3,4 +3,6 @@ div.navbar
         a((click)='goHome()')
             img.navbar-icon(src="/img/waltz-example_logo.png")
         a.navbar-title((click)='goHome()') #{env('main.title')}
+        span.navbar-menu
+            a((click)='login()') Login
 div.navbar-border
