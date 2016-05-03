@@ -1,7 +1,6 @@
 #Contributing to Waltz
 
 I would love it if you'd want to contribute to Waltz and help make it the best, most user-friendly CMS out there!
-
 Here are some of the things that might help you along the way:
 
  - [Questions or Problems?](#questions)
