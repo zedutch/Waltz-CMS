@@ -28,11 +28,14 @@ html
 
         script.
             System.config({
-                packages: {
-                    dist: {
-                        format: 'register',
-                        defaultExtension: 'js'
+                packages : {
+                    dist : {
+                        format : 'register',
+                        defaultExtension : 'js'
                     }
+                },
+                map : {
+                    moment : 'lib/moment/moment.js'
                 }
             });
             System.import('dist/main')

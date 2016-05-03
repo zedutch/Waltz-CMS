@@ -28,6 +28,7 @@
     "express-session": "^1.13.0",
     "gulp": "^3.9.1",
     "mkdirs": "0.0.2",
+    "moment": "^2.13.0",
     "mongoose": "^4.4.14",
     "morgan": "^1.7.0",
     "ng2-bootstrap": "^1.0.14",
