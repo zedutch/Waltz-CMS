@@ -1,6 +1,7 @@
 {
-    "welcome" : "Welcome to",
-    "waltz"   : "Waltz",
+    "welcomeTitle" : "Welcome to",
+    "welcomeText"  : "This is an example website made using Waltz. Waltz is a new content management system, built especially for non-technical users.",
+    "waltz"        : "Waltz",
 
     "post.author" : "Posted by:",
 

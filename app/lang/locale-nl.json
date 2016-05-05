@@ -1,8 +1,9 @@
 {
-    "welcome" : "Welkom bij",
-    "waltz"   : "Waltz",
+    "welcomeTitle" : "Welkom bij",
+    "welcomeText"  : "Dit is een voorbeeldwebsite gemaakt met Waltz. Waltz is een nieuw content management system, gebouwd speciaal voor niet-technische gebruikers.",
+    "waltz"        : "Waltz",
 
-    "post.author" : "Gepost door",
+    "post.author"  : "Gepost door",
 
     "widget.upcoming" : "Aankomende evenementen",
     "widget.about" : "Over Ons",
