@@ -1,17 +1,17 @@
-import {Component}             from 'angular2/core';
-import {HTTP_PROVIDERS}        from 'angular2/http';
-import {RouteConfig}           from 'angular2/router';
-import {Router}                from 'angular2/router';
-import {ROUTER_DIRECTIVES}     from 'angular2/router';
+import {Component}               from 'angular2/core';
+import {HTTP_PROVIDERS}          from 'angular2/http';
+import {RouteConfig}             from 'angular2/router';
+import {Router}                  from 'angular2/router';
+import {ROUTER_DIRECTIVES}       from 'angular2/router';
 
-import {TranslatePipe}         from 'angular2localization/angular2localization';
-import {LocaleService}         from 'angular2localization/angular2localization';
-import {LocalizationService}   from 'angular2localization/angular2localization';
+import {TranslatePipe}           from 'angular2localization/angular2localization';
+import {LocaleService}           from 'angular2localization/angular2localization';
+import {LocalizationService}     from 'angular2localization/angular2localization';
 
-import {AlertComponent }       from 'ng2-bootstrap/ng2-bootstrap';
+import {AlertComponent }         from 'ng2-bootstrap/ng2-bootstrap';
 
-import {WaltzViewComponent}    from './waltz-view.component';
-import {PostDetailComponent}   from './post-detail.component';
+import {WaltzViewComponent}      from './waltz-view.component';
+import {PostDetailComponent}     from './post-detail.component';
 
 @Component({
     selector    : 'waltz-main',

@@ -8,8 +8,7 @@ div.row
                 li(*ngFor="#post of posts")
                     post([post]='post')
     div.col-xs-12.col-sm-3.sidebar-container
-        div.sidebar-widget
-            h3 {{'widget.upcoming' | translate}}
+        calendar-widget
         div.sidebar-widget
             h3 {{'widget.about' | translate}}
         div.sidebar-widget

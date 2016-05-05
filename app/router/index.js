@@ -25,6 +25,11 @@ router.get('/components/:name', function(req, res) {
     res.render('components/' + name, envVariables);
 });
 
+router.get('/widgets/:name', function(req, res) {
+    var name = req.params.name;
+    res.render('widgets/' + name, envVariables);
+});
+
 router.get('*', function(req, res) {
     res.render('index', envVariables);
 });

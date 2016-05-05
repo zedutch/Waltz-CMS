@@ -1,0 +1,18 @@
+div.sidebar-widget.calendar-widget
+    h3 {{'widget.upcoming' | translate}}
+    div.calendar
+        a.btn.btn-default.btn-xs((click)='showList()', *ngIf='!listMode') {{'list' | translate}}
+        a.btn.btn-default.btn-xs((click)='showCalendar()', *ngIf='listMode') {{'calendar' | translate}}
+        a.btn.btn-default.btn-xs((click)='reset()', *ngIf='!listMode') {{'today' | translate}}
+        datepicker([(ngModel)]='date', [showWeeks]='false', *ngIf='!listMode', (ngModelChange)="dateChanged($event)", [customClass]='dayClasses')
+        ul(*ngIf='listMode')
+            li.calendar-item(*ngFor='#event of events')
+                strong {{event.date | localedate:'yMMMdjm'}} - {{event.endDate | localedate:'shortTime'}}:
+                br
+                | {{event.title}}
+        div(*ngIf='!listMode')
+            ul
+                li.calendar-item(*ngFor='#event of filteredEvents')
+                    strong {{event.date | localedate:'shortTime'}} - {{event.endDate | localedate:'shortTime'}}
+                    br
+                    | {{event.title}}

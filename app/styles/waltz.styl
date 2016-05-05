@@ -95,3 +95,39 @@ footer
 
 .main-widget
     margin      32px 0
+
+.sidebar-widget h3
+    text-transform  capitalize
+
+.calendar-widget .calendar,
+datepicker
+    display     inline-block
+
+.calendar > ul
+    margin-top  24px
+
+li.calendar-item
+    list-style      none
+    margin-bottom   16px
+
+.calendar-item strong
+    margin-left -24px
+
+.calendar .events-sparse
+    font-weight         bold
+    background-color    rgba(0, 255, 0, 0.1)
+    
+.calendar .events-medium
+    @extend .calendar .events-sparse
+    text-decoration     underline
+    background-color    rgba(255, 165, 0, 0.2)
+    
+.calendar .events-lots
+    @extend .calendar .events-medium
+    background-color    rgba(255, 0, 0, 0.3)
+
+
+daypicker:focus,
+monthpicker:focus,
+yearpicker:focus
+    outline none

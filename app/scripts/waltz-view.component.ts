@@ -2,9 +2,10 @@ import {Component}          from 'angular2/core';
 import {OnInit}             from 'angular2/core';
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 
-import {CMSBackendService}  from './cms-backend.service';
+import {CMSBackendService}       from './cms-backend.service';
 
-import {PostComponent}      from './post.component';
+import {PostComponent}           from './post.component';
+import {WidgetCalendarComponent} from './widget-calendar.component';
 
 @Component({
     selector    : 'waltz-view',
@@ -12,7 +13,10 @@ import {PostComponent}      from './post.component';
     providers   : [
                     CMSBackendService
                   ],
-    directives  : [PostComponent],
+    directives  : [
+                    PostComponent,
+                    WidgetCalendarComponent
+                  ],
     pipes       : [TranslatePipe]
 })
 

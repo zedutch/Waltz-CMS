@@ -3,6 +3,10 @@
     "welcomeText"  : "This is an example website made using Waltz. Waltz is a new content management system, built especially for non-technical users.",
     "waltz"        : "Waltz",
 
+    "today"        : "Today",
+    "list"         : "List",
+    "calendar"     : "Calendar",
+
     "post.author" : "Posted by:",
 
     "widget.upcoming" : "Upcoming Events",
