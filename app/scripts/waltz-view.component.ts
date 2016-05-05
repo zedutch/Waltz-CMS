@@ -8,7 +8,7 @@ import {PostComponent}      from './post.component';
 
 @Component({
     selector    : 'waltz-view',
-    templateUrl : '/views/view1',
+    templateUrl : '/views/home',
     providers   : [
                     CMSBackendService
                   ],
