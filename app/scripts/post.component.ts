@@ -10,7 +10,7 @@ import {LocaleDatePipe}   from 'angular2localization/angular2localization';
 })
 
 export class PostComponent {
-    @Input() post : Object;
+    @Input() post;
 
     constructor(private _router : Router) {}
 
