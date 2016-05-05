@@ -51,13 +51,19 @@ gulp.task('typescript', ['install'], function() {
         .js.pipe(gulp.dest('app/dist'));
 });
 
+gulp.task('typescriptWOInstall', function() {
+    return tsProject.src()
+        .pipe(ts(tsProject))
+        .js.pipe(gulp.dest('app/dist'));
+});
+
 gulp.task('install', function (cb) {
     run("npm install")(cb);
 });
 
 gulp.task('watch', ['install'], function () {
     gulp.watch('./app/styles/**/*.styl', ['stylus']);
-    gulp.watch('./app/scripts/**/*.ts', ['typescript']);
+    gulp.watch('./app/scripts/**/*.ts', ['typescriptWOInstall']);
 });
 
 gulp.task('dev', ['install', 'typescript', 'stylus', 'start-mongo'], function () {
