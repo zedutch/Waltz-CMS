@@ -19,6 +19,10 @@ router.use(config.epPosts, postsRouter);
 var usersRouter = require('./users.js');
 router.use(config.epUsers, usersRouter);
 
+// EVENTS
+var eventsRouter = require('./events.js');
+router.use(config.epEvents, eventsRouter);
+
 // 404
 router.use('*', function (req, res){
     res.status(404).send({
