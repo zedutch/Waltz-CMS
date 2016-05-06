@@ -35,7 +35,7 @@ exports.checkSession = function (req, res, callback) {
     if (req.session.user) {
         callback();
     } else {
-        response.send(401, {
+        res.status(401).send({
             error : "Authorization failed."
         });
     }
