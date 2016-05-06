@@ -101,33 +101,33 @@ footer
 
 .calendar-widget .calendar,
 datepicker
-    display     inline-block
+    display         inline-block
 
 .calendar > ul
-    margin-top  24px
+    margin-top      24px
 
 li.calendar-item
     list-style      none
     margin-bottom   16px
 
 .calendar-item strong
-    margin-left -24px
+    margin-left     -24px
 
 .calendar .events-sparse
     font-weight         bold
-    background-color    rgba(0, 255, 0, 0.1)
+    background-color    calendar-sparse
     
 .calendar .events-medium
     @extend .calendar .events-sparse
     text-decoration     underline
-    background-color    rgba(255, 165, 0, 0.2)
+    background-color    calendar-medium
     
 .calendar .events-lots
     @extend .calendar .events-medium
-    background-color    rgba(255, 0, 0, 0.3)
+    background-color    calendar-lots
 
 
 daypicker:focus,
 monthpicker:focus,
 yearpicker:focus
-    outline none
+    outline         none
