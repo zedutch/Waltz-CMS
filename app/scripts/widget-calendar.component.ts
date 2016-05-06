@@ -63,7 +63,6 @@ export class WidgetCalendarComponent implements OnInit {
         return filteredEvents;
     }
 
-    // ?Array<{date:Date, mode:string, clazz:string}>
     parseCustomClasses() {
         var eventDict = {};
         for (var event of this.events) {
