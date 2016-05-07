@@ -1,5 +1,5 @@
-import {Component}          from 'angular2/core';
-import {OnInit}             from 'angular2/core';
+import {Component}          from '@angular/core';
+import {OnInit}             from '@angular/core';
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 
 import {CMSBackendService}       from './cms-backend.service';

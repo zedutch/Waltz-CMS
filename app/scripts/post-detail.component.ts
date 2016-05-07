@@ -1,6 +1,6 @@
-import {Component}          from 'angular2/core';
-import {OnInit}             from 'angular2/core';
-import {RouteParams}        from 'angular2/router';
+import {Component}          from '@angular/core';
+import {OnInit}             from '@angular/core';
+import {RouteSegment}       from '@angular/router';
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 
 import {CMSBackendService}  from './cms-backend.service';
@@ -22,11 +22,11 @@ export class PostDetailComponent implements OnInit {
     post = {};
     
     constructor(private _cmsBackendService : CMSBackendService,
-                private _routeParams       : RouteParams) {}
+                private _currSegment       : RouteSegment) {}
 
     ngOnInit() {
         let self = this;
-        let id = this._routeParams.get('id');
+        let id = this._currSegment.getParam('id');
         this._cmsBackendService.getPost(id, function(post) {
             self.post = post;
         });

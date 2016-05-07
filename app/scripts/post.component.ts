@@ -1,5 +1,5 @@
-import {Component, Input} from 'angular2/core';
-import {Router}           from 'angular2/router';
+import {Component, Input} from '@angular/core';
+import {Router}           from '@angular/router';
 import {TranslatePipe}    from 'angular2localization/angular2localization';
 import {LocaleDatePipe}   from 'angular2localization/angular2localization';
 

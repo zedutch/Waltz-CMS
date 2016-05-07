@@ -5,7 +5,7 @@ div.row
             div {{'welcomeText' | translate}}
         div.main-widget
             ul.posts-list
-                li(*ngFor="#post of posts")
+                li(*ngFor="let post of posts")
                     post([post]='post')
     div.col-xs-12.col-sm-3.sidebar-container
         calendar-widget

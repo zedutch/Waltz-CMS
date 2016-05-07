@@ -9,14 +9,16 @@ html
 
         // IE required polyfills
         script(src='lib/es6-shim/es6-shim.min.js')
-        script(src='lib/systemjs/dist/system-polyfills.js')
-        script(src='lib/angular2/es6/dev/src/testing/shims_for_IE.js')
+         script(src='lib/systemjs/dist/system-polyfills.js')
+        // script(src='lib/angular2/es6/dev/src/testing/shims_for_IE.js')
 
-        script(src='lib/angular2/bundles/angular2-polyfills.js')
+        // script(src='lib/angular2/bundles/angular2-polyfills.js')
+        script(src='lib/zone.js/dist/zone.js')
+        script(src='lib/reflect-metadata/Reflect.js')
         script(src='lib/systemjs/dist/system.src.js')
-        script(src='lib/rxjs/bundles/Rx.js')
-        script(src='lib/angular2/bundles/angular2.dev.js')
-        script(src='lib/angular2/bundles/router.dev.js')
+        // script(src='lib/rxjs/bundles/Rx.js')
+        // script(src='lib/angular2/bundles/angular2.dev.js')
+        // script(src='lib/angular2/bundles/router.dev.js')
 
         // Internationalization support
         script(src='https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.nl-BE,Intl.~locale.en-US')
@@ -24,19 +26,9 @@ html
         script(src='lib/ng2-bootstrap/bundles/ng2-bootstrap.min.js')
         script(src='lib/angular2localization/bundles/angular2localization.js')
 
-        script(src='lib/angular2/bundles/http.js')
-
+        script(src='scripts/systemjs.config.js')
         script.
-            System.config({
-                packages : {
-                    dist : {
-                        format : 'register',
-                        defaultExtension : 'js'
-                    }
-                },
-                map : {
-                    moment : 'lib/moment/moment.js'
-                }
+            System.import('app')
+                  .catch(function(err) {
+                console.error(err);
             });
-            System.import('dist/main')
-                  .then(null, console.error.bind(console));

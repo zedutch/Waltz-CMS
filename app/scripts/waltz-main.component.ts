@@ -1,8 +1,8 @@
-import {Component}               from 'angular2/core';
-import {HTTP_PROVIDERS}          from 'angular2/http';
-import {RouteConfig}             from 'angular2/router';
-import {Router}                  from 'angular2/router';
-import {ROUTER_DIRECTIVES}       from 'angular2/router';
+import {Component}               from '@angular/core';
+import {HTTP_PROVIDERS}          from '@angular/http';
+import {Routes}                  from '@angular/router';
+import {Router}                  from '@angular/router';
+import {ROUTER_DIRECTIVES}       from '@angular/router';
 
 import {TranslatePipe}           from 'angular2localization/angular2localization';
 import {LocaleService}           from 'angular2localization/angular2localization';
@@ -29,14 +29,14 @@ import {PostDetailComponent}     from './post-detail.component';
     pipes       : [TranslatePipe]
 })
 
-@RouteConfig([{
-        path         : '/',
-        name         : 'Home',
-        component    : WaltzViewComponent,
-        useAsDefault : true
-    },
-    
-    { path : '/posts/:id',  name : 'PostDetail',  component: PostDetailComponent }
+@Routes([
+    {
+        path      : '/',
+        component : WaltzViewComponent
+    }, {
+        path      : '/posts/:id',
+        component : PostDetailComponent
+    }
 ])
 
 export class WaltzMainComponent {
@@ -59,7 +59,7 @@ export class WaltzMainComponent {
     }
 
     goHome() {
-        this._router.navigate(['Home']);
+        this._router.navigate(['/']);
     }
 
     login() {
