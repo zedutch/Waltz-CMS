@@ -15,6 +15,6 @@ export class PostComponent {
     constructor(private _router : Router) {}
 
     openPost() {
-        this._router.navigate( ['PostDetail', { id : this.post._id }] );
+        this._router.navigate( ['/posts', this.post._id] );
     }
 }

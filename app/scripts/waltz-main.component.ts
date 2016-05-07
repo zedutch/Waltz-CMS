@@ -58,10 +58,6 @@ export class WaltzMainComponent {
         this.localization.translationProvider('../lang/locale-');
     }
 
-    goHome() {
-        this._router.navigate(['/']);
-    }
-
     login() {
         alert('We\'re waiting on ng2-bootstrap to update before we can support logging in...');
     }
