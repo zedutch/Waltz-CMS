@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "del": "~2.2.0",
     "express-livereload": "0.0.24",
     "gulp-nodemon": "^2.0.6",
     "gulp-stylus": "^2.3.1",

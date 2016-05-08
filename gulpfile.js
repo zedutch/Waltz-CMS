@@ -4,7 +4,8 @@ var gulp    = require('gulp'),
     ts      = require('gulp-typescript'),
     mkdirs  = require('mkdirs'),
     exec    = require('child_process').exec,
-    config  = require('./app/config/express.conf');
+    config     = require('./app/config/express.conf'),
+    del        = require('del');
 
 var tsProject = ts.createProject('tsconfig.json');
 
@@ -21,23 +22,27 @@ function run(command) {
     };
 }
 
+gulp.task('clean', function () {
+	return del(['app/dist/*', 'app/styles/*.css']);
+});
+
 // http://stackoverflow.com/a/29504192
-gulp.task('start-mongo', ['install'], function() {
+gulp.task('start-mongo', function() {
     var cmd = 'mongod --dbpath ' + config.dbData + '/ --logpath ' + config.logDir + config.dbLog;
     mkdirs(config.dbData);
     mkdirs(config.logDir);
     run(cmd)();
 });
 
-gulp.task('stop-mongo', ['install'], run('mongo --eval "db.shutdownServer();"'));
+gulp.task('stop-mongo', run('mongo --eval "db.shutdownServer();"'));
 
-gulp.task('stylus', ['install'], function () {
-    return gulp.src('./app/styles/**/*.styl')
+gulp.task('stylus', ['clean'], function () {
+    return gulp.src('app/styles/**/*.styl')
         .pipe(stylus())
-        .pipe(gulp.dest('./app/styles'));
+        .pipe(gulp.dest('app/styles'));
 });
 
-gulp.task('compress', ['install'], function () {
+gulp.task('compress', function () {
     return gulp.src('./app/styles/**/*.styl')
         .pipe(stylus({
             compress: true
@@ -45,32 +50,24 @@ gulp.task('compress', ['install'], function () {
         .pipe(gulp.dest('./app/styles'));
 });
 
-gulp.task('typescript', ['install'], function() {
+gulp.task('typescript', ['clean'], function() {
     return tsProject.src()
         .pipe(ts(tsProject))
         .js.pipe(gulp.dest('app/dist'));
 });
 
-gulp.task('typescriptWOInstall', function() {
-    return tsProject.src()
-        .pipe(ts(tsProject))
-        .js.pipe(gulp.dest('app/dist'));
 });
 
-gulp.task('install', function (cb) {
-    run("npm install")(cb);
-});
-
-gulp.task('watch', ['install'], function () {
+gulp.task('watch', function () {
     gulp.watch('./app/styles/**/*.styl', ['stylus']);
-    gulp.watch('./app/scripts/**/*.ts', ['typescriptWOInstall']);
+    gulp.watch('./app/scripts/**/*.ts', ['typescript']);
 });
 
-gulp.task('dev', ['install', 'typescript', 'stylus', 'start-mongo'], function () {
+gulp.task('dev', ['clean', 'typescript', 'stylus', 'start-mongo'], function () {
     nmon({
         script : 'server.js',
         ext    : 'js'
     });
 });
 
-gulp.task('default', ['install', 'dev', 'watch']);
+gulp.task('default', ['dev', 'watch']);
