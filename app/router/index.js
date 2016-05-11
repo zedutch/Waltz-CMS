@@ -30,7 +30,7 @@ router.get('/widgets/:name', function(req, res) {
     res.render('widgets/' + name, envVariables);
 });
 
-router.get('*', function(req, res) {
+router.get('/', function(req, res) {
     res.render('index', envVariables);
 });
 
