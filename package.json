@@ -4,8 +4,13 @@
   "description": "A JavaScript CMS",
   "main": "server.js",
   "scripts": {
-    "postinstall": "typings install",
-    "typings": "typings"
+    "postinstall": "typings install --ambient",
+    "clean": "rimraf app/dist",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "gulp",
+    "test": "karma start karma.conf.js",
+    "reinstall": "rimraf node_modules && npm install"
   },
   "keywords": [
     "CMS",
@@ -13,7 +18,10 @@
     "Waltz"
   ],
   "author": "Zedutchgandalf",
-  "repository": "https://github.com/zedutchgandalf/Waltz-CMS.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zedutchgandalf/Waltz-CMS.git"
+  },
   "license": "Unlicense",
   "dependencies": {
     "@angular/common": "^2.0.0-rc.1",
@@ -51,13 +59,17 @@
     "del": "~2.2.0",
     "express-livereload": "0.0.24",
     "gulp-nodemon": "^2.0.6",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.3.1",
     "gulp-typescript": "^2.13.0",
-    "jasmine-core": "^2.4.1",
+    "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "rimraf": "^2.5.2",
+    "typescript": "^1.8.10",
     "typings": "^0.8.1"
   }
 }

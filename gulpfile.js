@@ -2,10 +2,13 @@ var gulp    = require('gulp'),
     stylus  = require('gulp-stylus'),
     nmon    = require('gulp-nodemon'),
     ts      = require('gulp-typescript'),
+    tsMaps  = require('gulp-sourcemaps'),
     mkdirs  = require('mkdirs'),
     exec    = require('child_process').exec,
-    config     = require('./app/config/express.conf'),
-    del        = require('del');
+    config  = require('./app/config/express.conf'),
+    del     = require('del');
+
+var KarmaServer = require('karma').Server;
 
 var tsProject = ts.createProject('tsconfig.json');
 
@@ -23,7 +26,7 @@ function run(command) {
 }
 
 gulp.task('clean', function () {
-	return del(['app/dist/*', 'app/styles/*.css']);
+	return del(['app/dist/**/*']);
 });
 
 // http://stackoverflow.com/a/29504192
@@ -39,7 +42,7 @@ gulp.task('stop-mongo', run('mongo --eval "db.shutdownServer();"'));
 gulp.task('stylus', ['clean'], function () {
     return gulp.src('app/styles/**/*.styl')
         .pipe(stylus())
-        .pipe(gulp.dest('app/styles'));
+        .pipe(gulp.dest('app/dist/styles'));
 });
 
 gulp.task('compress', function () {
@@ -47,15 +50,22 @@ gulp.task('compress', function () {
         .pipe(stylus({
             compress: true
         }))
-        .pipe(gulp.dest('./app/styles'));
+        .pipe(gulp.dest('./app/dist/styles'));
 });
 
 gulp.task('typescript', ['clean'], function() {
     return tsProject.src()
-        .pipe(ts(tsProject))
-        .js.pipe(gulp.dest('app/dist'));
+        .pipe(tsMaps.init())
+        .pipe(ts(tsProject)).js
+        .pipe(tsMaps.write('.'))
+        .pipe(gulp.dest('app/dist'));
 });
 
+gulp.task('test', ['clean', 'typescript', 'stylus'], function() {
+    new KarmaServer({
+        configFile : __dirname + '/karma.conf.js',
+        singleRun: true
+    }).start();
 });
 
 gulp.task('watch', function () {
