@@ -5,11 +5,8 @@
   "main": "server.js",
   "scripts": {
     "postinstall": "typings install --ambient",
-    "clean": "rimraf app/dist",
-    "build": "tsc",
-    "watch": "tsc --watch",
     "start": "gulp",
-    "test": "karma start karma.conf.js",
+    "test": "gulp test",
     "reinstall": "rimraf node_modules && npm install"
   },
   "keywords": [
@@ -67,7 +64,9 @@
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
     "phantomjs-prebuilt": "^2.1.7",
+    "remap-istanbul": "^0.6.4",
     "rimraf": "^2.5.2",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"

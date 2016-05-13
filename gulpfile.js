@@ -8,7 +8,8 @@ var gulp    = require('gulp'),
     config  = require('./app/config/express.conf'),
     del     = require('del');
 
-var KarmaServer = require('karma').Server;
+var KarmaServer   = require('karma').Server,
+    remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 
 var tsProject = ts.createProject('tsconfig.json');
 
@@ -61,12 +62,39 @@ gulp.task('typescript', ['clean'], function() {
         .pipe(gulp.dest('app/dist'));
 });
 
-gulp.task('test', ['clean', 'typescript', 'stylus'], function() {
+gulp.task('unit-test', ['clean', 'typescript', 'stylus'], function(done) {
     new KarmaServer({
         configFile : __dirname + '/karma.conf.js',
         singleRun: true
-    }).start();
+    }, testsDone).start();
+
+    function testsDone (exitCode) {
+        console.log('Unit tests done. Exit code: ' + exitCode);
+        remapCoverage();
+        if (exitCode === 0) {
+            done();
+        } else {
+            done('Unit tests failed.');
+        }
+    }
 });
+
+function remapCoverage () {
+    gulp.src(config.report.path + 'report-json/coverage-final.json')
+        .pipe(remapIstanbul({
+            reports : {
+                'lcovonly'     : config.report.path + 'remap/lcov.info',
+                'json'         : config.report.path + 'remap/coverage.json',
+                'html'         : config.report.path + 'remap/html-report',
+                'text-summary' : config.report.path + 'remap/text-summary.txt'
+            }
+        }))
+        .on('finish', function () {
+            console.log('Remapping done. View the result in ' + config.report.path + 'remap/html-report');
+        })
+}
+
+gulp.task('test', ['clean', 'unit-test']);
 
 gulp.task('watch', function () {
     gulp.watch('./app/styles/**/*.styl', ['stylus']);
