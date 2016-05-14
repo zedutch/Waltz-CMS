@@ -1,7 +1,6 @@
 var express      = require('express'),
     app          = express();
 
-
 // CONFIGURATION
 var config       = require('./app/config/express.conf'),
     bodyParser   = require('body-parser'),

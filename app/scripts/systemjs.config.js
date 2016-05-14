@@ -7,7 +7,8 @@
 
     // map tells the System loader where to look for things
     var map = {
-        'app'      :  'dist',
+        'app'      :  'app',
+        'dist'     :  'dist',
         'rxjs'     :  'lib/rxjs',
         '@angular' :  'lib/@angular',
         'moment'   :  'lib/moment/moment.js'
@@ -16,8 +17,11 @@
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app' : {
+            defaultExtension : 'js'
+        },
+        'dist' : {
             type             : 'register',
-            main             : 'main.js',
+            main             : 'main',
             defaultExtension : 'js'
         },
         'rxjs' : {
@@ -35,7 +39,7 @@
         '@angular/router-deprecated',
         '@angular/router',
         '@angular/testing',
-        '@angular/upgrade',
+        '@angular/upgrade'
     ];
 
     // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
