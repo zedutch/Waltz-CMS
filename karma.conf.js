@@ -40,48 +40,57 @@ module.exports = function(config) {
             // System.js for module loading
             'node_modules/systemjs/dist/system.src.js',
 
+            'node_modules/angular2localization/bundles/angular2localization.js',
+
             'app/config/systemjs.config.js',
             'karma-test-shim.js',
             
             {
                 pattern  : 'app/dist/**/*.js',
                 included : false
+            }, {
+                pattern  : 'test/**/*.js',
+                included : false
             },
-//            {
-//                pattern: 'app/test/matchers.js',
-//                included: false
-//            },
             
             // paths loaded via Angular's component compiler
             {
-                pattern: 'app/views/**/*.pug',
-                included: false
+                pattern  : 'app/views/**/*.pug',
+                included : false
             }, {
-                pattern: 'app/dist/**/*.css',
-                included: false
+                pattern  : 'app/dist/**/*.css',
+                included : false
             },
             
             // paths to support debugging with source maps
             {
-                pattern: 'app/scripts/**/*.ts',
-                included: false,
-                watched: false
+                pattern  : 'app/scripts/**/*.ts',
+                included : false,
+                watched  : false
             }, {
-                pattern: 'app/dist/**/*.js.map',
-                included: false,
-                watched: false
+                pattern  : 'app/dist/**/*.js.map',
+                included : false,
+                watched  : false
+            }, {
+                pattern  : 'test/**/*.ts',
+                included : false,
+                watched  : false
+            }, {
+                pattern  : 'test/**/*.js.map',
+                included : false
             },
             
             {
-                pattern: 'node_modules/karma-sourcemap-loader/**/*.js',
-                included: false
+                pattern  : 'node_modules/karma-sourcemap-loader/**/*.js',
+                included : false
             }
         ],
 
         proxies: {
             // required for component assests fetched by Angular's compiler
             "/lib/"  : "/base/node_modules/",
-            "/app/"  : "/base/app/"
+            "/app/"  : "/base/app/",
+            "/test/" : "/base/test/"
         },
 
         plugins: [

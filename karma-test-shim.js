@@ -22,9 +22,22 @@ function toModule (path) {
                .replace(/\.js/, '');
 }
 
+System.config({
+    meta: {
+        '/app/*': { format: 'register' }
+    },
+    packages: {
+        'test' : {
+            type             : 'register',
+            defaultExtension : 'js'
+        }
+    }
+});
+
 Promise.all([
     System.import('@angular/core/testing'),
-    System.import('@angular/platform-browser-dynamic/testing')
+    System.import('@angular/platform-browser-dynamic/testing'),
+    System.import('test/setup')
 ])
 .then(function () {
     return Promise.all(

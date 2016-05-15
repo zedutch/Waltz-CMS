@@ -7,3 +7,4 @@ node_modules/
 typings/
 *.log
 coverage/
+test/*.js*

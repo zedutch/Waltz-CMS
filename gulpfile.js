@@ -11,7 +11,8 @@ var gulp    = require('gulp'),
 var KarmaServer   = require('karma').Server,
     remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 
-var tsProject = ts.createProject('tsconfig.json');
+var tsProject   = ts.createProject('tsconfig.json');
+var testProject = ts.createProject('tsTestConfig.json');
 
 function run(command) {
     return function (callback) {
@@ -54,15 +55,23 @@ gulp.task('compress', function () {
         .pipe(gulp.dest('./app/dist/styles'));
 });
 
-gulp.task('typescript', ['clean'], function() {
-    return tsProject.src()
-        .pipe(tsMaps.init())
-        .pipe(ts(tsProject)).js
-        .pipe(tsMaps.write('.'))
-        .pipe(gulp.dest('app/dist'));
+gulp.task('tests-typescript', ['clean'], function() {
+    return testProject.src()
+               .pipe(tsMaps.init())
+               .pipe(ts(testProject)).js
+               .pipe(tsMaps.write('.'))
+               .pipe(gulp.dest('test/'));
 });
 
-gulp.task('unit-test', ['clean', 'typescript', 'stylus'], function(done) {
+gulp.task('typescript', ['clean'], function() {
+    return tsProject.src()
+               .pipe(tsMaps.init())
+               .pipe(ts(tsProject)).js
+               .pipe(tsMaps.write('.'))
+               .pipe(gulp.dest('app/dist'));
+});
+
+gulp.task('unit-test', ['clean', 'typescript', 'stylus', 'tests-typescript'], function(done) {
     new KarmaServer({
         configFile : __dirname + '/karma.conf.js',
         singleRun: true
@@ -71,11 +80,7 @@ gulp.task('unit-test', ['clean', 'typescript', 'stylus'], function(done) {
     function testsDone (exitCode) {
         console.log('Unit tests done. Exit code: ' + exitCode);
         remapCoverage();
-        if (exitCode === 0) {
-            done();
-        } else {
-            done('Unit tests failed.');
-        }
+        done();
     }
 });
 
