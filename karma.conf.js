@@ -40,7 +40,7 @@ module.exports = function(config) {
             // System.js for module loading
             'node_modules/systemjs/dist/system.src.js',
 
-            'app/scripts/systemjs.config.js',
+            'app/config/systemjs.config.js',
             'karma-test-shim.js',
             
             {
