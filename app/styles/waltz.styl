@@ -3,10 +3,27 @@ normalize-css()
 @import colours
 @import mixins
 
+font-sans = "HelveticaNeue-Light",
+            "Helvetica Neue Light",
+            "Helvetica Neue",
+            Roboto,
+            Helvetica,
+            Arial,
+            "Lucida Grande",
+            sans-serif
+
+font-serif = "Crimson Text",
+             "EB Garamond",
+             Garamond,
+             serif
+
 html,
 body
-    margin  0
-    color   text-main
+    margin                 0
+    color                  text-main
+    -webkit-font-smoothing antialiased
+    font-family            font-sans
+    font-weight            300
 
 a,
 a:hover
