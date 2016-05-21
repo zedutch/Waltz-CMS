@@ -41,11 +41,14 @@ gulp.task('start-mongo', function() {
 
 gulp.task('stop-mongo', run('mongo --eval "db.shutdownServer();"'));
 
-gulp.task('stylus', ['clean'], function () {
+var fnStylus = function () {
     return gulp.src('app/styles/**/*.styl')
         .pipe(stylus())
         .pipe(gulp.dest('app/dist/styles'));
-});
+};
+
+gulp.task('stylus-clean', ['clean'], fnStylus);
+gulp.task('stylus', fnStylus);
 
 gulp.task('compress', function () {
     return gulp.src('./app/styles/**/*.styl')
@@ -63,13 +66,16 @@ gulp.task('tests-typescript', ['clean'], function() {
                .pipe(gulp.dest('test/'));
 });
 
-gulp.task('typescript', ['clean'], function() {
+var fnTypescript = function() {
     return tsProject.src()
                .pipe(tsMaps.init())
                .pipe(ts(tsProject)).js
                .pipe(tsMaps.write('.'))
                .pipe(gulp.dest('app/dist'));
-});
+};
+
+gulp.task('typescript-clean', ['clean'], fnTypescript);
+gulp.task('typescript', fnTypescript);
 
 gulp.task('unit-test', ['clean', 'typescript', 'stylus', 'tests-typescript'], function(done) {
     new KarmaServer({
@@ -106,7 +112,7 @@ gulp.task('watch', function () {
     gulp.watch('./app/scripts/**/*.ts', ['typescript']);
 });
 
-gulp.task('dev', ['clean', 'typescript', 'stylus', 'start-mongo'], function () {
+gulp.task('dev', ['clean', 'typescript-clean', 'stylus-clean', 'start-mongo'], function () {
     nmon({
         script : 'server.js',
         ext    : 'js'
