@@ -15,6 +15,7 @@ app.set('views',       __dirname + '/app/views');
 app.set(morgan('dev'));
 app.use('/styles',  express.static(__dirname + '/app/styles'));
 app.use('/dist',    express.static(__dirname + '/app/dist'));
+app.use('/config',  express.static(__dirname + '/app/config'));
 app.use('/scripts', express.static(__dirname + '/app/scripts'));
 app.use('/img',     express.static(__dirname + '/app/images'));
 app.use('/lang',    express.static(__dirname + '/app/lang'));
