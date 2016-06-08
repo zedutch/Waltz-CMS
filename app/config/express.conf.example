@@ -1,4 +1,4 @@
-exports.port    = 8080;
+exports.port    = 80;
 exports.env     = "development";
 exports.dburl   = "localhost:27017/DATABASE-NAME";
 exports.logDir  = "./logs/";
