@@ -1,8 +1,8 @@
 div.row
     div.col-xs-12.col-sm-9.main-container
         div.main-widget
-            h1 {{'welcomeTitle' | translate}} #{env('main.title')}!
-            div {{'welcomeText' | translate}}
+            h1 {{'welcomeTitle' | translate:lang}} #{env('main.title')}!
+            div {{'welcomeText' | translate:lang}}
         div.main-widget
             ul.posts-list
                 li(*ngFor="let post of posts")
@@ -10,6 +10,6 @@ div.row
     div.col-xs-12.col-sm-3.sidebar-container
         calendar-widget
         div.sidebar-widget
-            h3 {{'widget.about' | translate}}
+            h3 {{'widget.about' | translate:lang}}
         div.sidebar-widget
-            h3 {{'widget.faq' | translate}}
+            h3 {{'widget.faq' | translate:lang}}

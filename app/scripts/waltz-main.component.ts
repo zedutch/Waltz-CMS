@@ -4,6 +4,7 @@ import {Routes}                  from '@angular/router';
 import {Router}                  from '@angular/router';
 import {ROUTER_DIRECTIVES}       from '@angular/router';
 
+import {Locale}                  from 'angular2localization/angular2localization';
 import {TranslatePipe}           from 'angular2localization/angular2localization';
 import {LocaleService}           from 'angular2localization/angular2localization';
 import {LocalizationService}     from 'angular2localization/angular2localization';
@@ -39,7 +40,7 @@ import {PostDetailComponent}     from './post-detail.component';
     }
 ])
 
-export class WaltzMainComponent {
+export class WaltzMainComponent extends Locale {
     data = {};
     url;
     posts = [];
@@ -51,11 +52,14 @@ export class WaltzMainComponent {
     constructor(public locale       : LocaleService,
                 public localization : LocalizationService,
                 private _router     : Router) {
+        super(locale, localization);
+        
         this.locale.addLanguage('en');
         this.locale.addLanguage('nl');
         this.locale.definePreferredLocale('nl', 'BE', 30);
         this.locale.definePreferredCurrency('EUR');
         this.localization.translationProvider('../lang/locale-');
+        this.localization.updateTranslation();
     }
 
     login() {
