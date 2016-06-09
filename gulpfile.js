@@ -77,6 +77,8 @@ var fnTypescript = function() {
 gulp.task('typescript-clean', ['clean'], fnTypescript);
 gulp.task('typescript', fnTypescript);
 
+gulp.task('populate', run('mongoimport --upsert --jsonArray --db ' + config.dbName + ' ' + config.dbInitialFiles));
+
 gulp.task('unit-test', ['clean', 'typescript', 'stylus', 'tests-typescript'], function(done) {
     new KarmaServer({
         configFile : __dirname + '/karma.conf.js',
