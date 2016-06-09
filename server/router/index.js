@@ -11,6 +11,10 @@ router.get('/', function(req, res) {
     });
 });
 
+// INFO
+var infoRouter = require('./info.js');
+router.use(config.epInfo, infoRouter);
+
 // POSTS
 var postsRouter = require('./posts.js');
 router.use(config.epPosts, postsRouter);

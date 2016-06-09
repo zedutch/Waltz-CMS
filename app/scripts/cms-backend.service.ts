@@ -5,8 +5,22 @@ import {Http}       from '@angular/http';
 export class CMSBackendService {
     URL = 'http://localhost:8080/api';
     _epPosts = '/posts';
+    _epInfo  = '/info';
 
     constructor(private http : Http) { }
+    
+    getInfo(callback) {
+        var data = this.http.get(this.URL + this._epInfo);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                var info = res.json();
+                console.log("[DEBUGGING] The info object:", info);
+                callback(info || {});
+            } else {
+                console.error("Error retrieving website info!", res)
+            }
+        });
+    }
 
     getAllPosts(callback) {
         var data = this.http.get(this.URL + this._epPosts);

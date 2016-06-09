@@ -40,7 +40,7 @@ router.get('/:id', function(req, res) {
             post.handleUser(req.session.user);
             return res.send(post);
         }
-    })
+    });
 });
 
 router.put('/:id', checkSession, function(req, res) {

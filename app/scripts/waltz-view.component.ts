@@ -22,11 +22,15 @@ import {WidgetCalendarComponent} from './widget-calendar.component';
 
 export class WaltzViewComponent implements OnInit {
     posts = [];
+    info  = {};
     
     constructor(private _cmsBackendService : CMSBackendService) {}
 
     ngOnInit() {
         var self = this;
+        this._cmsBackendService.getInfo(function(info) {
+            self.info = info
+        });
         this._cmsBackendService.getAllPosts(function(posts) {
             self.posts = posts;
         });

@@ -2,7 +2,7 @@ div.row
     div.col-xs-12.col-sm-9.main-container
         div.main-widget
             h1 {{'welcomeTitle' | translate:lang}} #{env('main.title')}!
-            div {{'welcomeText' | translate:lang}}
+            div {{info.welcomeText}}
         div.main-widget
             ul.posts-list
                 li(*ngFor="let post of posts")
