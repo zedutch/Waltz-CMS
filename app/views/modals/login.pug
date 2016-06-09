@@ -1,0 +1,9 @@
+a((click)='loginModal.show()') {{'login.button' | translate:lang}}
+div.modal.fade(bsModal #loginModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true")
+    div.modal-dialog.modal-sm
+        div.modal-content
+            div.modal-header
+                button.close((click)="loginModal.hide()" type="button" aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title {{'login.title' | translate:lang}}
+            div.modal-body Coming Soon!&trade;

@@ -4,5 +4,6 @@ div.navbar
             img.navbar-icon(src="/img/waltz-example_logo.png")
         a.navbar-title([routerLink]="['/']") #{env('main.title')}
         span.navbar-menu
-            a((click)='login()') Login
+            login-modal
+
 div.navbar-border

@@ -15,6 +15,11 @@ var envVariables = {
     }
 };
 
+router.get('/modals/:name', function(req, res) {
+    var name = req.params.name;
+    res.render('modals/' + name, envVariables);
+});
+
 router.get('/views/:name', function(req, res) {
     var name = req.params.name;
     res.render('views/' + name, envVariables);

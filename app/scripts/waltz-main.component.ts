@@ -1,4 +1,6 @@
 import {Component}               from '@angular/core';
+import {ViewContainerRef}        from '@angular/core';
+import {CORE_DIRECTIVES}         from '@angular/common';
 import {HTTP_PROVIDERS}          from '@angular/http';
 import {Routes}                  from '@angular/router';
 import {Router}                  from '@angular/router';
@@ -13,21 +15,24 @@ import {AlertComponent }         from 'ng2-bootstrap/ng2-bootstrap';
 
 import {WaltzViewComponent}      from './waltz-view.component';
 import {PostDetailComponent}     from './post-detail.component';
+import {LoginModalComponent}     from './login-modal.component';
 
 @Component({
-    selector    : 'waltz-main',
-    templateUrl : '/views/main',
-    providers   : [
-                    HTTP_PROVIDERS,
-                    LocaleService,
-                    LocalizationService
-                  ],
-    directives  : [
-                    WaltzViewComponent,
-                    ROUTER_DIRECTIVES,
-                    AlertComponent
-                  ],
-    pipes       : [TranslatePipe]
+    selector      : 'waltz-main',
+    templateUrl   : '/views/main',
+    providers     : [
+                      HTTP_PROVIDERS,
+                      LocaleService,
+                      LocalizationService
+                    ],
+    directives    : [
+                      WaltzViewComponent,
+                      ROUTER_DIRECTIVES,
+                      CORE_DIRECTIVES,
+                      AlertComponent,
+                      LoginModalComponent
+                    ],
+    pipes         : [ TranslatePipe ]
 })
 
 @Routes([
@@ -49,9 +54,10 @@ export class WaltzMainComponent extends Locale {
      */
     alert = {};
     
-    constructor(public locale       : LocaleService,
-                public localization : LocalizationService,
-                private _router     : Router) {
+    constructor(public locale           : LocaleService,
+                public localization     : LocalizationService,
+                private _router         : Router,
+                public viewContainerRef : ViewContainerRef) {
         super(locale, localization);
         
         this.locale.addLanguage('en');
@@ -60,6 +66,9 @@ export class WaltzMainComponent extends Locale {
         this.locale.definePreferredCurrency('EUR');
         this.localization.translationProvider('../lang/locale-');
         this.localization.updateTranslation();
+        
+        // Hack needed for ng2-bootstrap modals
+        this.viewContainerRef = viewContainerRef;
     }
 
     login() {
