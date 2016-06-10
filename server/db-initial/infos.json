@@ -1,4 +1,1 @@
-[
-    {"_locale":"nl","welcomeText":"Dit is een voorbeeldwebsite gemaakt met Waltz. Waltz is een nieuw content management system, gebouwd speciaal voor minder-technische gebruikers."},
-    {"_locale":"en","welcomeText":"This is an example website made using Waltz. Waltz is a new content management system, built especially for less-technical users."}
-]
+[{"welcomeText":{"nl":"Dit is een voorbeeldwebsite gemaakt met Waltz. Waltz is een nieuw content management system, gebouwd speciaal voor minder-technische gebruikers.","en":"This is an example website made using Waltz. Waltz is a new content management system, built especially for less-technical users."}}]

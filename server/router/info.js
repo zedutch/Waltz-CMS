@@ -1,10 +1,10 @@
-var express      = require('express'),
-    checkSession = require('./helpers.js').checkSession;
-    Info         = require('../models/info.js'),
-    config       = require('../config/waltz.conf');;
+var express         = require('express'),
+    checkSession    = require('./helpers.js').checkSession;
+    Info            = require('../models/info.js'),
+    config          = require('../config/waltz.conf');
 var router = express.Router();
 
-router.get('/', function(req, res) {
+function getCorrectLocale (req) {
     var locale_req = req.headers["accept-language"].substring(0, 2);
     var locale = locale_req;
     var supported_req = config.supportedLocales;
@@ -15,15 +15,39 @@ router.get('/', function(req, res) {
     
     console.log("Locale used:", locale);
     
-    Info.findOne({
-        _locale : locale
-    }, function(err, info) {
-        if (!err && info) {
-            return res.status(200).send(info);
-        } else if(!err && !info) {
+    return locale
+}
+
+router.get('/', function(req, res) {
+    var locale = getCorrectLocale(req);
+    
+    Info.findOne({}, function(err, info) {
+        if (!info && !err) {
             return res.status(404).send();
+        } else if(err) {
+            return res.status(500).send(err);
+        }
+        
+        var localizedInfo = Info.schema.methods.toJSONLocalizedOnly(info, locale, config.defaultLocale);
+        
+        return res.status(200).send(localizedInfo);
+    });
+});
+
+router.post('/', /*checkSession,*/ function(req, res) {
+    var locale = getCorrectLocale(req);
+    
+    var info = new Info({
+        welcomeText : {}
+    });
+    info.welcomeText[locale] = req.body.welcomeText;
+    
+    info.save(function(err) {
+        if (!err) {
+            var localizedInfo = Info.schema.methods.toJSONLocalizedOnly(info, locale, config.defaultLocale);
+            
+            return res.status(200).send(localizedInfo);
         } else {
-            console.error(err);
             return res.status(500).send(err);
         }
     });
