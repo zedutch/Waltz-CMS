@@ -70,8 +70,4 @@ export class WaltzMainComponent extends Locale {
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
     }
-
-    login() {
-        alert('We\'re waiting on ng2-bootstrap to update before we can support logging in...');
-    }
 }

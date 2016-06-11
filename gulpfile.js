@@ -111,7 +111,7 @@ gulp.task('test', ['clean', 'unit-test']);
 
 gulp.task('watch', function () {
     gulp.watch('./app/styles/**/*.styl', ['stylus']);
-    gulp.watch('./app/scripts/**/*.ts', ['typescript']);
+    gulp.watch('./app/scripts/**/*.ts',  ['typescript']);
 });
 
 gulp.task('dev', ['clean', 'typescript-clean', 'stylus-clean', 'start-mongo'], function () {

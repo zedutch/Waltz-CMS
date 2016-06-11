@@ -3,8 +3,12 @@
     "welcomeText"  : "This is an example website made using Waltz. Waltz is a new content management system, built especially for less-technical users.",
     "waltz"        : "Waltz",
     
-    "login.button" : "Log In",
-    "login.title"  : "Log In",
+    "login.button"    : "Log In",
+    "login.title"     : "Log In",
+    "login.username"  : "Username",
+    "login.password"  : "Password",
+    "login.remember"  : "Remember Me",
+    "login.submit"    : "Log In",
 
     "today"        : "Today",
     "list"         : "List",
