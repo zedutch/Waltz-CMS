@@ -38,9 +38,14 @@ router.post('/', /*checkSession,*/ function(req, res) {
     var locale = getCorrectLocale(req);
     
     var info = new Info({
-        welcomeText : {}
+        welcomeText : {},
+        aboutUs     : {},
+        faq         : {}
     });
+    
     info.welcomeText[locale] = req.body.welcomeText;
+    info.aboutUs[locale]     = req.body.aboutUs;
+    info.faq[locale]         = req.body.faq;
     
     info.save(function(err) {
         if (!err) {

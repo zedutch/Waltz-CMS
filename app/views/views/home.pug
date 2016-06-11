@@ -8,8 +8,10 @@ div.row
                 li(*ngFor="let post of posts")
                     post([post]='post')
     div.col-xs-12.col-sm-3.sidebar-container
-        calendar-widget
-        div.sidebar-widget
-            h3 {{'widget.about' | translate:lang}}
-        div.sidebar-widget
-            h3 {{'widget.faq' | translate:lang}}
+        calendar-widget(*ngIf="info.showCalendar")
+        div.sidebar-widget(*ngIf="info.showAbout")
+            h3  {{'widget.about' | translate:lang}}
+            div {{info.aboutUs}}
+        div.sidebar-widget(*ngIf="info.showFAQ")
+            h3  {{'widget.faq' | translate:lang}}
+            div {{info.faq}}

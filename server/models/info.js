@@ -8,6 +8,31 @@ var infoSchema = new Schema({
         type     : String,
         required : false,
         i18n     : true
+    },
+    aboutUs : {
+        type     : String,
+        required : false,
+        i18n     : true
+    },
+    faq : {
+        type     : String,
+        required : false,
+        i18n     : true
+    },
+    showCalendar : {
+        type      : Boolean,
+        required  : false,
+        default   : true
+    },
+    showAbout : {
+        type      : Boolean,
+        required  : false,
+        default   : true
+    },
+    showFAQ : {
+        type      : Boolean,
+        required  : false,
+        default   : true
     }
 }, {
     toJSON     : {
