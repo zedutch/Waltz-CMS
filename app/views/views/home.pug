@@ -11,7 +11,7 @@ div.row
         calendar-widget(*ngIf="info.showCalendar")
         div.sidebar-widget(*ngIf="info.showAbout")
             h3  {{'widget.about' | translate:lang}}
-            div {{info.aboutUs}}
+            div.widget-content {{info.aboutUs}}
         div.sidebar-widget(*ngIf="info.showFAQ")
             h3  {{'widget.faq' | translate:lang}}
-            div {{info.faq}}
+            div.widget-content {{info.faq}}
