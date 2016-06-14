@@ -23,16 +23,34 @@ import {WidgetCalendarComponent} from './widget-calendar.component';
 export class WaltzViewComponent implements OnInit {
     posts = [];
     info  = {};
+    user  = {};
     
     constructor(private _cmsBackendService : CMSBackendService) {}
 
-    ngOnInit() {
+    ngOnInit () {
         var self = this;
         this._cmsBackendService.getInfo(function(info) {
-            self.info = info
+            self.info = info;
+            // For debugging purposes:
+            self.info.showFAQ = false;
         });
         this._cmsBackendService.getAllPosts(function(posts) {
             self.posts = posts;
         });
+
+        // For debugging purposes:
+         this.user.isAdmin = true;
+    }
+    
+    toggleCalendar () {
+        this.info.showCalendar = !this.info.showCalendar;
+    }
+    
+    toggleFAQ () {
+        this.info.showFAQ = !this.info.showFAQ;
+    }
+    
+    toggleAbout () {
+        this.info.showAbout = !this.info.showAbout;
     }
 }

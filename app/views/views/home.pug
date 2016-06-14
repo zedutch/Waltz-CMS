@@ -7,11 +7,28 @@ div.row
             ul.posts-list
                 li(*ngFor="let post of posts")
                     post([post]='post')
+
     div.col-xs-12.col-sm-3.sidebar-container
-        calendar-widget(*ngIf="info.showCalendar")
-        div.sidebar-widget(*ngIf="info.showAbout")
-            h3  {{'widget.about' | translate:lang}}
-            div.widget-content {{info.aboutUs}}
-        div.sidebar-widget(*ngIf="info.showFAQ")
-            h3  {{'widget.faq' | translate:lang}}
-            div.widget-content {{info.faq}}
+        span([ngClass]="{'widget-gray' : !info.showCalendar}")
+            div.sidebar-widget.calendar-widget
+                a.btn-widget((click)="toggleCalendar()")
+                    span.glyphicon.glyphicon-eye-open(*ngIf="info.showCalendar")
+                    span.glyphicon.glyphicon-eye-close(*ngIf="!info.showCalendar")
+                h3 {{'widget.upcoming' | translate:lang}}
+                calendar-widget(*ngIf="info.showCalendar || user.isAdmin")
+
+        span([ngClass]="{'widget-gray' : !info.showAbout}")
+            div.sidebar-widget(*ngIf="info.showAbout || user.isAdmin")
+                a.btn-widget((click)="toggleAbout()")
+                    span.glyphicon.glyphicon-eye-open(*ngIf="info.showAbout")
+                    span.glyphicon.glyphicon-eye-close(*ngIf="!info.showAbout")
+                h3  {{'widget.about' | translate:lang}}
+                div.widget-content() {{info.aboutUs}}
+
+        span([ngClass]="{'widget-gray' : !info.showFAQ}")
+            div.sidebar-widget(*ngIf="info.showFAQ || user.isAdmin")
+                a.btn-widget((click)="toggleFAQ()")
+                    span.glyphicon.glyphicon-eye-open(*ngIf="info.showFAQ")
+                    span.glyphicon.glyphicon-eye-close(*ngIf="!info.showFAQ")
+                h3  {{'widget.faq' | translate:lang}}
+                div.widget-content {{info.faq}}
