@@ -10,7 +10,16 @@
     "login.remember"  : "Remember Me",
     "login.submit"    : "Log In",
     
-    "register.title"  : "Register",
+    "register.title"          : "Register",
+    "register.personalData"   : "Personal Data:",
+    "register.loginData"      : "Log In Data:",
+    "register.firstName"      : "First Name",
+    "register.lastName"       : "Last Name",
+    "register.email"          : "E-Mail Address",
+    "register.username"       : "Username",
+    "register.password"       : "Password",
+    "register.passwordRepeat" : "Repeat Password",
+    "register.submit"         : "Register",
 
     "today"        : "Today",
     "list"         : "List",

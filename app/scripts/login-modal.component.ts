@@ -24,8 +24,9 @@ import {AutoFocus}           from './autofocus.component';
 })
 
 export class LoginModalComponent {
-    renderContent = false
-    loginData     = {
+    renderContent    = false
+    registrationData = { }
+    loginData        = {
         rememberMe : true
     }
     
@@ -48,5 +49,9 @@ export class LoginModalComponent {
     
     login () {
         console.log("Trying to log in... Data used:", this.loginData);
+    }
+    
+    register () {
+        console.log("Trying to register... Data used:", this.registrationData);
     }
 }

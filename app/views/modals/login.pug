@@ -7,7 +7,8 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                 button.close((click)="loginModal.hide()" type="button" aria-label="Close")
                     span(aria-hidden="true") &times;
                 tabset.modal-tabset
-                    tab(heading="{{'login.title' | translate:lang}}")
+                    tab(disabled)
+                    tab(active="true" heading="{{'login.title' | translate:lang}}")
                         form((submit)="login()")
                             fieldset.form-group
                                 label.sr-only(for="UsernameInput") {{'login.username' | translate:lang}}:
@@ -22,4 +23,28 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                             fieldset.form-group.text-center
                                 button.btn.btn-primary(type="submit") {{'login.submit' | translate:lang}}
                     tab(heading="{{'register.title' | translate:lang}}")
-                        | Insert register form
+                        form((submit)="register()")
+                            label {{'register.personalData' | translate:lang}}
+                            fieldset.form-group.row
+                                div.col-xs-12.col-sm-6
+                                    label.sr-only.col-xs-12(for="FirstNameInput") {{'register.firstName' | translate:lang}}:
+                                    input.form-control#FirstNameInput([(ngModel)]="registrationData.firstName" type="text" placeholder="{{'register.firstName' | translate:lang}}" autofocus required)
+                                div.col-xs-12.col-sm-6
+                                    label.sr-only.col-xs-12(for="LastNameInput") {{'register.lastName' | translate:lang}}:
+                                    input.form-control#LastNameInput([(ngModel)]="registrationData.lastName" type="text" placeholder="{{'register.lastName' | translate:lang}}" required)
+                            fieldset.form-group
+                                label.sr-only(for="EmailInput") {{'register.email' | translate:lang}}:
+                                input.form-control#EmailInput([(ngModel)]="registrationData.email" type="email" placeholder="{{'register.email' | translate:lang}}" required)
+                            hr
+                            label {{'register.loginData' | translate:lang}}
+                            fieldset.form-group
+                                label.sr-only(for="UsernameInput") {{'register.username' | translate:lang}}:
+                                input.form-control#UsernameInput([(ngModel)]="registrationData.username" type="text" placeholder="{{'register.username' | translate:lang}}" required)
+                            fieldset.form-group
+                                label.sr-only(for="PasswordInput") {{'register.password' | translate:lang}}:
+                                input.form-control#PasswordInput([(ngModel)]="registrationData.password" type="password" placeholder="{{'register.password' | translate:lang}}" required)
+                            fieldset.form-group
+                                label.sr-only(for="PasswordRepeatInput") {{'register.passwordRepeat' | translate:lang}}:
+                                input.form-control#PasswordRepeatInput([(ngModel)]="registrationData.passwordRepeat" type="password" placeholder="{{'register.passwordRepeat' | translate:lang}}" required)
+                            fieldset.form-group.text-center
+                                button.btn.btn-primary(type="submit") {{'register.submit' | translate:lang}}
