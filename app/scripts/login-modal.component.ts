@@ -6,6 +6,7 @@ import {LocalizationService} from 'angular2localization/angular2localization';
 
 import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
 import {MODAL_DIRECTVES}     from 'ng2-bootstrap/ng2-bootstrap';
+import {TAB_DIRECTIVES}      from 'ng2-bootstrap/ng2-bootstrap';
 
 import {AutoFocus}           from './autofocus.component';
 
@@ -16,6 +17,7 @@ import {AutoFocus}           from './autofocus.component';
     directives    : [
                       CORE_DIRECTIVES,
                       MODAL_DIRECTVES,
+                      TAB_DIRECTIVES,
                       AutoFocus
                     ],
     pipes         : [ TranslatePipe ]

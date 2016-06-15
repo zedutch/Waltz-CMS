@@ -3,12 +3,14 @@
     "welcomeText"  : "Dit is een voorbeeldwebsite gemaakt met Waltz. Waltz is een nieuw content management system, gebouwd speciaal voor minder-technische gebruikers.",
     "waltz"        : "Waltz",
 
-    "login.button"    : "Aanmelden",
+    "login.button"    : "Aanmelden / Registreren",
     "login.title"     : "Aanmelden",
     "login.username"  : "Username",
     "login.password"  : "Password",
     "login.remember"  : "Remember Me",
     "login.submit"    : "Log In",
+    
+    "register.title"  : "Registreren",
     
     "today"        : "Vandaag",
     "list"         : "Lijst",

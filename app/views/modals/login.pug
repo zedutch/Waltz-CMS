@@ -2,21 +2,24 @@ a((click)='loginModal.show();') {{'login.button' | translate:lang}}
 div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #loginModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true")
     div.modal-dialog.modal-sm(*ngIf="renderContent")
         div.modal-content
-            div.modal-header
+            // div.modal-header
+            div.modal-body
                 button.close((click)="loginModal.hide()" type="button" aria-label="Close")
                     span(aria-hidden="true") &times;
-                h4.modal-title {{'login.title' | translate:lang}}
-            div.modal-body
-                form((submit)="login()")
-                    fieldset.form-group
-                        label.sr-only(for="UsernameInput") {{'login.username' | translate:lang}}:
-                        input.form-control#UsernameInput([(ngModel)]="loginData.username" type="text" placeholder="{{'login.username' | translate:lang}}" autofocus required)
-                    fieldset.form-group
-                        label.sr-only(for="PasswordInput") {{'login.password' | translate:lang}}:
-                        input.form-control#PasswordInput([(ngModel)]="loginData.password" type="password" placeholder="{{'login.password' | translate:lang}}" required)
-                    fieldset.form-group.checkbox
-                        label
-                            input([(ngModel)]="loginData.rememberMe" type="checkbox")
-                            | {{'login.remember' | translate:lang}}
-                    fieldset.form-group.text-center
-                        button.btn.btn-primary(type="submit") {{'login.submit' | translate:lang}}
+                tabset.modal-tabset
+                    tab(heading="{{'login.title' | translate:lang}}")
+                        form((submit)="login()")
+                            fieldset.form-group
+                                label.sr-only(for="UsernameInput") {{'login.username' | translate:lang}}:
+                                input.form-control#UsernameInput([(ngModel)]="loginData.username" type="text" placeholder="{{'login.username' | translate:lang}}" autofocus required)
+                            fieldset.form-group
+                                label.sr-only(for="PasswordInput") {{'login.password' | translate:lang}}:
+                                input.form-control#PasswordInput([(ngModel)]="loginData.password" type="password" placeholder="{{'login.password' | translate:lang}}" required)
+                            fieldset.form-group.checkbox
+                                label
+                                    input([(ngModel)]="loginData.rememberMe" type="checkbox")
+                                    | {{'login.remember' | translate:lang}}
+                            fieldset.form-group.text-center
+                                button.btn.btn-primary(type="submit") {{'login.submit' | translate:lang}}
+                    tab(heading="{{'register.title' | translate:lang}}")
+                        | Insert register form
