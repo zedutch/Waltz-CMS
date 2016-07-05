@@ -1,7 +1,7 @@
 import {Component}               from '@angular/core';
 import {ViewContainerRef}        from '@angular/core';
+import {OnInit}                  from '@angular/core';
 import {CORE_DIRECTIVES}         from '@angular/common';
-import {HTTP_PROVIDERS}          from '@angular/http';
 import {Routes}                  from '@angular/router';
 import {Router}                  from '@angular/router';
 import {ROUTER_DIRECTIVES}       from '@angular/router';
@@ -21,7 +21,6 @@ import {LoginModalComponent}     from './login-modal.component';
     selector      : 'waltz-main',
     templateUrl   : '/views/main',
     providers     : [
-                      HTTP_PROVIDERS,
                       LocaleService,
                       LocalizationService
                     ],
@@ -45,7 +44,7 @@ import {LoginModalComponent}     from './login-modal.component';
     }
 ])
 
-export class WaltzMainComponent extends Locale {
+export class WaltzMainComponent extends Locale implements OnInit {
     data = {};
     url;
     posts = [];
@@ -58,7 +57,7 @@ export class WaltzMainComponent extends Locale {
                 public localization     : LocalizationService,
                 private _router         : Router,
                 public viewContainerRef : ViewContainerRef) {
-        super(locale, localization);
+        super(null, localization);
         
         this.locale.addLanguage('en');
         this.locale.addLanguage('nl');
@@ -69,5 +68,9 @@ export class WaltzMainComponent extends Locale {
         
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
+    }
+
+    ngOnInit() {
+        this._router.navigate(['/']);
     }
 }

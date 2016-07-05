@@ -1,6 +1,10 @@
 import {Component}          from '@angular/core';
 import {OnInit}             from '@angular/core';
-import {TranslatePipe}      from 'angular2localization/angular2localization';
+
+import {Locale}                  from 'angular2localization/angular2localization';
+import {LocaleService}           from 'angular2localization/angular2localization';
+import {LocalizationService}     from 'angular2localization/angular2localization';
+import {TranslatePipe}           from 'angular2localization/angular2localization';
 
 import {CMSBackendService}       from './cms-backend.service';
 
@@ -20,12 +24,16 @@ import {WidgetCalendarComponent} from './widget-calendar.component';
     pipes       : [TranslatePipe]
 })
 
-export class WaltzViewComponent implements OnInit {
+export class WaltzViewComponent extends Locale implements OnInit {
     posts = [];
-    info  = {};
-    user  = {};
+    info : any  = {};
+    user : any  = {};
     
-    constructor(private _cmsBackendService : CMSBackendService) {}
+    constructor(private _cmsBackendService : CMSBackendService,
+                public locale              : LocaleService,
+                public localization        : LocalizationService) {
+        super(locale, localization);
+    }
 
     ngOnInit () {
         var self = this;

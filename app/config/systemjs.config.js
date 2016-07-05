@@ -7,11 +7,12 @@
 
     // map tells the System loader where to look for things
     var map = {
-        'app'      :  'app',
-        'dist'     :  'dist',
-        'rxjs'     :  'lib/rxjs',
-        '@angular' :  'lib/@angular',
-        'moment'   :  'lib/moment/moment.js'
+        'app'                  : 'app',
+        'dist'                 : 'dist',
+        'rxjs'                 : 'lib/rxjs',
+        '@angular'             : 'lib/@angular',
+        'moment'               : 'lib/moment/moment.js',
+        'angular2localization' : 'lib/angular2localization'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -25,7 +26,11 @@
             defaultExtension : 'js'
         },
         'rxjs' : {
-            defaultExtension: 'js'
+            defaultExtension : 'js'
+        },
+        'angular2localization': {
+            main             : 'bundles/angular2localization.umd.min.js',
+            defaultExtension : 'js'
         }
     };
 
