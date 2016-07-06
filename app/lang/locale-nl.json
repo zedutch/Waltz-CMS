@@ -32,5 +32,8 @@
     "widget.faq" : "Veelgestelde Vragen",
 
     "footer.designBy"  : "Website ontworpen door ",
-    "footer.poweredBy" : "en met trots aangedreven door "
+    "footer.poweredBy" : "en met trots aangedreven door ",
+
+    "error.title"          : "Fout!",
+    "error.passwordRepeat" : "De wachtwoorden komen niet overeen!"
 }

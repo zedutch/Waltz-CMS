@@ -32,5 +32,8 @@
     "widget.faq"      : "F.A.Q.",
 
     "footer.designBy"  : "Website designed by ",
-    "footer.poweredBy" : "and proudly powered by "
+    "footer.poweredBy" : "and proudly powered by ",
+
+    "error.title"          : "Error!",
+    "error.passwordRepeat" : "The passwords don't match!"
 }

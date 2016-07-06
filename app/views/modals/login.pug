@@ -2,12 +2,13 @@ a((click)='loginModal.show();') {{'login.button' | translate:lang}}
 div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #loginModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true")
     div.modal-dialog.modal-sm(*ngIf="renderContent")
         div.modal-content
-            // div.modal-header
             div.modal-body
                 button.close((click)="loginModal.hide()" type="button" aria-label="Close")
                     span(aria-hidden="true") &times;
                 tabset.modal-tabset
                     tab(disabled)
+
+                    // LOGIN
                     tab(active="true" heading="{{'login.title' | translate:lang}}")
                         form((submit)="login()")
                             fieldset.form-group
@@ -22,7 +23,13 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                                     | {{'login.remember' | translate:lang}}
                             fieldset.form-group.text-center
                                 button.btn.btn-primary(type="submit") {{'login.submit' | translate:lang}}
+
+                    // REGISTER
                     tab(heading="{{'register.title' | translate:lang}}")
+                        alert(type='danger' dismissible='true' '(close)'='hideError()' '*ngIf'='showError')
+                            span.glyphicon.glyphicon-warning-sign
+                            strong &nbsp; {{'error.title' | translate:lang}}
+                            div.indent {{'error.passwordRepeat' | translate:lang}}
                         form((submit)="register()")
                             label {{'register.personalData' | translate:lang}}
                             fieldset.form-group.row

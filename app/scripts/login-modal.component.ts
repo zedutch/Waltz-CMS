@@ -7,6 +7,7 @@ import {LocalizationService} from 'angular2localization/angular2localization';
 import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
 import {MODAL_DIRECTVES}     from 'ng2-bootstrap/ng2-bootstrap';
 import {TAB_DIRECTIVES}      from 'ng2-bootstrap/ng2-bootstrap';
+import {AlertComponent}      from 'ng2-bootstrap/ng2-bootstrap';
 
 import {AutoFocus}           from './autofocus.component';
 
@@ -18,17 +19,17 @@ import {AutoFocus}           from './autofocus.component';
                       CORE_DIRECTIVES,
                       MODAL_DIRECTVES,
                       TAB_DIRECTIVES,
-                      AutoFocus
+                      AutoFocus,
+                      AlertComponent
                     ],
     pipes         : [ TranslatePipe ]
 })
 
 export class LoginModalComponent {
     renderContent    = false
-    registrationData = { }
-    loginData        = {
-        rememberMe : true
-    }
+    showError        = false
+    registrationData : any = {}
+    loginData : any        = {}
     
     constructor (public localization : LocalizationService) {
         // TODO: check localSettings for the previous username and remember settings. If remembered, try to automatically login.
@@ -40,11 +41,20 @@ export class LoginModalComponent {
     }
     
     onShow ($event) {
-        this.renderContent = true
+        this.renderContent = true;
+
+        this.registrationData = {};
+        this.loginData = {
+            rememberMe : true
+        };
     }
     
     onHide ($event) {
-        this.renderContent = false
+        this.renderContent = false;
+    }
+
+    hideError () {
+        this.showError = false;
     }
     
     login () {
@@ -53,5 +63,9 @@ export class LoginModalComponent {
     
     register () {
         console.log("Trying to register... Data used:", this.registrationData);
+
+        if (this.registrationData.password !== this.registrationData.passwordRepeat) {
+            this.showError = true;
+        }
     }
 }
