@@ -6,6 +6,9 @@ import {FORM_DIRECTIVES}    from '@angular/common';
 import * as moment             from 'moment';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
+import {Locale}                  from 'angular2localization/angular2localization';
+import {LocaleService}           from 'angular2localization/angular2localization';
+import {LocalizationService}     from 'angular2localization/angular2localization';
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 import {LocaleDatePipe}     from 'angular2localization/angular2localization';
 
@@ -28,14 +31,18 @@ import {CMSBackendService}  from './cms-backend.service';
     ]
 })
 
-export class WidgetCalendarComponent implements OnInit {
+export class WidgetCalendarComponent extends Locale implements OnInit {
     date : Date;
     listMode = false;
     events = [];
     filteredEvents = [];
     dayClasses = [];
 
-    constructor(private _cmsBackendService : CMSBackendService) {}
+    constructor(private _cmsBackendService : CMSBackendService,
+                public locale              : LocaleService,
+                public localization        : LocalizationService) {
+        super(locale, localization);
+    }
 
     reset() {
         this.date = new Date(new Date().setHours(0,0,0,0));
