@@ -18,9 +18,9 @@ router.post('/', function(req, res) {
         last_name  : req.body.last_name
     });
 
-    newUser.save(function(err) {
+    newUser.save(function(err, user) {
         if (!err) {
-            return res.status(200).send(newUser);
+            return res.status(200).send(user);
         } else {
             return res.status(500).send(err);
         }
