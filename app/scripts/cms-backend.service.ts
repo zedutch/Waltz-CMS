@@ -1,16 +1,42 @@
-import {Injectable} from '@angular/core';
-import {Http}       from '@angular/http';
+import {Injectable}     from '@angular/core';
+import {Http}           from '@angular/http';
+import {Headers}        from '@angular/http';
+import {RequestOptions} from '@angular/http';
+
+import {LocaleService}  from 'angular2localization/angular2localization';
 
 @Injectable()
 export class CMSBackendService {
     URL = 'http://localhost:8080/api';
-    _epPosts = '/posts';
-    _epInfo  = '/info';
+    _epPosts  = '/posts';
+    _epInfo   = '/info';
+    _epUsers  = '/users';
+    _epLogin  = this._epUsers + '/login';
+    _epLogout = this._epUsers + '/logout';
+    options : RequestOptions;
 
-    constructor(private http : Http) { }
+    constructor(private http : Http,
+                private locale : LocaleService) {
+
+        this.locale.languageCodeChanged.subscribe(function(newLang) {
+            console.log("Language changed: " + newLang);
+            this.updateHeaders();
+        });
+
+        this.updateHeaders();
+    }
+
+    private updateHeaders() {
+        let headers = new Headers({
+            'Content-Type'    : 'application/json',
+            'Accept-Language' : this.locale.getCurrentLanguage()
+        });
+
+        this.options = new RequestOptions({headers: headers});
+    }
     
     getInfo(callback) {
-        var data = this.http.get(this.URL + this._epInfo);
+        var data = this.http.get(this.URL + this._epInfo, this.options);
         data.subscribe(res => {
             if (res.status === 200) {
                 var info = res.json();
@@ -46,6 +72,17 @@ export class CMSBackendService {
                 console.error("Error retrieving post with id '" + id + "'!", res)
             }
         });
+    }
+
+    register(userData, callback) {
+        var data = this.http.post(this.URL + this._epUsers, userData, this.options);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                callback(res.json());
+            } else {
+                console.error("Error registering user with user data", data, "Error message:", res);
+            }
+        })
     }
 
     getEvents(callback) {

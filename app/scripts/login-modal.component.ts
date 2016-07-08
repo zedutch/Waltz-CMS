@@ -10,11 +10,13 @@ import {TAB_DIRECTIVES}      from 'ng2-bootstrap/ng2-bootstrap';
 import {AlertComponent}      from 'ng2-bootstrap/ng2-bootstrap';
 
 import {AutoFocus}           from './autofocus.component';
+import {CMSBackendService}   from './cms-backend.service';
 
 @Component({
     selector      : 'login-modal',
     templateUrl   : '/modals/login',
     viewProviders : [ BS_VIEW_PROVIDERS ],
+    providers     : [ CMSBackendService ],
     directives    : [
                       CORE_DIRECTIVES,
                       MODAL_DIRECTVES,
@@ -31,15 +33,15 @@ export class LoginModalComponent {
     registrationData : any = {}
     loginData : any        = {}
     
-    constructor (public localization : LocalizationService) {
+    constructor (public localization : LocalizationService,
+                private _cmsBackendService : CMSBackendService) {
         // TODO: check localSettings for the previous username and remember settings. If remembered, try to automatically login.
     }
-    
-    
+
     get lang (): string {
         return this.localization.languageCode;
     }
-    
+
     onShow ($event) {
         this.renderContent = true;
 
@@ -48,7 +50,7 @@ export class LoginModalComponent {
             rememberMe : true
         };
     }
-    
+
     onHide ($event) {
         this.renderContent = false;
     }
@@ -56,16 +58,20 @@ export class LoginModalComponent {
     hideError () {
         this.showError = false;
     }
-    
+
     login () {
         console.log("Trying to log in... Data used:", this.loginData);
     }
-    
+
     register () {
         console.log("Trying to register... Data used:", this.registrationData);
 
         if (this.registrationData.password !== this.registrationData.passwordRepeat) {
             this.showError = true;
+        } else {
+            this._cmsBackendService.register(this.registrationData, accountData => {
+                console.log(accountData);
+            });
         }
     }
 }
