@@ -45,42 +45,34 @@ router.post(config.epLogin, function(req, res) {
     var validateCredentials = function(err, data) {
         if (err || data === null) {
             return res.status(401).send({
-                error : "No such user exists!"
+                error : "Invalid username and/or password!"
             });
         }
 
-        User.findOne({
-            username : username
-        }).select('password').exec(function(err, pw) {
-            data.password = pw.password;
-
-            if (username === data.username &&
-                bcrypt.compareSync(password, data.password)) {
-
+        if ((username == data.username || email == data.email) && password !== undefined &&
+            bcrypt.compareSync(password, data.password)) {
                 req.session.regenerate(function() {
                     req.session.user = username;
-                    data.password = undefined;
                     return res.send(data);
                 });
-            } else {
-                return res.status(401).send({
-                    error : "Invalid username and/or password!"
-                });
-            }
-        });
+        } else {
+            return res.status(401).send({
+                error : "Invalid username and/or password!"
+            });
+        }
     };
 
-    if (username) {
+    if (username && password) {
         User.findOne({
             username : username
         }, validateCredentials);
-    } else if(email) {
+    } else if(email && password) {
         User.findOne({
             email : email
         }, validateCredentials);
     } else {
         return res.status(400).send({
-            error : "No valid login credentials found! Provide at least either a 'username' or 'email' field and the matching password."
+            error : "No valid login credentials found! Provide at least either a 'username' or 'email' field and the matching password in a 'password' field."
         });
     }
 });
