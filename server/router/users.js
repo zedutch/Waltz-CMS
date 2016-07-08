@@ -27,6 +27,16 @@ router.post('/', function(req, res) {
     });
 });
 
+router.get('/', function(req, res) {
+    User.find({}, function(err, users) {
+        if (!err) {
+            return res.status(200).send(users);
+        } else {
+            return res.status(500).send(err);
+        }
+    });
+});
+
 router.post(config.epLogin, function(req, res) {
     var username = req.body.username,
         password = req.body.password,
