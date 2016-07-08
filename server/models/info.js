@@ -40,6 +40,13 @@ var infoSchema = new Schema({
     }
 });
 
+infoSchema.methods.toJSON = function() {
+    var obj = this.toObject();
+    delete obj.id;
+    delete obj._id;
+    return obj;
+};
+
 infoSchema.plugin(mongooseI18n, {
     locales : config.supportedLocales
 });
