@@ -10,11 +10,12 @@ router.post('/', function(req, res) {
         hash     = bcrypt.hashSync(password, salt);
 
     var newUser = new User({
-        username   : req.body.username,
-        password   : hash,
-        email      : req.body.email,
-        first_name : req.body.first_name,
-        last_name  : req.body.last_name
+        username       : req.body.username,
+        username_lower : req.body.username.toLowerCase(),
+        password       : hash,
+        email          : req.body.email,
+        first_name     : req.body.first_name,
+        last_name      : req.body.last_name
     });
 
     newUser.save(function(err, user) {
@@ -37,9 +38,9 @@ router.get('/', function(req, res) {
 });
 
 router.post(config.epLogin, function(req, res) {
-    var username = req.body.username,
+    var username = req.body.username.toLowerCase(),
         password = req.body.password,
-        email    = req.body.email;
+        email    = req.body.email.toLowerCase();
 
     var validateCredentials = function(err, data) {
         if (err || data === null) {
@@ -63,7 +64,7 @@ router.post(config.epLogin, function(req, res) {
 
     if (username && password) {
         User.findOne({
-            username : username
+            username_lower : username
         }, validateCredentials);
     } else if(email && password) {
         User.findOne({
