@@ -46,6 +46,22 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/:username', function(req, res) {
+    var username = req.params.username.toLowerCase();
+
+    User.findOne({
+        username_lower : username
+    }, function(err, user) {
+        if (!err && user) {
+            return res.status(200).send(user);
+        } else if (!err) {
+            return res.status(404).send();
+        } else {
+            return console.error(err);
+        }
+    });
+});
+
 router.post(config.epLogin, function(req, res) {
     var username = req.body.username,
         password = req.body.password,
