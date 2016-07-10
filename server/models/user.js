@@ -48,6 +48,7 @@ userSchema.methods.toJSON = function() {
     delete obj.password;
     delete obj.salt;
     delete obj.__v;
+    delete obj.id;
     delete obj.username_lower;
     return obj;
 };

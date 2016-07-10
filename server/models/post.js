@@ -24,10 +24,17 @@ var postSchema = new Schema({
         default : false
     }
 }, {
-    toJSON     : {
+    toObject   : {
         virtuals : true 
     }
 });
+
+postSchema.methods.toJSON = function() {
+    var obj = this.toObject();
+    delete obj.__v;
+    delete obj.id
+    return obj;
+};
 
 postSchema.virtual('url').get(function() {
     return config.epPosts + "/" + this._id;
