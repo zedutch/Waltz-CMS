@@ -10,22 +10,30 @@ router.post('/', function(req, res) {
         salt     = bcrypt.genSaltSync(10),
         hash     = bcrypt.hashSync(password, salt);
 
-    var newUser = new User({
-        username       : req.body.username,
-        username_lower : req.body.username.toLowerCase(),
-        password       : hash,
-        email          : req.body.email,
-        first_name     : req.body.first_name,
-        last_name      : req.body.last_name
-    });
+    if (req.body.username && req.body.email && req.body.password) {
+        var newUser = new User({
+            username       : req.body.username,
+            username_lower : req.body.username.toLowerCase(),
+            password       : hash,
+            email          : req.body.email.toLowerCase(),
+            first_name     : req.body.first_name,
+            last_name      : req.body.last_name
+        });
 
-    newUser.save(function(err, user) {
-        if (!err) {
-            return res.status(200).send(user);
-        } else {
-            return res.status(500).send(err);
-        }
-    });
+        newUser.save(function(err, user) {
+            if (!err) {
+                return res.status(200).send(user);
+            } else {
+                err = err.toJSON();
+                delete err.op;
+                return res.status(500).send(err);
+            }
+        });
+    } else {
+        return res.status(400).send({
+            error : "No valid credentials found! To register a new user, provide at least a 'username', an 'email', and a 'password' field."
+        });
+    }
 });
 
 router.get('/', function(req, res) {
@@ -39,9 +47,17 @@ router.get('/', function(req, res) {
 });
 
 router.post(config.epLogin, function(req, res) {
-    var username = req.body.username.toLowerCase(),
+    var username = req.body.username,
         password = req.body.password,
-        email    = req.body.email.toLowerCase();
+        email    = req.body.email;
+
+    if (username) {
+        username = username.toLowerCase();
+    }
+
+    if (email) {
+        email = email.toLowerCase();
+    }
 
     var validateCredentials = function(err, data) {
         if (err || data === null) {
@@ -50,7 +66,7 @@ router.post(config.epLogin, function(req, res) {
             });
         }
 
-        if ((username == data.username || email == data.email) && password !== undefined &&
+        if ((username == data.username_lower || email == data.email) && password !== undefined &&
             bcrypt.compareSync(password, data.password)) {
                 SessionManager.createSession(req, data._id, function() {
                     return res.send(data);
