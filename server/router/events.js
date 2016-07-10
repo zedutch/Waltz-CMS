@@ -1,5 +1,5 @@
 var express      = require('express'),
-    checkSession = require('./helpers.js').checkSession;
+    checkSession = require('./helpers.js').SessionManager.checkSession;
     Event        = require('../models/event.js');
 var router = express.Router();
 

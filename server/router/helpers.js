@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt-nodejs');
+
 exports.getURL = function(req) {
     return req.protocol + '://' + req.get('host') + req.originalUrl;
 };
@@ -31,12 +33,40 @@ exports.checkBody = function (body, requiredFields, objectName, res) {
     return true;
 };
 
-exports.checkSession = function (req, res, callback) {
-    if (req.session.user) {
-        callback();
-    } else {
-        res.status(401).send({
-            error : "Authorization failed."
+var sessions = {};
+
+exports.SessionManager = {
+    createSession : function (req, userId, callback) {
+        var sid = bcrypt.genSaltSync(10).substring(7);
+        req.session.regenerate(function() {
+            req.session.user = userId;
+            req.session.sid  = sid;
+            sessions[userId] = sid;
+            callback();
+        });
+    },
+    checkSession : function (req, res, callback) {
+        var authorized = false;
+        if (req.session.user) {
+            var sid = sessions[req.session.user];
+            authorized = sid == req.session.sid;
+        }
+
+        if (authorized) {
+            callback();
+        } else {
+            res.status(401).send({
+                error : "Authorization failed."
+            });
+        }
+    },
+    destroySession : function (req, callback) {
+        var userId = req.session.user;
+        req.session.destroy(function () {
+            if (userId) {
+                delete sessions[userId];
+            }
+            callback();
         });
     }
 };

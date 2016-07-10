@@ -1,7 +1,8 @@
-var express   = require('express'),
-    bcrypt    = require('bcrypt-nodejs'),
-    User      = require('../models/user.js'),
-    config    = require('../config/waltz.conf');;
+var express        = require('express'),
+    bcrypt         = require('bcrypt-nodejs'),
+    User           = require('../models/user.js'),
+    config         = require('../config/waltz.conf'),
+    SessionManager = require('./helpers.js').SessionManager;
 var router = express.Router();
 
 router.post('/', function(req, res) {
@@ -51,8 +52,7 @@ router.post(config.epLogin, function(req, res) {
 
         if ((username == data.username || email == data.email) && password !== undefined &&
             bcrypt.compareSync(password, data.password)) {
-                req.session.regenerate(function() {
-                    req.session.user = username;
+                SessionManager.createSession(req, data._id, function() {
                     return res.send(data);
                 });
         } else {
@@ -78,9 +78,9 @@ router.post(config.epLogin, function(req, res) {
 });
 
 router.get(config.epLogout, function(req, res) {
-    req.session.destroy(function() {
+    SessionManager.destroySession(req, function() {
         return res.send(204);
-    })
+    });
 });
 
 module.exports = router;
