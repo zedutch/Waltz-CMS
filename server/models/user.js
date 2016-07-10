@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    config   = require('../config/waltz.conf');
+
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -31,6 +33,14 @@ var userSchema = new Schema({
         type     : Boolean,
         default  : false
     }
+}, {
+    toObject  : {
+        virtuals : true 
+    }
+});
+
+userSchema.virtual('url').get(function() {
+    return config.epUsers + "/" + this.username_lower;
 });
 
 userSchema.methods.toJSON = function() {
