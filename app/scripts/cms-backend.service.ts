@@ -85,6 +85,17 @@ export class CMSBackendService {
         })
     }
 
+    login(userData, callback) {
+        var data = this.http.post(this.URL + this._epLogin, userData, this.options);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                callback(res.json());
+            } else {
+                console.error("Error during login in for user with user data", data, "Error message:", res);
+            }
+        })
+    }
+
     getEvents(callback) {
         var data = [];
         data.push({
