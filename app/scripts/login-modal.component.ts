@@ -61,6 +61,14 @@ export class LoginModalComponent {
 
     login () {
         console.log("Trying to log in... Data used:", this.loginData);
+
+        if (!this.loginData.username || !this.loginData.password) {
+            // TODO: show error
+        } else {
+            this._cmsBackendService.login(this.loginData, user => {
+                console.log(user);
+            });
+        }
     }
 
     register () {
