@@ -34,6 +34,8 @@
     "footer.designBy"  : "Website designed by ",
     "footer.poweredBy" : "and proudly powered by ",
 
-    "error.title"          : "Error!",
-    "error.passwordRepeat" : "The passwords don't match!"
+    "error.title"            : "Error!",
+    "error.passwordRepeat"   : "The passwords don't match!",
+    "error.invalidLoginData" : "Please provide both a username and a password in order to login!",
+    "error.invalidPassword"  : "Invalid password/username!"
 }

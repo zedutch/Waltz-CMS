@@ -34,6 +34,8 @@
     "footer.designBy"  : "Website ontworpen door ",
     "footer.poweredBy" : "en met trots aangedreven door ",
 
-    "error.title"          : "Fout!",
-    "error.passwordRepeat" : "De wachtwoorden komen niet overeen!"
+    "error.title"            : "Fout!",
+    "error.passwordRepeat"   : "De wachtwoorden komen niet overeen!",
+    "error.invalidLoginData" : "Je hebt een gebruikersnaam en een wachtwoord nodig om in te loggen!",
+    "error.invalidPassword"  : "Ongeldig wachtwoord/gebruikersnaam!"
 }
