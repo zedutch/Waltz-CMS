@@ -1,4 +1,5 @@
 import {Component}           from '@angular/core';
+import {ViewChild}           from '@angular/core';
 import {CORE_DIRECTIVES}     from '@angular/common';
 
 import {TranslatePipe}       from 'angular2localization/angular2localization';
@@ -6,6 +7,7 @@ import {LocalizationService} from 'angular2localization/angular2localization';
 
 import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
 import {MODAL_DIRECTVES}     from 'ng2-bootstrap/ng2-bootstrap';
+import {ModalDirective}     from 'ng2-bootstrap/ng2-bootstrap';
 import {TAB_DIRECTIVES}      from 'ng2-bootstrap/ng2-bootstrap';
 import {AlertComponent}      from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -32,6 +34,9 @@ export class LoginModalComponent {
     showError        = false
     registrationData : any = {}
     loginData : any        = {}
+
+    @ViewChild(ModalDirective)
+    modal : ModalDirective;
     
     constructor (public localization : LocalizationService,
                 private _cmsBackendService : CMSBackendService) {
@@ -59,14 +64,18 @@ export class LoginModalComponent {
         this.showError = false;
     }
 
-    login () {
-        console.log("Trying to log in... Data used:", this.loginData);
+    close () {
+        this.modal.hide();
+    }
 
+    login () {
         if (!this.loginData.username || !this.loginData.password) {
             // TODO: show error
         } else {
             this._cmsBackendService.login(this.loginData, user => {
                 console.log(user);
+                this.close();
+                // TODO: save user model so all components can access it.
             });
         }
     }
