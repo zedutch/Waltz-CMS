@@ -9,7 +9,12 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                     tab(disabled)
 
                     // LOGIN
-                    tab(active="true" heading="{{'login.title' | translate:lang}}")
+                    tab(active="true" heading="{{'login.title' | translate:lang}}" '(deselect)'='hideError()')
+                        alert(type='danger' dismissible='true' '(close)'='hideError()' '*ngIf'='errorMessage')
+                            span.glyphicon.glyphicon-warning-sign
+                            strong &nbsp; {{'error.title' | translate:lang}}
+                            div.indent {{errorMessage | translate:lang}}
+
                         form((submit)="login()")
                             fieldset.form-group
                                 label.sr-only(for="UsernameInput") {{'login.username' | translate:lang}}:
@@ -25,11 +30,11 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                                 button.btn.btn-primary(type="submit") {{'login.submit' | translate:lang}}
 
                     // REGISTER
-                    tab(heading="{{'register.title' | translate:lang}}")
-                        alert(type='danger' dismissible='true' '(close)'='hideError()' '*ngIf'='showError')
+                    tab(heading="{{'register.title' | translate:lang}}" '(deselect)'='hideError()')
+                        alert(type='danger' dismissible='true' '(close)'='hideError()' '*ngIf'='errorMessage')
                             span.glyphicon.glyphicon-warning-sign
                             strong &nbsp; {{'error.title' | translate:lang}}
-                            div.indent {{'error.passwordRepeat' | translate:lang}}
+                            div.indent {{errorMessage | translate:lang}}
                         form((submit)="register()")
                             label {{'register.personalData' | translate:lang}}
                             fieldset.form-group.row

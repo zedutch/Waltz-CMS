@@ -31,7 +31,7 @@ import {CMSBackendService}   from './cms-backend.service';
 
 export class LoginModalComponent {
     renderContent    = false
-    showError        = false
+    errorMessage     = ""
     registrationData : any = {}
     loginData : any        = {}
 
@@ -60,8 +60,12 @@ export class LoginModalComponent {
         this.renderContent = false;
     }
 
+    showError(message) {
+        this.errorMessage = message;
+    }
+
     hideError () {
-        this.showError = false;
+        this.errorMessage = "";
     }
 
     close () {
@@ -70,7 +74,7 @@ export class LoginModalComponent {
 
     login () {
         if (!this.loginData.username || !this.loginData.password) {
-            // TODO: show error
+            this.showError("error.invalidLoginData");
         } else {
             this._cmsBackendService.login(this.loginData, user => {
                 console.log(user);
@@ -84,7 +88,7 @@ export class LoginModalComponent {
         console.log("Trying to register... Data used:", this.registrationData);
 
         if (this.registrationData.password !== this.registrationData.passwordRepeat) {
-            this.showError = true;
+            this.showError("error.passwordRepeat");
         } else {
             this._cmsBackendService.register(this.registrationData, accountData => {
                 console.log(accountData);
