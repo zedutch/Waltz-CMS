@@ -4,6 +4,6 @@ div.navbar
             img.navbar-icon(src="/img/waltz-example_logo.png")
         a.navbar-title([routerLink]="['/']") #{env('main.title')}
         span.navbar-menu
-            login-modal
+            login-modal('(userDataChange)' = 'changeUserData($event)')
 
 div.navbar-border

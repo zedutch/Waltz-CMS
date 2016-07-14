@@ -1,5 +1,7 @@
 import {Component}           from '@angular/core';
 import {ViewChild}           from '@angular/core';
+import {Output}              from '@angular/core';
+import {EventEmitter}        from '@angular/core';
 import {CORE_DIRECTIVES}     from '@angular/common';
 
 import {TranslatePipe}       from 'angular2localization/angular2localization';
@@ -37,6 +39,8 @@ export class LoginModalComponent {
 
     @ViewChild(ModalDirective)
     modal : ModalDirective;
+
+    @Output() userDataChange : EventEmitter<any> = new EventEmitter<any>();
     
     constructor (public localization : LocalizationService,
                 private _cmsBackendService : CMSBackendService) {
@@ -78,8 +82,8 @@ export class LoginModalComponent {
         } else {
             this._cmsBackendService.login(this.loginData, user => {
                 console.log(user);
+                this.userDataChange.emit(user);
                 this.close();
-                // TODO: save user model so all components can access it.
             });
         }
     }

@@ -16,13 +16,15 @@ import {AlertComponent }         from 'ng2-bootstrap/ng2-bootstrap';
 import {WaltzViewComponent}      from './waltz-view.component';
 import {PostDetailComponent}     from './post-detail.component';
 import {LoginModalComponent}     from './login-modal.component';
+import {AppDataService}          from './app-data.service';
 
 @Component({
     selector      : 'waltz-main',
     templateUrl   : '/views/main',
     providers     : [
                       LocaleService,
-                      LocalizationService
+                      LocalizationService,
+                      AppDataService
                     ],
     directives    : [
                       WaltzViewComponent,
@@ -56,7 +58,8 @@ export class WaltzMainComponent extends Locale implements OnInit {
     constructor(public locale           : LocaleService,
                 public localization     : LocalizationService,
                 private _router         : Router,
-                public viewContainerRef : ViewContainerRef) {
+                public viewContainerRef : ViewContainerRef,
+                private _appdata        : AppDataService) {
         super(null, localization);
         
         this.locale.addLanguage('en');
@@ -68,6 +71,10 @@ export class WaltzMainComponent extends Locale implements OnInit {
         
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
+    }
+
+    changeUserData(user) {
+        this._appdata.user = user;
     }
 
     ngOnInit() {
