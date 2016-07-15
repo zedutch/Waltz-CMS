@@ -10,8 +10,8 @@ div.row
 
     div.col-xs-12.col-sm-3.sidebar-container
         span([ngClass]="{'widget-gray' : !info.showCalendar}")
-            div.sidebar-widget.calendar-widget
-                a.btn-widget((click)="toggleCalendar()")
+            div.sidebar-widget.calendar-widget(*ngIf="info.showCalendar || user.isAdmin")
+                a.btn-widget((click)="toggleCalendar()" '*ngIf'='user.isAdmin')
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showCalendar")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showCalendar")
                 h3 {{'widget.upcoming' | translate:lang}}
@@ -19,7 +19,7 @@ div.row
 
         span([ngClass]="{'widget-gray' : !info.showAbout}")
             div.sidebar-widget(*ngIf="info.showAbout || user.isAdmin")
-                a.btn-widget((click)="toggleAbout()")
+                a.btn-widget((click)="toggleAbout()" '*ngIf'='user.isAdmin')
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showAbout")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showAbout")
                 h3  {{'widget.about' | translate:lang}}
@@ -27,7 +27,7 @@ div.row
 
         span([ngClass]="{'widget-gray' : !info.showFAQ}")
             div.sidebar-widget(*ngIf="info.showFAQ || user.isAdmin")
-                a.btn-widget((click)="toggleFAQ()")
+                a.btn-widget((click)="toggleFAQ()" '*ngIf'='user.isAdmin')
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showFAQ")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showFAQ")
                 h3  {{'widget.faq' | translate:lang}}
