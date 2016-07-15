@@ -9,7 +9,9 @@
     "login.password"  : "Wachtwoord",
     "login.remember"  : "Automatisch Inloggen",
     "login.submit"    : "Log In",
-    
+
+    "logout.button"   : "Afmelden",
+
     "register.title"          : "Registreren",
     "register.personalData"   : "Persoonlijke Gegevens:",
     "register.loginData"      : "Inloggegevens:",
@@ -20,7 +22,7 @@
     "register.password"       : "Wachtwoord",
     "register.passwordRepeat" : "Herhaal Wachtwoord",
     "register.submit"         : "Registreer",
-    
+
     "today"        : "Vandaag",
     "list"         : "Lijst",
     "calendar"     : "Kalender",

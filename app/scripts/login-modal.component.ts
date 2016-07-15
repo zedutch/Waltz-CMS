@@ -36,6 +36,7 @@ export class LoginModalComponent {
     errorMessage     = ""
     registrationData : any = {}
     loginData : any        = {}
+    user : any = {}
 
     @ViewChild(ModalDirective)
     modal : ModalDirective;
@@ -81,6 +82,7 @@ export class LoginModalComponent {
             this.showError("error.invalidLoginData");
         } else {
             this._cmsBackendService.login(this.loginData, user => {
+                this.user = user;
                 this.userDataChange.emit(user);
                 this.close();
             });
