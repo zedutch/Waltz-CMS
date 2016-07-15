@@ -53,27 +53,31 @@ export class WaltzMainComponent extends Locale implements OnInit {
      * Setting 'alert.dismissible' to a value (no matter what), will make the alert dismissible.
      */
     alert = {};
-    
+    user : any;
+
     constructor(public locale           : LocaleService,
                 public localization     : LocalizationService,
                 private _router         : Router,
                 public viewContainerRef : ViewContainerRef,
                 private _appdata        : AppDataService) {
         super(null, localization);
-        
+
         this.locale.addLanguage('en');
         this.locale.addLanguage('nl');
         this.locale.definePreferredLocale('nl', 'BE', 30);
         this.locale.definePreferredCurrency('EUR');
         this.localization.translationProvider('../lang/locale-');
         this.localization.updateTranslation();
-        
+
+        this.user = _appdata.user;
+        _appdata.userChange.subscribe(user => this.user = user);
+
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
     }
 
     changeUserData(user) {
-        this._appdata.user = user;
+        this._appdata.setUser(user);
     }
 
     ngOnInit() {
