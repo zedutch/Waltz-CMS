@@ -96,7 +96,9 @@ export class LoginModalComponent {
             this.showError("error.passwordRepeat");
         } else {
             this._cmsBackendService.register(this.registrationData, accountData => {
-                console.log(accountData);
+                this.user = accountData;
+                this.userDataChange.emit(accountData);
+                this.close();
             });
         }
     }
