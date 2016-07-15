@@ -49,7 +49,6 @@ import {AppDataService}          from './app-data.service';
 export class WaltzMainComponent extends Locale implements OnInit {
     data = {};
     url;
-    posts = [];
     /*
      * Setting 'alert.dismissible' to a value (no matter what), will make the alert dismissible.
      */
