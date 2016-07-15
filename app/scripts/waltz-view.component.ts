@@ -7,6 +7,7 @@ import {LocalizationService}     from 'angular2localization/angular2localization
 import {TranslatePipe}           from 'angular2localization/angular2localization';
 
 import {CMSBackendService}       from './cms-backend.service';
+import {AppDataService}          from './app-data.service';
 
 import {PostComponent}           from './post.component';
 import {WidgetCalendarComponent} from './widget-calendar.component';
@@ -25,40 +26,51 @@ import {WidgetCalendarComponent} from './widget-calendar.component';
 })
 
 export class WaltzViewComponent extends Locale implements OnInit {
-    posts = [];
-    info : any  = {};
-    user : any  = {};
+    posts      = [];
+    info : any = {};
+    user : any;
     
     constructor(private _cmsBackendService : CMSBackendService,
+                private _appData           : AppDataService,
                 public locale              : LocaleService,
                 public localization        : LocalizationService) {
         super(locale, localization);
+
+        this.user = _appData.user;
+        _appData.userChange.subscribe(this.userChange);
     }
 
     ngOnInit () {
         var self = this;
         this._cmsBackendService.getInfo(function(info) {
             self.info = info;
+
             // For debugging purposes:
             self.info.showFAQ = false;
+
+            self._appData.setInfo(info);
         });
         this._cmsBackendService.getAllPosts(function(posts) {
             self.posts = posts;
         });
-
-        // For debugging purposes:
-         this.user.isAdmin = true;
     }
+
+    userChange = (newUser) => {
+        this.user = newUser;
+    };
     
     toggleCalendar () {
         this.info.showCalendar = !this.info.showCalendar;
+        this._appData.setInfo(this.info);
     }
     
     toggleFAQ () {
         this.info.showFAQ = !this.info.showFAQ;
+        this._appData.setInfo(this.info);
     }
     
     toggleAbout () {
         this.info.showAbout = !this.info.showAbout;
+        this._appData.setInfo(this.info);
     }
 }

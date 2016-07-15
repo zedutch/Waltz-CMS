@@ -81,7 +81,6 @@ export class LoginModalComponent {
             this.showError("error.invalidLoginData");
         } else {
             this._cmsBackendService.login(this.loginData, user => {
-                console.log(user);
                 this.userDataChange.emit(user);
                 this.close();
             });
