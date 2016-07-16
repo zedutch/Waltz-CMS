@@ -36,25 +36,33 @@ router.get('/', function(req, res) {
 
 router.post('/', /*checkSession,*/ function(req, res) {
     var locale = getCorrectLocale(req);
-    
-    var info = new Info({
-        welcomeText : {},
-        aboutUs     : {},
-        faq         : {}
-    });
-    
-    info.welcomeText[locale] = req.body.welcomeText;
-    info.aboutUs[locale]     = req.body.aboutUs;
-    info.faq[locale]         = req.body.faq;
-    
-    info.save(function(err) {
-        if (!err) {
-            var localizedInfo = Info.schema.methods.toJSONLocalizedOnly(info, locale, config.defaultLocale);
-            
-            return res.status(200).send(localizedInfo);
-        } else {
+
+    Info.findOne({}, function(err, info) {
+        if (!info && !err) {
+            return res.status(404).send();
+        } else if(err) {
+            console.error("Error retrieving the info object before editing:", err);
             return res.status(500).send(err);
         }
+
+        for (var att in req.body) {
+            if(info[att][locale] !== undefined) {
+                info[att][locale] = req.body[att];
+            } else {
+                info[att] = req.body[att];
+            }
+        }
+
+        info.save(function(err) {
+            if (!err) {
+                var localizedInfo = Info.schema.methods.toJSONLocalizedOnly(info, locale, config.defaultLocale);
+
+                return res.status(200).send(localizedInfo);
+            } else {
+                console.error("Error saving the info object:", err);
+                return res.status(500).send(err);
+            }
+        });
     });
 });
 
