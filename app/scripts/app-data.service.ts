@@ -8,7 +8,7 @@ export class AppDataService {
         isAdmin : false
     };
 
-    info : any = {}
+    info : any = {};
 
     @Output() userChange : EventEmitter<any> = new EventEmitter<any> ();
     @Output() infoChange : EventEmitter<any> = new EventEmitter<any> ();
