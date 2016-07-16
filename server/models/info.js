@@ -44,6 +44,7 @@ infoSchema.methods.toJSON = function() {
     var obj = this.toObject();
     delete obj.id;
     delete obj._id;
+    delete obj.__v;
     return obj;
 };
 
