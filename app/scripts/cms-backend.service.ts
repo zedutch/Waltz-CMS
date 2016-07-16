@@ -48,6 +48,19 @@ export class CMSBackendService {
         });
     }
 
+    postInfo(info, callback = undefined) {
+        var data = this.http.post(this.URL + this._epInfo, info, this.options);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                if (callback) {
+                    callback(res.json() || {});
+                }
+            } else {
+                console.error("Error saving the website info!", res)
+            }
+        });
+    }
+
     getAllPosts(callback) {
         var data = this.http.get(this.URL + this._epPosts);
         data.subscribe(res => {

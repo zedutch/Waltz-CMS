@@ -44,11 +44,8 @@ export class WaltzViewComponent extends Locale implements OnInit {
         var self = this;
         this._cmsBackendService.getInfo(function(info) {
             self.info = info;
-
-            // For debugging purposes:
-            self.info.showFAQ = false;
-
             self._appData.setInfo(info);
+            self._appData.infoChange.subscribe(self.infoChange);
         });
         this._cmsBackendService.getAllPosts(function(posts) {
             self.posts = posts;
@@ -57,6 +54,10 @@ export class WaltzViewComponent extends Locale implements OnInit {
 
     userChange = (newUser) => {
         this.user = newUser;
+    };
+
+    infoChange = (newInfo) => {
+        this._cmsBackendService.postInfo(newInfo);
     };
     
     toggleCalendar () {
