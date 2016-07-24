@@ -9,6 +9,11 @@ var infoSchema = new Schema({
         required : false,
         i18n     : true
     },
+    welcomeTitle : {
+        type     : String,
+        required : false,
+        i18n     : true
+    },
     aboutUs : {
         type     : String,
         required : false,
