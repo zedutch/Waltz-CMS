@@ -1,18 +1,18 @@
-import {Component}          from '@angular/core';
-import {OnInit}             from '@angular/core';
-import {CORE_DIRECTIVES}    from '@angular/common';
-import {FORM_DIRECTIVES}    from '@angular/common';
+import {Component}           from '@angular/core';
+import {OnInit}              from '@angular/core';
+import {CORE_DIRECTIVES}     from '@angular/common';
+import {FORM_DIRECTIVES}     from '@angular/common';
 
-import * as moment             from 'moment';
-import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {DATEPICKER_DIRECTIVES} 
+                             from 'ng2-bootstrap/ng2-bootstrap';
 
-import {Locale}                  from 'angular2localization/angular2localization';
-import {LocaleService}           from 'angular2localization/angular2localization';
-import {LocalizationService}     from 'angular2localization/angular2localization';
-import {TranslatePipe}      from 'angular2localization/angular2localization';
-import {LocaleDatePipe}     from 'angular2localization/angular2localization';
+import {Locale}              from 'angular2localization/angular2localization';
+import {LocaleService}       from 'angular2localization/angular2localization';
+import {LocalizationService} from 'angular2localization/angular2localization';
+import {TranslatePipe}       from 'angular2localization/angular2localization';
+import {LocaleDatePipe}      from 'angular2localization/angular2localization';
 
-import {CMSBackendService}  from './cms-backend.service';
+import {CMSBackendService}   from './cms-backend.service';
 
 @Component({
     selector    : 'calendar-widget',
