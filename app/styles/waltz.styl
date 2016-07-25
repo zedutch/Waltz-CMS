@@ -113,6 +113,35 @@ footer
 .post-author
     font-style  italic
 
+editable-info div.enabled:hover
+    border              1px solid #DDD
+    margin              -3px -8px
+    padding             2px 7px
+    -webkit-box-shadow  inset 2px 2px 3px 0px #EEE
+    -moz-box-shadow     inset 2px 2px 3px 0px #EEE
+    box-shadow          inset 2px 2px 3px 0px #EEE
+
+editable-info textarea
+    width               100%
+    border              1px solid #DDD
+    resize              vertical
+
+editable-info span.btn
+    border                      1px solid #DDD
+    border-bottom               none
+    border-radius               10px
+    border-bottom-left-radius   0
+    border-bottom-right-radius  0
+    padding                     3px 6px 0px 7px
+    background-color            #F0F0F0
+    color                       #444
+    margin-right                 4px
+
+*:focus
+    box-shadow          0 0 5px color-main
+    border              1px solid color-main-da
+    outline             none
+
 .main-widget
     margin      32px 0
 
@@ -133,6 +162,10 @@ footer
 .calendar-widget .calendar,
 datepicker
     display         inline-block
+
+daypicker:focus
+    box-shadow          none
+    border              none
 
 datepicker-inner .well
     margin-bottom   0

@@ -1,5 +1,8 @@
 {
-    "waltz"        : "Waltz",
+    "waltz" : "Waltz",
+
+    "save"  : "Save",
+    "close" : "Close",
 
     "login.button"    : "Log In / Register",
     "login.title"     : "Log In",
