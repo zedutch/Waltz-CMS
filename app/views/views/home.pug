@@ -1,8 +1,9 @@
 div.row
     div.col-xs-12.col-sm-9.main-container
         div.main-widget
-            h1 {{info.welcomeTitle}}
-            div {{info.welcomeText}}
+            h1
+                editable-info(attribute='welcomeTitle' '[adminonly]'="true")
+            editable-info(attribute='welcomeText' '[adminonly]'="true")
         div.main-widget
             ul.posts-list
                 li(*ngFor="let post of posts")
@@ -23,7 +24,8 @@ div.row
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showAbout")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showAbout")
                 h3  {{'widget.about' | translate:lang}}
-                div.widget-content() {{info.aboutUs}}
+                div.widget-content
+                    editable-info(attribute='aboutUs')
 
         span([ngClass]="{'widget-gray' : !info.showFAQ}")
             div.sidebar-widget(*ngIf="info.showFAQ || user.isAdmin")
@@ -31,4 +33,5 @@ div.row
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showFAQ")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showFAQ")
                 h3  {{'widget.faq' | translate:lang}}
-                div.widget-content {{info.faq}}
+                div.widget-content
+                    editable-info(attribute='faq')

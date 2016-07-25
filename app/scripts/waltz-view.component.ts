@@ -10,6 +10,7 @@ import {CMSBackendService}       from './cms-backend.service';
 import {AppDataService}          from './app-data.service';
 
 import {PostComponent}           from './post.component';
+import {EditableInfoComponent}   from './editable-info.component';
 import {WidgetCalendarComponent} from './widget-calendar.component';
 
 @Component({
@@ -20,7 +21,8 @@ import {WidgetCalendarComponent} from './widget-calendar.component';
                   ],
     directives  : [
                     PostComponent,
-                    WidgetCalendarComponent
+                    WidgetCalendarComponent,
+                    EditableInfoComponent
                   ],
     pipes       : [TranslatePipe]
 })
