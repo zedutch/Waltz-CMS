@@ -113,13 +113,17 @@ footer
 .post-author
     font-style  italic
 
-editable-info div.enabled:hover
-    border              1px solid #DDD
+editable-info div.enabled
+    border              1px dashed #EEE
     margin              -3px -8px
     padding             2px 7px
-    -webkit-box-shadow  inset 2px 2px 3px 0px #EEE
-    -moz-box-shadow     inset 2px 2px 3px 0px #EEE
-    box-shadow          inset 2px 2px 3px 0px #EEE
+
+    &:hover
+        border              1px solid #DDD
+        -webkit-box-shadow  inset 2px 2px 3px 0px #EEE
+        -moz-box-shadow     inset 2px 2px 3px 0px #EEE
+        box-shadow          inset 2px 2px 3px 0px #EEE
+        cursor              pointer
 
 editable-info textarea
     width               100%
