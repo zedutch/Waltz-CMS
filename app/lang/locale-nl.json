@@ -1,8 +1,8 @@
 {
-    "waltz" : "Waltz",
+    "waltz"  : "Waltz",
 
-    "save"  : "Opslaan",
-    "close" : "Sluiten",
+    "save"   : "Opslaan",
+    "cancel" : "Annuleer",
 
     "login.button"    : "Aanmelden / Registreren",
     "login.title"     : "Aanmelden",

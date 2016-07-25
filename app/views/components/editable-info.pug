@@ -7,6 +7,6 @@ div('*ngIf'='isEditing')
 
     span.btn('(click)'='close()')
         span.glyphicon.glyphicon-remove
-        | &nbsp; {{'close' | translate:lang}}
+        | &nbsp; {{'cancel' | translate:lang}}
 
     textarea#inputArea('[ngModel]'='value' '(ngModelChange)'="value=$event;updateSaveButton()" placeholder='{{value}}' autofocus)
