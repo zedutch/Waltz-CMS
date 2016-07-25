@@ -1,11 +1,12 @@
 div('*ngIf'='!isEditing' '[ngClass]'='{enabled: isEnabled}' '(click)'='startEditMode()') {{value}}
 
-span.btn('*ngIf'='isEditing' '(click)'='save()' '[ngClass]'='{disabled: savingDisabled}')
-    span.glyphicon.glyphicon-floppy-disk
-    | &nbsp; {{'save' | translate:lang}}
+div('*ngIf'='isEditing')
+    span.btn('(click)'='save()' '[ngClass]'='{disabled: savingDisabled}')
+        span.glyphicon.glyphicon-floppy-disk
+        | &nbsp; {{'save' | translate:lang}}
 
-span.btn('*ngIf'='isEditing' '(click)'='close()')
-    span.glyphicon.glyphicon-remove
-    | &nbsp; {{'close' | translate:lang}}
+    span.btn('(click)'='close()')
+        span.glyphicon.glyphicon-remove
+        | &nbsp; {{'close' | translate:lang}}
 
-textarea#inputArea('*ngIf'='isEditing' '[ngModel]'='value' '(ngModelChange)'="value=$event;updateSaveButton()" placeholder='{{value}}' autofocus)
+    textarea#inputArea('[ngModel]'='value' '(ngModelChange)'="value=$event;updateSaveButton()" placeholder='{{value}}' autofocus)

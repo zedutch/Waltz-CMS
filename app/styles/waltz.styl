@@ -129,6 +129,12 @@ editable-info textarea
     width               100%
     border              1px solid #DDD
     resize              vertical
+    margin              -3px -8px
+    padding             2px 7px
+    position            relative
+    top                 -21px
+    h1 &
+        top             -39px
 
 editable-info span.btn
     border                      1px solid #DDD
@@ -139,7 +145,17 @@ editable-info span.btn
     padding                     3px 6px 0px 7px
     background-color            #F0F0F0
     color                       #444
-    margin-right                 4px
+    margin-right                4px
+    position                    relative
+    z-index                     10000
+    top                         -24px
+    left                        -8px
+    &.disabled
+        opacity                 1
+        background-color        #F5F5F5
+        color                   #858585
+    h1 &
+        top                     -39px
 
 *:focus
     box-shadow          0 0 5px color-main
