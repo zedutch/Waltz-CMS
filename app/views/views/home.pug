@@ -23,7 +23,8 @@ div.row
                 a.btn-widget((click)="toggleAbout()" '*ngIf'='user.isAdmin')
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showAbout")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showAbout")
-                h3  {{'widget.about' | translate:lang}}
+                h3
+                    editable-info(attribute='aboutUsTitle')
                 div.widget-content
                     editable-info(attribute='aboutUs')
 

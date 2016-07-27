@@ -19,6 +19,11 @@ var infoSchema = new Schema({
         required : false,
         i18n     : true
     },
+    aboutUsTitle : {
+        type     : String,
+        required : false,
+        i18n     : true
+    },
     faq : {
         type     : String,
         required : false,
