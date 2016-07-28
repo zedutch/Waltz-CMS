@@ -29,6 +29,11 @@ var infoSchema = new Schema({
         required : false,
         i18n     : true
     },
+    faqTitle : {
+        type     : String,
+        required : false,
+        i18n     : true
+    },
     showCalendar : {
         type      : Boolean,
         required  : false,

@@ -33,6 +33,7 @@ div.row
                 a.btn-widget((click)="toggleFAQ()" '*ngIf'='user.isAdmin')
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showFAQ")
                     span.glyphicon.glyphicon-eye-close(*ngIf="!info.showFAQ")
-                h3  {{'widget.faq' | translate:lang}}
+                h3
+                    editable-info(attribute='faqTitle')
                 div.widget-content
                     editable-info(attribute='faq')
