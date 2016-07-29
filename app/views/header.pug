@@ -1,7 +1,7 @@
 div.navbar
     div.container
         a([routerLink]="['/']")
-            img.navbar-icon(src="/img/waltz-example_logo.png")
+            img.navbar-icon(src=env("main.logo"))
         a.navbar-title([routerLink]="['/']") #{env('main.title')}
         span.navbar-menu
             login-modal('(userDataChange)'='changeUserData($event)')
