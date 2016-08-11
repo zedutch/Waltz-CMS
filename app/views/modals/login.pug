@@ -1,4 +1,5 @@
-a((click)='loginModal.show();' '*ngIf'='!user.username') {{'login.button' | translate:lang}}
+a((click)='loginModal.show();' '*ngIf'='!user.username')
+    span.glyphicon.glyphicon-user.glyphicon-white-circle(title="{{'login.button' | translate:lang}}")
 span('*ngIf'='user.username')
     a {{user.username}}
     | &nbsp;|&nbsp;
