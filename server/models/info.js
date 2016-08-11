@@ -1,6 +1,6 @@
-var mongoose        = require('mongoose'),
-    mongooseI18n    = require('mongoose-i18n-localize'),
-    config          = require('../config/waltz.conf');
+var mongoose     = require('mongoose'),
+    mongooseI18n = require('mongoose-i18n-localize'),
+    config       = require('../config/waltz.conf');
 var Schema = mongoose.Schema;
 
 var infoSchema = new Schema({

@@ -1,6 +1,7 @@
 var express         = require('express'),
     checkSession    = require('./helpers.js').checkSession;
     Info            = require('../models/info.js'),
+    Page            = require('../models/page.js'),
     config          = require('../config/waltz.conf');
 var router = express.Router();
 
@@ -29,8 +30,22 @@ router.get('/', function(req, res) {
         }
         
         var localizedInfo = Info.schema.methods.toJSONLocalizedOnly(info, locale, config.defaultLocale);
-        
-        return res.status(200).send(localizedInfo);
+
+        Page.find(function(err, pages) {
+            if (!err) {
+                localizedInfo.pages = pages.map(
+                    function(page) {
+                        return {
+                            'title' : page.title,
+                            'url'   : page.url
+                        };
+                    }
+                );
+                return res.status(200).send(localizedInfo);
+            } else {
+                return res.status(500).send(err);
+            }
+        });
     });
 });
 

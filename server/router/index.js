@@ -27,6 +27,10 @@ router.use(config.epUsers, usersRouter);
 var eventsRouter = require('./events.js');
 router.use(config.epEvents, eventsRouter);
 
+// PAGES
+var pagesRouter = require('./pages.js');
+router.use(config.epPages, pagesRouter);
+
 // 404
 router.use('*', function (req, res){
     res.status(404).send({
