@@ -17,7 +17,12 @@ router.post('/', function(req, res) {
             password       : hash,
             email          : req.body.email.toLowerCase(),
             first_name     : req.body.first_name,
-            last_name      : req.body.last_name
+            last_name      : req.body.last_name,
+            birthdate      : req.body.birthdate,
+            address        : req.body.address,
+            postal_code    : req.body.postal_code,
+            city           : req.body.city,
+            telephone      : req.body.telephone
         });
 
         newUser.save(function(err, user) {

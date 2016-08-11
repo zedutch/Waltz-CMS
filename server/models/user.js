@@ -23,8 +23,13 @@ var userSchema = new Schema({
         unique   : true,
         required : true
     },
-    firstName : String,
-    lastName  : String,
+    firstName   : String,
+    lastName    : String,
+    birthdate   : String,
+    address     : String,
+    postal_code : String,
+    city        : String,
+    telephone   : String,
     isAdmin   : {
         type     : Boolean,
         default  : false
