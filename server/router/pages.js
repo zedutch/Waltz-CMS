@@ -1,6 +1,8 @@
-var express      = require('express'),
-    checkSession = require('./helpers.js').SessionManager.checkSession;
-    Page         = require('../models/page.js');
+var express          = require('express'),
+    checkSession     = require('./helpers.js').SessionManager.checkSession,
+    getCorrectLocale = require('./helpers.js').getCorrectLocale,
+    Page             = require('../models/page.js'),
+    config           = require('../config/waltz.conf');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -37,6 +39,7 @@ router.post('/', checkSession, function(req, res) {
 
 router.get('/:urlString', function(req, res) {
     var urlString = req.params.urlString;
+    var locale = getCorrectLocale(req);
 
     Page.findOne({
         urlString : urlString

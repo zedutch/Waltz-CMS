@@ -58,6 +58,7 @@ a.navbar-title:hover
     margin-left 64px
     color       navbar-title
     text-shadow 1px 1px 2px navbar-shadow
+    height      100%
 
 .navbar-icon
     width       48px
@@ -70,8 +71,23 @@ a.navbar-title:hover
 .navbar-menu
     float       right
 
-.navbar-menu a
-    color       navbar-menu
+.navbar-menu > a
+    color                   navbar-menu
+    vertical-align          center
+    padding                 16px
+    border-top-left-radius  10px
+    border-top-right-radius 10px
+    -webkit-transition      width 2s, height 2s, background-color 0.2s, -webkit-transform 2s
+    transition              width 2s, height 2s, background-color 0.2s, transform 2s
+
+    &:hover
+        color               white
+        background-color    color-main
+        font-size           1.05em
+        margin-left         -3px
+
+.navbar-menu login-modal
+    margin-left 12px
 
 footer
     text-align  center
@@ -79,9 +95,13 @@ footer
 
 .glyphicon-white-circle
     color               navbar-main
-    background-color    navbar-gray
-    padding             8px 8px 10px 10px
+    background-color    navbar-menu
+    text-align          center
+    vertical-align      center
+    padding             6px 6px 6px 6px
     border-radius       16px
+    &:hover
+        background-color    white
 
 .indent
     margin-left 16px

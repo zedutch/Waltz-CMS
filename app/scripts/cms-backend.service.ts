@@ -11,6 +11,7 @@ export class CMSBackendService {
     _epPosts  = '/posts';
     _epInfo   = '/info';
     _epUsers  = '/users';
+    _epPages  = '/pages';
     _epLogin  = this._epUsers + '/login';
     _epLogout = this._epUsers + '/logout';
     options : RequestOptions;
@@ -107,6 +108,17 @@ export class CMSBackendService {
                 console.error("Error during login in for user with user data", data, "Error message:", res);
             }
         })
+    }
+
+     getPage(urlString, callback) {
+        var data = this.http.get(this.URL + this._epPages +'/' + urlString);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                callback(res.json());
+            } else {
+                console.error("Error retrieving page with url string '" + urlString + "'!", res)
+            }
+        });
     }
 
     getEvents(callback) {

@@ -1,9 +1,11 @@
 div.navbar
     div.container
-        a([routerLink]="['/']")
+        a('[routerLink]'="['/']")
             img.navbar-icon(src=env("main.logo"))
-        a.navbar-title([routerLink]="['/']") #{env('main.title')}
-        span.navbar-menu
+        a.navbar-title('[routerLink]'="['/']") #{env('main.title')}
+        div.navbar-menu
+            a('[routerLink]'="['/']") {{'page.home' | translate:lang}}
+            a('*ngFor'="let page of info.pages" '[routerLink]'="[page.url]") {{ page.title }}
             login-modal('(userDataChange)'='changeUserData($event)')
 
 div.navbar-border

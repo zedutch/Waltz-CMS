@@ -6,16 +6,19 @@ var Schema = mongoose.Schema;
 var pageSchema = new Schema({
     title      : {
         type     : String,
-        required : true
+        required : true,
+        i18n     : true
     },
     urlString  : {
         type     : String,
         required : true,
-        unique   : true
+        unique   : true,
+        i18n     : false
     },
     content    : {
         type     : String,
-        required : true
+        required : true,
+        i18n     : true
     }
 }, {
     toObject   : {

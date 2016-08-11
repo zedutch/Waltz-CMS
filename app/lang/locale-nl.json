@@ -24,11 +24,13 @@
     "register.passwordRepeat" : "Herhaal Wachtwoord",
     "register.submit"         : "Registreer",
 
-    "today"        : "Vandaag",
-    "list"         : "Lijst",
-    "calendar"     : "Kalender",
+    "today"       : "Vandaag",
+    "list"        : "Lijst",
+    "calendar"    : "Kalender",
 
-    "post.author"  : "Gepost door",
+    "post.author" : "Gepost door",
+
+    "page.home"   : "Home",
 
     "widget.upcoming" : "Aankomende evenementen",
 

@@ -24,11 +24,13 @@
     "register.passwordRepeat" : "Repeat Password",
     "register.submit"         : "Register",
 
-    "today"        : "Today",
-    "list"         : "List",
-    "calendar"     : "Calendar",
+    "today"       : "Today",
+    "list"        : "List",
+    "calendar"    : "Calendar",
 
     "post.author" : "Posted by:",
+
+    "page.home"   : "Home",
 
     "widget.upcoming" : "Upcoming Events",
 

@@ -1,23 +1,10 @@
-var express         = require('express'),
-    checkSession    = require('./helpers.js').checkSession;
-    Info            = require('../models/info.js'),
-    Page            = require('../models/page.js'),
-    config          = require('../config/waltz.conf');
+var express          = require('express'),
+    checkSession     = require('./helpers.js').checkSession,
+    getCorrectLocale = require('./helpers.js').getCorrectLocale,
+    Info             = require('../models/info.js'),
+    Page             = require('../models/page.js'),
+    config           = require('../config/waltz.conf');
 var router = express.Router();
-
-function getCorrectLocale (req) {
-    var locale_req = req.headers["accept-language"].substring(0, 2);
-    var locale = locale_req;
-    var supported_req = config.supportedLocales;
-    if (supported_req.indexOf(locale_req) < 0) {
-        console.log("User requested language", locale_req, "but it is not supported. Supported languages are", supported_req);
-        locale = config.defaultLocale;
-    }
-    
-    console.log("Locale used:", locale);
-    
-    return locale
-}
 
 router.get('/', function(req, res) {
     var locale = getCorrectLocale(req);
@@ -59,6 +46,8 @@ router.post('/', /*checkSession,*/ function(req, res) {
             console.error("Error retrieving the info object before editing:", err);
             return res.status(500).send(err);
         }
+
+        delete req.body.pages
 
         for (var att in req.body) {
             if(info[att][locale] !== undefined) {

@@ -1,4 +1,19 @@
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs'),
+    config = require('../config/waltz.conf');
+
+exports.getCorrectLocale = function(req) {
+    var locale_req = req.headers["accept-language"].substring(0, 2);
+    var locale = locale_req;
+    var supported_req = config.supportedLocales;
+    if (supported_req.indexOf(locale_req) < 0) {
+        console.log("User requested language", locale_req, "but it is not supported. Supported languages are", supported_req);
+        locale = config.defaultLocale;
+    }
+    
+    console.log("Locale used:", locale);
+    
+    return locale
+};
 
 exports.getURL = function(req) {
     return req.protocol + '://' + req.get('host') + req.originalUrl;

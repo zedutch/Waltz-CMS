@@ -15,6 +15,7 @@ import {AlertComponent }         from 'ng2-bootstrap/ng2-bootstrap';
 
 import {WaltzViewComponent}      from './waltz-view.component';
 import {PostDetailComponent}     from './post-detail.component';
+import {DynamicPageComponent}    from './dynamic-page.component';
 import {LoginModalComponent}     from './login-modal.component';
 import {AppDataService}          from './app-data.service';
 
@@ -43,6 +44,9 @@ import {AppDataService}          from './app-data.service';
     }, {
         path      : '/posts/:id',
         component : PostDetailComponent
+    }, {
+        path      : '/pages/:urlString',
+        component : DynamicPageComponent
     }
 ])
 
@@ -53,6 +57,9 @@ export class WaltzMainComponent extends Locale implements OnInit {
      * Setting 'alert.dismissible' to a value (no matter what), will make the alert dismissible.
      */
     alert = {};
+    info  = {
+        message : "Test-Page"
+    };
     user : any;
 
     constructor(public locale           : LocaleService,
@@ -72,12 +79,19 @@ export class WaltzMainComponent extends Locale implements OnInit {
         this.user = _appdata.user;
         _appdata.userChange.subscribe(user => this.user = user);
 
+        this.info = _appdata.info;
+        _appdata.infoChange.subscribe(info => this.info = info);
+
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
     }
 
     changeUserData(user) {
         this._appdata.setUser(user);
+    }
+
+    changeInfoData(info) {
+        this._appdata.setInfo(info);
     }
 
     ngOnInit() {
