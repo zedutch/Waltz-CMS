@@ -22,9 +22,10 @@ router.get('/', function(req, res) {
             if (!err) {
                 localizedInfo.pages = pages.map(
                     function(page) {
+                        var lPage = Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale);
                         return {
-                            'title' : page.title,
-                            'url'   : page.url
+                            'title' : lPage.title,
+                            'url'   : lPage.url
                         };
                     }
                 );

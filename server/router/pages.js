@@ -21,11 +21,14 @@ router.post('/', checkSession, function(req, res) {
     var urlString = title.toLowerCase()
                          .trim()
                          .replace(/ /g, "_");
+    var now = new Date().toISOString();
 
     var page = new Page({
-        title     : title,
-        content   : req.body.content,
-        urlString : urlString
+        title      : title,
+        content    : req.body.content,
+        urlString  : urlString,
+        lastEditBy : req.session.name,
+        lastEditOn : now
     });
 
     page.save(function(err) {
@@ -58,17 +61,35 @@ router.get('/:urlString', function(req, res) {
 
 router.put('/:urlString', checkSession, function(req, res) {
     var urlString = req.params.urlString;
+    var locale = getCorrectLocale(req);
+    var now = new Date().toISOString();
 
-    Page.update({
+    Page.findOne({
         urlString : urlString
-    }, {
-        $set : {
-            title : req.body.title,
-            content : req.body.content
+    }, function(err, page) {
+        if (!page && !err) {
+            return res.status(404).send();
+        } else if(err) {
+            console.error("Error retrieving a page object before editing:", err);
+            return res.status(500).send(err);
         }
-    }).exec();
 
-    return res.sendStatus(204);
+        page.title[locale]      = req.body.title;
+        page.content[locale]    = req.body.content;
+        page.lastEditBy         = req.session.name;
+        page.lastEditOn         = now;
+
+        page.save(function(err) {
+            if (!err) {
+                var localizedpage = Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale);
+
+                return res.status(200).send(localizedpage);
+            } else {
+                console.error("Error saving a page object:", err);
+                return res.status(500).send(err);
+            }
+        });
+    });
 });
 
 router.delete('/:urlString', checkSession, function(req, res) {
