@@ -19,7 +19,9 @@ var pageSchema = new Schema({
         type     : String,
         required : true,
         i18n     : true
-    }
+    },
+    lastEditOn : String,
+    lastEditBy : String
 }, {
     toObject   : {
         virtuals : true 
