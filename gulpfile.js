@@ -3,8 +3,10 @@ var gulp    = require('gulp'),
     nmon    = require('gulp-nodemon'),
     ts      = require('gulp-typescript'),
     tsMaps  = require('gulp-sourcemaps'),
+    tap     = require('gulp-tap'),
     mkdirs  = require('mkdirs'),
     exec    = require('child_process').exec,
+    spawn   = require('child_process').spawn,
     config  = require('./app/config/express.conf'),
     del     = require('del');
 
@@ -41,6 +43,25 @@ gulp.task('start-mongo', function() {
 
 gulp.task('stop-mongo', run('mongo --eval "db.shutdownServer();"'));
 
+gulp.task('populate', function() {
+    return gulp.src(config.dbInitialFiles)
+               .pipe(tap(function(file) {
+                    var args = ['--drop', '--jsonArray', '--db=' + config.dbName, file.path];
+                    var mongoimport = spawn('mongoimport', args)
+                    mongoimport.stdout.on('data', function(data) {
+                        console.log(`stdout: ${data}`);
+                    });
+
+                    mongoimport.stderr.on('data', function(data) {
+                        console.error(`stderr: ${data}`);
+                    });
+
+                    mongoimport.on('close', (code) => {
+                      console.log(`mongoimport process exited with code ${code}`);
+                    });
+               }));
+});
+
 var fnStylus = function () {
     return gulp.src('app/styles/**/*.styl')
         .pipe(stylus())
@@ -76,8 +97,6 @@ var fnTypescript = function() {
 
 gulp.task('typescript-clean', ['clean'], fnTypescript);
 gulp.task('typescript', fnTypescript);
-
-gulp.task('populate', run('mongoimport --upsert --jsonArray --db ' + config.dbName + ' ' + config.dbInitialFiles));
 
 gulp.task('unit-test', ['clean', 'typescript', 'stylus', 'tests-typescript'], function(done) {
     new KarmaServer({
