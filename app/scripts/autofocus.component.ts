@@ -3,7 +3,8 @@ import {Renderer}   from '@angular/core'
 import {ElementRef} from '@angular/core'
 
 @Directive({
-    selector : '[autofocus]'
+    selector : '[autofocus]',
+    exportAs : 'autofocus'
 })
 
 export class AutoFocus {
