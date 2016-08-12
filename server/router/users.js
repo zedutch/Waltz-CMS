@@ -89,7 +89,7 @@ router.post(config.epLogin, function(req, res) {
 
         if ((username == data.username_lower || email == data.email) && password !== undefined &&
             bcrypt.compareSync(password, data.password)) {
-                SessionManager.createSession(req, data._id, function() {
+                SessionManager.createSession(req, data._id, username, function() {
                     return res.send(data);
                 });
         } else {

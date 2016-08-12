@@ -51,11 +51,12 @@ exports.checkBody = function (body, requiredFields, objectName, res) {
 var sessions = {};
 
 exports.SessionManager = {
-    createSession : function (req, userId, callback) {
+    createSession : function (req, userId, username, callback) {
         var sid = bcrypt.genSaltSync(10).substring(7);
         req.session.regenerate(function() {
             req.session.user = userId;
             req.session.sid  = sid;
+            req.session.name = username;
             sessions[userId] = sid;
             callback();
         });
