@@ -121,6 +121,19 @@ export class CMSBackendService {
         });
     }
 
+    updatePage(page, callback = undefined) {
+        var data = this.http.put(this.URL + page.url, page, this.options);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                if (callback) {
+                    callback(res.json() || {});
+                }
+            } else {
+                console.error("Error saving page '" + page.title + "'!", res)
+            }
+        });
+    }
+
     getEvents(callback) {
         var data = [];
         data.push({
