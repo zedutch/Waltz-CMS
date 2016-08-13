@@ -3,13 +3,46 @@ div.editor-bar('*ngIf'='isEditing')
         span.glyphicon.glyphicon-floppy-disk
         | &nbsp; {{'save' | translate:lang}}
 
-    span.btn.unselectable.bold('(click)'='onStyleButton("bold", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("bold")}') B
+    span.divider
 
-    span.btn.unselectable.italic('(click)'='onStyleButton("italic", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("italic")}') I
+    span.btn.unselectable.bold('(click)'='handleLinking(inputArea, "editor.link");' 'unselectable'='on' '[ngClass]'='{toggled: linkSelected()}')
+        span.glyphicon.glyphicon-link
 
-    span.btn.unselectable.underline('(click)'='onStyleButton("underline", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("underline")}') U
+    span.divider
 
-    span.btn.pull-right('(click)'='close()')
+    span.btn.unselectable.bold('(click)'='command("bold", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("bold")}') B
+
+    span.btn.unselectable.italic('(click)'='command("italic", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("italic")}') I
+
+    span.btn.unselectable.underline('(click)'='command("underline", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("underline")}') U
+
+    span.divider
+
+    span.btn.unselectable('(click)'='command("superscript", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("superscript")}')
+        span.glyphicon.glyphicon-superscript
+
+    span.btn.unselectable('(click)'='command("subscript", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("subscript")}')
+        span.glyphicon.glyphicon-subscript
+
+    span.divider
+
+    span.btn.unselectable('(click)'='command("justifyLeft", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("justifyLeft")}')
+        span.glyphicon.glyphicon-align-left
+
+    span.btn.unselectable('(click)'='command("justifyCenter", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("justifyCenter")}')
+        span.glyphicon.glyphicon-align-center
+
+    span.btn.unselectable('(click)'='command("justifyRight", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("justifyRight")}')
+        span.glyphicon.glyphicon-align-right
+
+    span.btn.unselectable('(click)'='command("justifyFull", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("justifyFull")}')
+        span.glyphicon.glyphicon-align-justify
+
+    span.divider
+
+    span.btn.unselectable.underline('(click)'='command("insertHorizontalRule", inputArea);' 'unselectable'='on') HR
+
+    span.btn.pull-right('(click)'='close(inputArea)')
         span.glyphicon.glyphicon-remove
         | &nbsp; {{'cancel' | translate:lang}}
 

@@ -20,6 +20,9 @@ import {AppDataService}      from './app-data.service';
     selector      : 'editor',
     templateUrl   : '/components/editor',
     viewProviders : [ BS_VIEW_PROVIDERS ],
+    providers     : [
+                      TranslatePipe
+                    ],
     directives    : [
                       CORE_DIRECTIVES,
                       Link
@@ -43,7 +46,8 @@ export class EditorComponent extends Locale implements OnInit {
     constructor (public localization : LocalizationService,
                  public locale       : LocaleService,
                 private _appData     : AppDataService,
-                private _element     : ElementRef) {
+                private _element     : ElementRef,
+                private _translate   : TranslatePipe) {
         super(locale, localization);
         this.document = _element.nativeElement.ownerDocument;
     }
@@ -87,17 +91,42 @@ export class EditorComponent extends Locale implements OnInit {
         }
     }
 
-    close () {
+    close (inputArea) {
+        inputArea.elementRef.nativeElement.innerHTML = this._content;
         this.value = this.initialValue;
         this._content = this.initialValue;
         this.isEditing = false;
     }
 
     userChange = (user) => {
-        this.isEnabled = user.isAdmin || ((user.isStaff || false) && !this.adminonly) || false
+        this.isEnabled = user.isAdmin || ((user.isStaff || false) && !this.adminonly) || false;
     };
 
-    onStyleButton (type, el) {
+    linkSelected () {
+        if (this.document.queryCommandEnabled("unlink")) {
+            var selected = document.getSelection();
+            return selected.anchorNode.parentNode.nodeName == 'A';
+        }
+
+        return false;
+    }
+
+    handleLinking (el, queryStr) {
+        if (!this.linkSelected()) {
+            var q = this._translate.transform(queryStr, this.lang);
+            var url = prompt(q, 'http://');
+            el.elementRef.nativeElement.focus();
+
+            if (url) {
+                var linkText = this.document.getSelection();
+                this.document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + linkText + '</a>');
+            }
+        } else {
+            this.command('unlink', el);
+        }
+    }
+
+    command (type, el) {
         el.elementRef.nativeElement.focus();
         this.document.execCommand(type);
     }
