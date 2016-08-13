@@ -1,4 +1,6 @@
 div.row
     div.col-xs-12
         h1 {{page.title}}
-    div.col-xs-12 {{page.content}}
+    div.col-xs-12
+        editor('[content]'='page.content' '(contentChange)'='page.content=$event;updatePage()'
+        '[adminonly]'='true')
