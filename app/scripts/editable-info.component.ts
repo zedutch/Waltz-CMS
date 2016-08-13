@@ -1,6 +1,5 @@
 import {Component}           from '@angular/core';
 import {OnInit}              from '@angular/core';
-import {ViewChild}           from '@angular/core';
 import {Input}               from '@angular/core';
 import {EventEmitter}        from '@angular/core';
 import {CORE_DIRECTIVES}     from '@angular/common';
