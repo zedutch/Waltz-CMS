@@ -4,3 +4,8 @@ shadowed-image(imgUrl, x, y, blur, shadowColour)
     filter drop-shadow(x y blur shadowColour);
     -ms-filter  "progid:DXImageTransform.Microsoft.Dropshadow(OffX="+x+", OffY="+y+", Color='"+shadowColour+"')"
     filter "progid:DXImageTransform.Microsoft.Dropshadow(OffX="++x", OffY="+y+", Color='"+shadowColour+"')"
+
+ box-shadow(args...)
+   -webkit-box-shadow args
+   -moz-box-shadow    args
+   box-shadow         args

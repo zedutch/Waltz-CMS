@@ -1,0 +1,16 @@
+div.editor-bar('*ngIf'='isEditing')
+    span.btn('(click)'='save()' '[ngClass]'='{disabled: savingDisabled}')
+        span.glyphicon.glyphicon-floppy-disk
+        | &nbsp; {{'save' | translate:lang}}
+
+    span.btn.unselectable.bold('(click)'='onStyleButton("bold", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("bold")}') B
+
+    span.btn.unselectable.italic('(click)'='onStyleButton("italic", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("italic")}') I
+
+    span.btn.unselectable.underline('(click)'='onStyleButton("underline", inputArea);' 'unselectable'='on' '[ngClass]'='{toggled: document.queryCommandState("underline")}') U
+
+    span.btn.pull-right('(click)'='close()')
+        span.glyphicon.glyphicon-remove
+        | &nbsp; {{'cancel' | translate:lang}}
+
+div.editor-view(link '#inputArea'='link' '(click)'='startEditMode()' '[innerHTML]'='content' 'attr.contenteditable'='{{isEnabled}}' '(input)'='value=$event.target.innerHTML;contentUpdated();' '[ngClass]'='{editing: isEditing, disabled: !isEnabled}')
