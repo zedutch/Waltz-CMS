@@ -1,7 +1,9 @@
 import {Component}          from '@angular/core';
 import {OnInit}             from '@angular/core';
 import {RouteSegment}       from '@angular/router';
+
 import {TranslatePipe}      from 'angular2localization/angular2localization';
+import {LocaleDatePipe}      from 'angular2localization/angular2localization';
 
 import {CMSBackendService}  from './cms-backend.service';
 import {EditorComponent}    from './editor.component';
@@ -15,7 +17,10 @@ import {EditorComponent}    from './editor.component';
     directives  : [
                     EditorComponent
                   ],
-    pipes       : [TranslatePipe]
+    pipes       : [
+                    TranslatePipe,
+                    LocaleDatePipe
+                  ]
 })
 
 export class DynamicPageComponent implements OnInit {

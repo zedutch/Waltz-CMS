@@ -28,7 +28,10 @@
     "list"        : "Lijst",
     "calendar"    : "Kalender",
 
-    "post.author" : "Gepost door",
+    "post.author"     : "Gepost door",
+    "post.lastEditBy" : "Laatst bewerkt door",
+    "post.lastEditAt" : "om",
+    "post.lastEditOn" : "op",
 
     "page.home"   : "Home",
 

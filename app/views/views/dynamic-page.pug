@@ -4,3 +4,6 @@ div.row
     div.col-xs-12
         editor('[content]'='page.content' '(contentChange)'='page.content=$event;updatePage()'
         '[adminonly]'='true')
+
+div.row.page-metadata
+    span.pull-right {{'post.lastEditBy' | translate:lang}} {{page.lastEditBy}} {{'post.lastEditOn' | translate:lang}} {{page.lastEditOn | localedate:defaultLocale:'fullDate'}} {{'post.lastEditAt' | translate:lang}} {{page.lastEditOn | localedate:defaultLocale:'shortTime'}}

@@ -28,7 +28,10 @@
     "list"        : "List",
     "calendar"    : "Calendar",
 
-    "post.author" : "Posted by:",
+    "post.author"     : "Posted by:",
+    "post.lastEditBy" : "Last edited by",
+    "post.lastEditAt" : "at",
+    "post.lastEditOn" : "on",
 
     "page.home"   : "Home",
 
