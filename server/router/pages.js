@@ -1,6 +1,7 @@
 var express          = require('express'),
     checkSession     = require('./helpers.js').SessionManager.checkSession,
     getCorrectLocale = require('./helpers.js').getCorrectLocale,
+    shouldLocalize   = require('./helpers.js').shouldLocalize,
     Page             = require('../models/page.js'),
     config           = require('../config/waltz.conf');
 var router = express.Router();
@@ -8,7 +9,14 @@ var router = express.Router();
 router.get('/', function(req, res) {
     Page.find(function(err, pages) {
         if (!err) {
-            return res.send(pages);
+            var localizedPages = pages
+            if (shouldLocalize(req)) {
+                var locale = getCorrectLocale(req);
+                localizedPages = pages.map(
+                    page => Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale)
+                );
+            }
+            return res.send(localizedPages);
         } else {
             return res.status(500).send(err);
         }
@@ -42,7 +50,6 @@ router.post('/', checkSession, function(req, res) {
 
 router.get('/:urlString', function(req, res) {
     var urlString = req.params.urlString;
-    var locale = getCorrectLocale(req);
 
     Page.findOne({
         urlString : urlString
@@ -52,8 +59,13 @@ router.get('/:urlString', function(req, res) {
         } else if (err) {
             return res.status(500).send(err);
         }
-        
-        var localizedPage = Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale);
+
+        var localizedPage = page;
+
+        if (shouldLocalize(req)) {
+            var locale = getCorrectLocale(req);
+            localizedPage = Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale);
+        }
 
         return res.status(200).send(localizedPage);
     });
@@ -74,14 +86,25 @@ router.put('/:urlString', checkSession, function(req, res) {
             return res.status(500).send(err);
         }
 
-        page.title[locale]      = req.body.title;
-        page.content[locale]    = req.body.content;
-        page.lastEditBy         = req.session.name;
-        page.lastEditOn         = now;
+        if (shouldLocalize(req)) {
+            page.title[locale]      = req.body.title;
+            page.content[locale]    = req.body.content;
+        } else {
+            page.title   = req.body.title;
+            page.content = req.body.content;
+        }
+
+        page.lastEditBy = req.session.name;
+        page.lastEditOn = now;
 
         page.save(function(err) {
             if (!err) {
-                var localizedpage = Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale);
+
+                var localizedpage = page
+                
+                if (shouldLocalize(req)) {
+                    localizedpage = Page.schema.methods.toJSONLocalizedOnly(page, locale, config.defaultLocale);
+                }
 
                 return res.status(200).send(localizedpage);
             } else {

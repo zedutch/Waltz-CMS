@@ -15,6 +15,11 @@ exports.getCorrectLocale = function(req) {
     return locale
 };
 
+exports.shouldLocalize = function(req) {
+    var shouldLocalize = req.headers["x-localize"]
+    return shouldLocalize !== "false"
+}
+
 exports.getURL = function(req) {
     return req.protocol + '://' + req.get('host') + req.originalUrl;
 };
