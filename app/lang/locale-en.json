@@ -37,7 +37,18 @@
 
     "widget.upcoming" : "Upcoming Events",
 
-    "editor.link" : "Please enter a URL:",
+    "editor.link.message" : "Please enter a URL:",
+    "editor.link.tooltip" : "Insert hyperlink",
+    "editor.bold" : "Bold Text",
+    "editor.italic" : "Italic Text",
+    "editor.underline" : "Underline Text",
+    "editor.superscript" : "Superscript",
+    "editor.subscript" : "Subscript",
+    "editor.align.left" : "Align Text Left",
+    "editor.align.center" : "Center Text",
+    "editor.align.right" : "Align Text Right",
+    "editor.align.justify" : "Justify Text",
+    "editor.horizRule" : "Insert Horizontal Rule",
 
     "footer.designBy"  : "Website designed by ",
     "footer.poweredBy" : "and proudly powered by ",

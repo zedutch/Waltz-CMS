@@ -37,7 +37,18 @@
 
     "widget.upcoming" : "Aankomende evenementen",
 
-    "editor.link" : "Geef een URL in:",
+    "editor.link.message"  : "Geef een URL in:",
+    "editor.link.tooltip"  : "Voeg link toe",
+    "editor.bold"          : "Vetgedrukte tekst",
+    "editor.italic"        : "Schuingedrukte tekst",
+    "editor.underline"     : "Onderlijnde tekst",
+    "editor.superscript"   : "Superscript",
+    "editor.subscript"     : "Subscript",
+    "editor.align.left"    : "Lijn tekst links uit",
+    "editor.align.center"  : "Centreer tekst",
+    "editor.align.right"   : "Lijn tekst rechts uit",
+    "editor.align.justify" : "Lijn tekst volledig uit",
+    "editor.horizRule"     : "Voeg horizontale lijn in",
 
     "footer.designBy"  : "Website ontworpen door ",
     "footer.poweredBy" : "en met trots aangedreven door ",

@@ -3,7 +3,7 @@ import {OnInit}              from '@angular/core';
 import {Input}               from '@angular/core';
 import {Output}              from '@angular/core';
 import {EventEmitter}        from '@angular/core';
-import {ElementRef} from '@angular/core';
+import {ElementRef}          from '@angular/core';
 import {CORE_DIRECTIVES}     from '@angular/common';
 
 import {Locale}              from 'angular2localization/angular2localization';
@@ -12,6 +12,7 @@ import {LocalizationService} from 'angular2localization/angular2localization';
 import {TranslatePipe}       from 'angular2localization/angular2localization';
 
 import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
+import {TOOLTIP_DIRECTIVES}  from 'ng2-bootstrap/ng2-bootstrap';
 
 import {Link}                from './link.component';
 import {AppDataService}      from './app-data.service';
@@ -25,6 +26,7 @@ import {AppDataService}      from './app-data.service';
                     ],
     directives    : [
                       CORE_DIRECTIVES,
+                      TOOLTIP_DIRECTIVES,
                       Link
                     ],
     pipes         : [ TranslatePipe ]
