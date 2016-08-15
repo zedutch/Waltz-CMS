@@ -1,0 +1,12 @@
+div('*ngIf'='!isEditing' '[ngClass]'='{enabled: isEnabled}' '(click)'='startEditMode()') {{label}}
+
+div('*ngIf'='isEditing')
+    span.btn('(click)'='save()' '[ngClass]'='{disabled: savingDisabled}')
+        span.glyphicon.glyphicon-floppy-disk
+        | &nbsp; {{'save' | translate:lang}}
+
+    span.btn('(click)'='close()')
+        span.glyphicon.glyphicon-remove
+        | &nbsp; {{'cancel' | translate:lang}}
+
+    input('type'='text' '[ngModel]'='value' '(ngModelChange)'="value=$event;updateSaveButton()" placeholder='{{label}}' autofocus)

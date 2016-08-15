@@ -1,7 +1,8 @@
 div.row
     div.col-xs-12.col-sm-9.main-container
         div.main-widget
-            h1 {{post.title}}
+            h1
+                editable-label('[label]'='post.title' '(contentChange)'='post.title=$event;updatePost()')
             editor('[content]'='post.content' '(contentChange)'='post.content=$event;updatePost()')
 
 div.row.page-metadata

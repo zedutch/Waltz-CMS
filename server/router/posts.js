@@ -103,17 +103,6 @@ router.put('/:id', checkSession, function(req, res) {
             }
         });
     });
-
-    Post.update({
-        _id : id
-    }, {
-        $set : {
-            title : req.body.title,
-            content : req.body.content
-        }
-    }).exec();
-
-    return res.sendStatus(204);
 });
 
 router.delete('/:id', checkSession, function(req, res) {

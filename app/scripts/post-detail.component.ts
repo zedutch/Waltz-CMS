@@ -7,8 +7,9 @@ import {LocaleDatePipe}     from 'angular2localization/angular2localization';
 
 import {CMSBackendService}  from './cms-backend.service';
 
-import {EditorComponent}    from './editor.component';
-import {PostComponent}      from './post.component';
+import {EditorComponent}        from './editor.component';
+import {EditableLabelComponent} from './editable-label.component';
+import {PostComponent}          from './post.component';
 
 @Component({
     selector    : 'post-detail',
@@ -18,7 +19,8 @@ import {PostComponent}      from './post.component';
                   ],
     directives  : [
                     PostComponent,
-                    EditorComponent
+                    EditorComponent,
+                    EditableLabelComponent
                   ],
     pipes       : [
                     TranslatePipe,

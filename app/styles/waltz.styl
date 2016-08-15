@@ -174,12 +174,15 @@ footer
     color            text-main
 
 .post-title
-    font-weight bold
-    color       color-main-da
+    font-weight     bold
+    color           color-main-da
+    font-size       1.1em
+    margin-bottom   8px
 
 .post-metadata
     text-align  right
     color       text-main-li
+    font-size   0.9em
 
 .post-date
     font-style  italic
@@ -187,7 +190,8 @@ footer
 .post-author
     font-style  italic
 
-editable-info div.enabled
+editable-info div.enabled,
+editable-label div.enabled
     border              1px dashed #EEE
     margin              -3px -8px
     padding             2px 7px
@@ -199,7 +203,8 @@ editable-info div.enabled
         box-shadow          inset 2px 2px 3px 0px #EEE
         cursor              pointer
 
-editable-info textarea
+editable-info textarea,
+editable-label input
     width               100%
     border              1px solid #DDD
     resize              vertical
@@ -210,7 +215,8 @@ editable-info textarea
     h1 &
         top             -39px
 
-editable-info span.btn
+editable-info span.btn,
+editable-label span.btn
     border                      1px solid #DDD
     border-bottom               none
     border-radius               10px
