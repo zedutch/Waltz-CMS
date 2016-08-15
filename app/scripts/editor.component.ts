@@ -85,6 +85,7 @@ export class EditorComponent extends Locale implements OnInit {
 
     save () {
         if (!this.savingDisabled) {
+            this.value = this.sanitizeHTML(this.value);
             this._content = this.value;
             this.isEditing = false;
             this.contentChange.emit(this._content);
@@ -100,6 +101,16 @@ export class EditorComponent extends Locale implements OnInit {
 
     userChange = (user) => {
         this.isEnabled = user.isAdmin || ((user.isStaff || false) && !this.adminonly) || false;
+    };
+
+    sanitizeHTML (dirtyCode) {
+        var regex = /(class="[^\"]*)align-[^\" ]*( [^\"]*)?" style="text-align: ([^;\"]*)[; ]*"/g;
+        dirtyCode = dirtyCode.replace(regex, "$1align-$3$2\"");
+        regex = /(class=".*)" style="text-align: ([^;\"]*);?"/g;
+        dirtyCode = dirtyCode.replace(regex, "$1 align-$2\"");
+        regex = /style="text-align: ([^;\"]*);?"/g;
+        dirtyCode = dirtyCode.replace(regex, "class=\"align-$1\"");
+        return dirtyCode
     };
 
     linkSelected () {
