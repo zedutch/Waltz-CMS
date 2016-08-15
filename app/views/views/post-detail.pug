@@ -2,4 +2,10 @@ div.row
     div.col-xs-12.col-sm-9.main-container
         div.main-widget
             h1 {{post.title}}
-            div {{post.content}}
+            editor('[content]'='post.content' '(contentChange)'='post.content=$event;updatePost()')
+
+div.row.page-metadata
+    div.pull-right
+        span {{post?.author}} &bull; {{post?.postedOn | localedate:defaultLocale:'fullDate'}}
+        br
+        span(*ngIf='post.lastEditBy') {{'post.lastEditBy' | translate:lang}} {{post.lastEditBy}} {{'post.lastEditOn' | translate:lang}} {{post.lastEditOn | localedate:defaultLocale:'fullDate'}} {{'post.lastEditAt' | translate:lang}} {{post.lastEditOn | localedate:defaultLocale:'shortTime'}}

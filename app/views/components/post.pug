@@ -1,6 +1,6 @@
 a.post((click)='openPost()')
     div.post-title   {{post?.title}}
-    div.post-content {{post?.content}}
+    div.post-content('[innerHTML]'='post?.content')
     div.post-metadata
         span.post-author(*ngIf='post?.author') {{'post.author' | translate:lang}} {{post?.author}} &bull;
-        span.post-date    {{post?.datePosted | localedate:defaultLocale:'fullDate'}}
+        span.post-date    {{post?.postedOn | localedate:defaultLocale:'fullDate'}}

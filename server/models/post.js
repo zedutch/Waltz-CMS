@@ -1,28 +1,29 @@
 var mongoose = require('mongoose'),
+    mongooseI18n = require('mongoose-i18n-localize'),
     config   = require('../config/waltz.conf');
 var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
     title      : {
         type     : String,
-        required : true
+        required : true,
+        i18n     : true
     },
     content    : {
         type     : String,
-        required : true
-    },
-    datePosted : {
-        type    : Date,
-        default : Date.now
+        required : true,
+        i18n     : true
     },
     author     : {
         type    : String,
         default : config.defaultAuthor
     },
-    canEdit    : {
-        type    : Boolean,
-        default : false
-    }
+    postedOn   : String,
+    lastEditOn : {
+        type     : String,
+        required : false
+    },
+    lastEditBy : String,
 }, {
     toObject   : {
         virtuals : true 
@@ -36,13 +37,13 @@ postSchema.methods.toJSON = function() {
     return obj;
 };
 
+postSchema.plugin(mongooseI18n, {
+    locales : config.supportedLocales
+});
+
 postSchema.virtual('url').get(function() {
     return config.epPosts + "/" + this._id;
 });
-
-postSchema.methods.handleUser = function handleUser(user) {
-    this.canEdit = !!user && (user.isAdmin || user.isStaff);
-};
 
 var Post = mongoose.model('Post', postSchema);
 module.exports = Post;

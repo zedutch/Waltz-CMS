@@ -1,10 +1,13 @@
 import {Component}          from '@angular/core';
 import {OnInit}             from '@angular/core';
 import {RouteSegment}       from '@angular/router';
+
 import {TranslatePipe}      from 'angular2localization/angular2localization';
+import {LocaleDatePipe}     from 'angular2localization/angular2localization';
 
 import {CMSBackendService}  from './cms-backend.service';
 
+import {EditorComponent}    from './editor.component';
 import {PostComponent}      from './post.component';
 
 @Component({
@@ -13,8 +16,14 @@ import {PostComponent}      from './post.component';
     providers   : [
                     CMSBackendService
                   ],
-    directives  : [PostComponent],
-    pipes       : [TranslatePipe]
+    directives  : [
+                    PostComponent,
+                    EditorComponent
+                  ],
+    pipes       : [
+                    TranslatePipe,
+                    LocaleDatePipe
+                  ]
 })
 
 export class PostDetailComponent implements OnInit {
@@ -29,6 +38,12 @@ export class PostDetailComponent implements OnInit {
         let id = this._currSegment.getParam('id');
         this._cmsBackendService.getPost(id, function(post) {
             self.post = post;
+        });
+    }
+
+    updatePost () {
+        this._cmsBackendService.updatePost(this.post, postUpdate => {
+            this.post = postUpdate;
         });
     }
 }

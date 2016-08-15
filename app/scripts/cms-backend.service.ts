@@ -79,11 +79,28 @@ export class CMSBackendService {
         var data = this.http.get(this.URL + this._epPosts + "/" + id);
         data.subscribe(res => {
             if (res.status === 200) {
-                var post = res.json();
-                post.datePosted = new Date(post.datePosted);
-                callback(post);
+                if (callback) {
+                    var post = res.json();
+                    post.datePosted = new Date(post.datePosted);
+                    callback(post);
+                }
             } else {
                 console.error("Error retrieving post with id '" + id + "'!", res)
+            }
+        });
+    }
+
+    updatePost(post, callback = undefined) {
+        var data = this.http.put(this.URL + post.url, post, this.options);
+        data.subscribe(res => {
+            if (res.status === 200) {
+                if (callback) {
+                    var post = res.json() || {};
+                    post.postedOn = new Date(post.postedOn);
+                    callback(post);
+                }
+            } else {
+                console.error("Error saving post '" + post.title + "'!", res)
             }
         });
     }
