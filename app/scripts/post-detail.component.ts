@@ -37,8 +37,8 @@ export class PostDetailComponent implements OnInit {
 
     ngOnInit() {
         let self = this;
-        let id = this._currSegment.getParam('id');
-        this._cmsBackendService.getPost(id, function(post) {
+        let urlString = this._currSegment.getParam('urlString');
+        this._cmsBackendService.getPost(urlString, function(post) {
             self.post = post;
         });
     }

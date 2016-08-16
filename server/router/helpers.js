@@ -18,6 +18,13 @@ exports.getCorrectLocale = function(req) {
 exports.shouldLocalize = function(req) {
     var shouldLocalize = req.headers["x-localize"]
     return shouldLocalize !== "false"
+};
+
+exports.sanitizeUrlString = function(urlString) {
+    return urlString.toLowerCase()
+                 .trim()
+                 .replace(/ /g, "_")
+                 .replace(/[\.!?\\/]/g, "");
 }
 
 exports.getURL = function(req) {

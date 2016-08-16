@@ -1,9 +1,10 @@
-var express          = require('express'),
-    checkSession     = require('./helpers.js').SessionManager.checkSession,
-    getCorrectLocale = require('./helpers.js').getCorrectLocale,
-    shouldLocalize   = require('./helpers.js').shouldLocalize,
-    Page             = require('../models/page.js'),
-    config           = require('../config/waltz.conf');
+var express           = require('express'),
+    checkSession      = require('./helpers.js').SessionManager.checkSession,
+    getCorrectLocale  = require('./helpers.js').getCorrectLocale,
+    shouldLocalize    = require('./helpers.js').shouldLocalize,
+    sanitizeUrlString = require('./helpers.js').sanitizeUrlString,
+    Page              = require('../models/page.js'),
+    config            = require('../config/waltz.conf');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -25,10 +26,7 @@ router.get('/', function(req, res) {
 
 router.post('/', checkSession, function(req, res) {
     var title = req.body.title;
-
-    var urlString = title.toLowerCase()
-                         .trim()
-                         .replace(/ /g, "_");
+    var urlString = sanitizeUrlString(title);
     var now = new Date().toISOString();
 
     var page = new Page({

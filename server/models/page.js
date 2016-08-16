@@ -12,8 +12,7 @@ var pageSchema = new Schema({
     urlString  : {
         type     : String,
         required : true,
-        unique   : true,
-        i18n     : false
+        unique   : true
     },
     content    : {
         type     : String,

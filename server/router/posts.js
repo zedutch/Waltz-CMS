@@ -2,6 +2,7 @@ var express          = require('express'),
     checkSession     = require('./helpers.js').SessionManager.checkSession,
     getCorrectLocale = require('./helpers.js').getCorrectLocale,
     shouldLocalize   = require('./helpers.js').shouldLocalize,
+    sanitizeUrlString = require('./helpers.js').sanitizeUrlString,
     Post             = require('../models/post.js'),
     config           = require('../config/waltz.conf');
 var router = express.Router();
@@ -25,12 +26,15 @@ router.get('/', function(req, res) {
 
 router.post('/', checkSession, function(req, res) {
     var now = new Date().toISOString();
+    var title = req.body.title
+    var urlString = sanitizeUrlString(title);
 
     var post = new Post({
-        title : req.body.title,
-        content : req.body.content,
-        author  : req.session.name,
-        postedOn : now
+        title     : req.body.title,
+        content   : req.body.content,
+        urlString : urlString,
+        author    : req.session.name,
+        postedOn  : now
     });
 
     post.save(function(err) {
@@ -42,11 +46,11 @@ router.post('/', checkSession, function(req, res) {
     });
 });
 
-router.get('/:id', function(req, res) {
-    var id = req.params.id;
+router.get('/:urlString', function(req, res) {
+    var urlString = req.params.urlString;
 
     Post.findOne({
-        _id : id
+        urlString : urlString
     }, function(err, post) {
         if (!err) {
             var localizedPost = post
@@ -61,13 +65,13 @@ router.get('/:id', function(req, res) {
     });
 });
 
-router.put('/:id', checkSession, function(req, res) {
-    var id = req.params.id;
+router.put('/:urlString', checkSession, function(req, res) {
+    var urlString = req.params.urlString;
     var locale = getCorrectLocale(req);
     var now = new Date().toISOString();
 
     Post.findOne({
-        _id : id
+        urlString : urlString
     }, function(err, post) {
         if (!post && !err) {
             return res.status(404).send();
@@ -105,11 +109,11 @@ router.put('/:id', checkSession, function(req, res) {
     });
 });
 
-router.delete('/:id', checkSession, function(req, res) {
-    var id = req.params.id;
+router.delete('/:urlString', checkSession, function(req, res) {
+    var urlString = req.params.urlString;
 
     Post.remove({
-        _id : id
+        urlString : urlString
     }, function(err) {
         return console.error(err);
     });

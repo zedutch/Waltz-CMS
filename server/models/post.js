@@ -14,6 +14,11 @@ var postSchema = new Schema({
         required : true,
         i18n     : true
     },
+    urlString  : {
+        type     : String,
+        required : true,
+        unique   : true
+    },
     author     : {
         type    : String,
         default : config.defaultAuthor
@@ -42,7 +47,7 @@ postSchema.plugin(mongooseI18n, {
 });
 
 postSchema.virtual('url').get(function() {
-    return config.epPosts + "/" + this._id;
+    return config.epPosts + "/" + this.urlString;
 });
 
 var Post = mongoose.model('Post', postSchema);

@@ -75,8 +75,8 @@ export class CMSBackendService {
         });
     }
 
-    getPost(id, callback) {
-        var data = this.http.get(this.URL + this._epPosts + "/" + id);
+    getPost(urlString, callback) {
+        var data = this.http.get(this.URL + this._epPosts + '/' + urlString);
         data.subscribe(res => {
             if (res.status === 200) {
                 if (callback) {
@@ -85,7 +85,7 @@ export class CMSBackendService {
                     callback(post);
                 }
             } else {
-                console.error("Error retrieving post with id '" + id + "'!", res)
+                console.error("Error retrieving post with url '" + urlString + "'!", res)
             }
         });
     }
