@@ -4,8 +4,6 @@ div.navbar
             img.navbar-icon(src=env("main.logo"))
         a.navbar-title('[routerLink]'="['/']") #{env('main.title')}
         div.navbar-menu
-            |Pages : '{{info.pages}}'
-            |Info : '{{info | json}}'
             a('[routerLink]'="['/']") {{'page.home' | translate:lang}}
             a('*ngFor'="let page of info.pages" '[routerLink]'="[page.url]") {{ page.title }}
             login-modal('(userDataChange)'='changeUserData($event)')
