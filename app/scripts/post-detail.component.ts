@@ -25,9 +25,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         let self = this;
         this.urlSubscription = this._currRoute.params.subscribe(params => {
             let urlString = params['urlString']
-            self._cmsBackendService.getPost(urlString, function(post) {
-                self.post = post;
-            });
+            self._cmsBackendService.getPost(urlString,
+                                            post => self.post = post);
         });
     }
 
@@ -36,8 +35,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     }
 
     updatePost () {
-        this._cmsBackendService.updatePost(this.post, postUpdate => {
-            this.post = postUpdate;
-        });
+        this._cmsBackendService.updatePost(this.post,
+                                        postUpdate => this.post = postUpdate);
     }
 }
