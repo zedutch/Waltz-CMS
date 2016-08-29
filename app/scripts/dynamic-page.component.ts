@@ -6,6 +6,10 @@ import {ActivatedRoute}     from  '@angular/router';
 
 import {Subscription}       from 'rxjs/Subscription';
 
+import {Locale}             from 'angular2localization/angular2localization';
+import {LocaleService}      from 'angular2localization/angular2localization';
+import {LocalizationService}from 'angular2localization/angular2localization';
+
 import {CMSBackendService}  from './cms-backend.service';
 import {AppDataService}     from './app-data.service';
 
@@ -14,7 +18,7 @@ import {AppDataService}     from './app-data.service';
     templateUrl : '/views/dynamic-page'
 })
 
-export class DynamicPageComponent implements OnInit, OnDestroy {
+export class DynamicPageComponent extends Locale implements OnInit, OnDestroy {
     page : any = {};
     urlSubscription : Subscription;
 
@@ -22,7 +26,11 @@ export class DynamicPageComponent implements OnInit, OnDestroy {
 
     constructor(private _cmsBackendService : CMSBackendService,
                 private _currRoute         : ActivatedRoute,
-                private _appData           : AppDataService) {}
+                private _appData           : AppDataService,
+                public locale              : LocaleService,
+                public localization        : LocalizationService) {
+        super(locale, localization);
+    }
 
     ngOnInit () {
         let self = this;

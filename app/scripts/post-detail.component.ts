@@ -6,6 +6,10 @@ import {ActivatedRoute} from  '@angular/router';
 
 import {Subscription}   from 'rxjs/Subscription';
 
+import {Locale}             from 'angular2localization/angular2localization';
+import {LocaleService}      from 'angular2localization/angular2localization';
+import {LocalizationService}from 'angular2localization/angular2localization';
+
 import {CMSBackendService}  from './cms-backend.service';
 
 @Component({
@@ -13,13 +17,17 @@ import {CMSBackendService}  from './cms-backend.service';
     templateUrl : '/views/post-detail'
 })
 
-export class PostDetailComponent implements OnInit, OnDestroy {
+export class PostDetailComponent extends Locale implements OnInit, OnDestroy {
     data = {};
     post = {};
     private urlSubscription : Subscription;
     
     constructor(private _cmsBackendService : CMSBackendService,
-                private _currRoute         : ActivatedRoute) {}
+                private _currRoute         : ActivatedRoute,
+                public locale              : LocaleService,
+                public localization        : LocalizationService) {
+        super(locale, localization);
+    }
 
     ngOnInit() {
         let self = this;
