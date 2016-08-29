@@ -1,6 +1,5 @@
 import {NgModule}        from '@angular/core';
 
-import {CommonModule}    from '@angular/common';
 import {BrowserModule}   from '@angular/platform-browser';
 import {HttpModule}      from '@angular/http';
 import {JsonpModule}     from '@angular/http';
@@ -26,6 +25,10 @@ import {EditableInfoComponent}   from './editable-info.component';
 import {AutoFocus}               from './auto-focus.component';
 import {Link}                    from './link.component';
 
+// Waltz Services //
+import {CMSBackendService}       from './cms-backend.service';
+import {AppDataService}          from './app-data.service';
+
 // Temp. disabled until ng2-bootstrap is fixed
 //import {WidgetCalendarComponent} from './widget-calendar.component';
 //import {DATEPICKER_DIRECTIVES}   from 'ng2-bootstrap/ng2-bootstrap';
@@ -38,6 +41,8 @@ import {AlertComponent}      from 'ng2-bootstrap/ng2-bootstrap';
 // Angular2 Localization //
 import {TranslatePipe}      from 'angular2localization/angular2localization';
 import {LocaleDatePipe}     from 'angular2localization/angular2localization';
+import {LocaleService}      from 'angular2localization/angular2localization';
+import {LocalizationService}from 'angular2localization/angular2localization';
 
 
 @NgModule({
@@ -46,7 +51,6 @@ import {LocaleDatePipe}     from 'angular2localization/angular2localization';
 //        FormsModule,
         HttpModule,
         JsonpModule,
-        CommonModule,
         DeprecatedFormsModule,
         Routing
     ],
@@ -67,11 +71,16 @@ import {LocaleDatePipe}     from 'angular2localization/angular2localization';
         EditableInfoComponent
 //        WidgetCalendarComponent,
 
-
 //        DATEPICKER_DIRECTIVES
     ],
     providers: [
+        CMSBackendService,
+        AppDataService,
+
         AppRoutingProviders,
+
+        LocaleService,
+        LocalizationService,
 
         BS_VIEW_PROVIDERS
     ],

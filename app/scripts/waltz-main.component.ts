@@ -14,13 +14,7 @@ import './rxjs-operators';
 
 @Component({
     selector      : 'waltz-main',
-    templateUrl   : '/views/main',
-    providers     : [
-                        CMSBackendService,
-                        AppDataService,
-                        LocaleService,
-                        LocalizationService
-                    ]
+    templateUrl   : '/views/main'
 })
 
 export class WaltzMainComponent extends Locale implements OnInit {
@@ -55,9 +49,7 @@ export class WaltzMainComponent extends Locale implements OnInit {
         _appdata.userChange.subscribe(user => this.user = user);
 
         this.info = _appdata.info;
-        _appdata.infoChange.subscribe(info => {this.info = info;
-            console.debug("Info changed in main!", info)
-        });
+        _appdata.infoChange.subscribe(info => this.info = info);
 
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;

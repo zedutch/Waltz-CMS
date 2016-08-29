@@ -22,5 +22,6 @@ export class PostComponent implements OnInit {
 
     ngOnInit() {
         this.info = this._appData.info;
+        this._appData.infoChange.subscribe(info => this.info = info);
     }
 }

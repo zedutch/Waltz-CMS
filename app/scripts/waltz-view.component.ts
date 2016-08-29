@@ -10,13 +10,7 @@ import {AppDataService}     from './app-data.service';
 
 @Component({
     selector    : 'waltz-view',
-    templateUrl : '/views/home',
-    providers   : [
-                      CMSBackendService,
-                      AppDataService,
-                      LocaleService,
-                      LocalizationService
-                  ]
+    templateUrl : '/views/home'
 })
 
 export class WaltzViewComponent extends Locale implements OnInit {
