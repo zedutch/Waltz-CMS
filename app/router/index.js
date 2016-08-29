@@ -35,15 +35,24 @@ router.get('/widgets/:name', function(req, res) {
     res.render('widgets/' + name, envVariables);
 });
 
+router.get('/errors/:name', function(req, res) {
+    var name = req.params.name;
+    res.render('errors/' + name, envVariables);
+});
+
 router.get('/', function(req, res) {
     res.render('index', envVariables);
 });
 
-router.use('*', function (req, res){
+router.get('/favicon.*', function(req, res) {
+    // TODO: Provide a way to serve the icon as favicon
+    res.status(404).send({
+        "error" : "Page not found."
+    });
+});
+
+router.use('*', function (req, res) {
     res.render('index', envVariables);
-//    res.status(404).send({
-//        "error" : "Page not found."
-//    });
 });
 
 module.exports = router;
