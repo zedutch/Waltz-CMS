@@ -66,9 +66,16 @@ import {LocalizationService}from 'angular2localization/angular2localization';
         WaltzViewComponent,
         PostDetailComponent,
         PostComponent,
+        DynamicPageComponent,
+        LoginModalComponent,
+        NotFoundComponent,
+
         EditorComponent,
         EditableLabelComponent,
-        EditableInfoComponent
+        EditableInfoComponent,
+
+        AutoFocus,
+        Link
 //        WidgetCalendarComponent,
 
 //        DATEPICKER_DIRECTIVES
