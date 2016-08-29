@@ -40,9 +40,10 @@ router.get('/', function(req, res) {
 });
 
 router.use('*', function (req, res){
-    res.status(404).send({
-        "error" : "Page not found."
-    });
+    res.render('index', envVariables);
+//    res.status(404).send({
+//        "error" : "Page not found."
+//    });
 });
 
 module.exports = router;

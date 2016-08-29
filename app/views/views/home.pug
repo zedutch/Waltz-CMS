@@ -10,7 +10,7 @@ div.row
                     post([post]='post')
 
     div.col-xs-12.col-sm-3.sidebar-container
-        span([ngClass]="{'widget-gray' : !info.showCalendar}")
+        //span([ngClass]="{'widget-gray' : !info.showCalendar}")
             div.sidebar-widget.calendar-widget(*ngIf="info.showCalendar || user.isAdmin")
                 a.btn-widget((click)="toggleCalendar()" '*ngIf'='user.isAdmin')
                     span.glyphicon.glyphicon-eye-open(*ngIf="info.showCalendar")

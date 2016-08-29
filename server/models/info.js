@@ -48,6 +48,11 @@ var infoSchema = new Schema({
         type      : Boolean,
         required  : false,
         default   : true
+    },
+    usePostDetails : {
+        type      : Boolean,
+        required  : false,
+        default   : true
     }
 }, {
     toJSON     : {

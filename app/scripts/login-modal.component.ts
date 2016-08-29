@@ -2,33 +2,16 @@ import {Component}           from '@angular/core';
 import {ViewChild}           from '@angular/core';
 import {Output}              from '@angular/core';
 import {EventEmitter}        from '@angular/core';
-import {CORE_DIRECTIVES}     from '@angular/common';
 
-import {TranslatePipe}       from 'angular2localization/angular2localization';
 import {LocalizationService} from 'angular2localization/angular2localization';
 
-import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
-import {MODAL_DIRECTVES}     from 'ng2-bootstrap/ng2-bootstrap';
-import {ModalDirective}     from 'ng2-bootstrap/ng2-bootstrap';
-import {TAB_DIRECTIVES}      from 'ng2-bootstrap/ng2-bootstrap';
-import {AlertComponent}      from 'ng2-bootstrap/ng2-bootstrap';
-
-import {AutoFocus}           from './autofocus.component';
 import {CMSBackendService}   from './cms-backend.service';
+
+import {ModalDirective}      from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector      : 'login-modal',
-    templateUrl   : '/modals/login',
-    viewProviders : [ BS_VIEW_PROVIDERS ],
-    providers     : [ CMSBackendService ],
-    directives    : [
-                      CORE_DIRECTIVES,
-                      MODAL_DIRECTVES,
-                      TAB_DIRECTIVES,
-                      AutoFocus,
-                      AlertComponent
-                    ],
-    pipes         : [ TranslatePipe ]
+    templateUrl   : '/modals/login'
 })
 
 export class LoginModalComponent {

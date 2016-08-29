@@ -30,6 +30,7 @@ var pageSchema = new Schema({
 pageSchema.methods.toJSON = function() {
     var obj = this.toObject();
     delete obj.__v;
+    delete obj._id;
     delete obj.id
     return obj;
 };

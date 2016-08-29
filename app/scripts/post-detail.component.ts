@@ -1,46 +1,38 @@
-import {Component}          from '@angular/core';
-import {OnInit}             from '@angular/core';
-import {RouteSegment}       from '@angular/router';
+import {Component}      from '@angular/core';
+import {OnInit}         from '@angular/core';
+import {OnDestroy}      from '@angular/core';
 
-import {TranslatePipe}      from 'angular2localization/angular2localization';
-import {LocaleDatePipe}     from 'angular2localization/angular2localization';
+import {ActivatedRoute} from  '@angular/router';
+
+import {Subscription}   from 'rxjs/Subscription';
 
 import {CMSBackendService}  from './cms-backend.service';
 
-import {EditorComponent}        from './editor.component';
-import {EditableLabelComponent} from './editable-label.component';
-import {PostComponent}          from './post.component';
-
 @Component({
     selector    : 'post-detail',
-    templateUrl : '/views/post-detail',
-    providers   : [
-                    CMSBackendService
-                  ],
-    directives  : [
-                    PostComponent,
-                    EditorComponent,
-                    EditableLabelComponent
-                  ],
-    pipes       : [
-                    TranslatePipe,
-                    LocaleDatePipe
-                  ]
+    templateUrl : '/views/post-detail'
 })
 
-export class PostDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit, OnDestroy {
     data = {};
     post = {};
+    private urlSubscription : Subscription;
     
     constructor(private _cmsBackendService : CMSBackendService,
-                private _currSegment       : RouteSegment) {}
+                private _currRoute         : ActivatedRoute) {}
 
     ngOnInit() {
         let self = this;
-        let urlString = this._currSegment.getParam('urlString');
-        this._cmsBackendService.getPost(urlString, function(post) {
-            self.post = post;
+        this.urlSubscription = this._currRoute.params.subscribe(params => {
+            let urlString = params['urlString']
+            self._cmsBackendService.getPost(urlString, function(post) {
+                self.post = post;
+            });
         });
+    }
+
+    ngOnDestroy() {
+        this.urlSubscription.unsubscribe();
     }
 
     updatePost () {

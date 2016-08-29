@@ -1,20 +1,26 @@
 import {Component, Input} from '@angular/core';
+import {OnInit}           from '@angular/core';
 import {Router}           from '@angular/router';
-import {TranslatePipe}    from 'angular2localization/angular2localization';
-import {LocaleDatePipe}   from 'angular2localization/angular2localization';
+
+import {AppDataService}   from './app-data.service';
 
 @Component({
     selector    : 'post',
-    templateUrl : 'components/post',
-    pipes       : [TranslatePipe, LocaleDatePipe]
+    templateUrl : 'components/post'
 })
 
-export class PostComponent {
+export class PostComponent implements OnInit {
     @Input() post;
+    info : any = {};
 
-    constructor(private _router : Router) {}
+    constructor(private _router  : Router,
+                private _appData : AppDataService) {}
 
     openPost() {
         this._router.navigate( ['/posts', this.post.urlString] );
+    }
+
+    ngOnInit() {
+        this.info = this._appData.info;
     }
 }

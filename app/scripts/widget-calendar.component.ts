@@ -3,9 +3,6 @@ import {OnInit}              from '@angular/core';
 import {CORE_DIRECTIVES}     from '@angular/common';
 import {FORM_DIRECTIVES}     from '@angular/common';
 
-import {DATEPICKER_DIRECTIVES} 
-                             from 'ng2-bootstrap/ng2-bootstrap';
-
 import {Locale}              from 'angular2localization/angular2localization';
 import {LocaleService}       from 'angular2localization/angular2localization';
 import {LocalizationService} from 'angular2localization/angular2localization';
@@ -21,13 +18,8 @@ import {CMSBackendService}   from './cms-backend.service';
         CMSBackendService
     ],
     directives  : [
-        DATEPICKER_DIRECTIVES,
         CORE_DIRECTIVES,
         FORM_DIRECTIVES
-    ],
-    pipes       : [
-        TranslatePipe,
-        LocaleDatePipe
     ]
 })
 

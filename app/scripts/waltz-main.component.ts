@@ -1,54 +1,27 @@
-import {Component}               from '@angular/core';
-import {ViewContainerRef}        from '@angular/core';
-import {OnInit}                  from '@angular/core';
-import {CORE_DIRECTIVES}         from '@angular/common';
-import {Routes}                  from '@angular/router';
-import {Router}                  from '@angular/router';
-import {ROUTER_DIRECTIVES}       from '@angular/router';
+import {Component}          from '@angular/core';
+import {ViewContainerRef}   from '@angular/core';
+import {OnInit}             from '@angular/core';
 
-import {Locale}                  from 'angular2localization/angular2localization';
-import {TranslatePipe}           from 'angular2localization/angular2localization';
-import {LocaleService}           from 'angular2localization/angular2localization';
-import {LocalizationService}     from 'angular2localization/angular2localization';
+import {Locale}             from 'angular2localization/angular2localization';
+import {LocaleService}      from 'angular2localization/angular2localization';
+import {LocalizationService}from 'angular2localization/angular2localization';
 
-import {AlertComponent }         from 'ng2-bootstrap/ng2-bootstrap';
+import {CMSBackendService}  from './cms-backend.service';
+import {AppDataService}     from './app-data.service';
 
-import {WaltzViewComponent}      from './waltz-view.component';
-import {PostDetailComponent}     from './post-detail.component';
-import {DynamicPageComponent}    from './dynamic-page.component';
-import {LoginModalComponent}     from './login-modal.component';
-import {AppDataService}          from './app-data.service';
+// Add the RxJS operators
+import './rxjs-operators';
 
 @Component({
     selector      : 'waltz-main',
     templateUrl   : '/views/main',
     providers     : [
-                      LocaleService,
-                      LocalizationService,
-                      AppDataService
-                    ],
-    directives    : [
-                      WaltzViewComponent,
-                      ROUTER_DIRECTIVES,
-                      CORE_DIRECTIVES,
-                      AlertComponent,
-                      LoginModalComponent
-                    ],
-    pipes         : [ TranslatePipe ]
+                        CMSBackendService,
+                        AppDataService,
+                        LocaleService,
+                        LocalizationService
+                    ]
 })
-
-@Routes([
-    {
-        path      : '/',
-        component : WaltzViewComponent
-    }, {
-        path      : '/posts/:id',
-        component : PostDetailComponent
-    }, {
-        path      : '/pages/:urlString',
-        component : DynamicPageComponent
-    }
-])
 
 export class WaltzMainComponent extends Locale implements OnInit {
     data = {};
@@ -56,7 +29,9 @@ export class WaltzMainComponent extends Locale implements OnInit {
     /*
      * Setting 'alert.dismissible' to a value (no matter what), will make the alert dismissible.
      */
-    alert = {};
+    alert = {
+        dismissible : true
+    };
     info  = {
         message : "Test-Page"
     };
@@ -64,11 +39,11 @@ export class WaltzMainComponent extends Locale implements OnInit {
 
     constructor(public locale           : LocaleService,
                 public localization     : LocalizationService,
-                private _router         : Router,
                 public viewContainerRef : ViewContainerRef,
                 private _appdata        : AppDataService) {
         super(null, localization);
 
+        this.locale.useLocalStorage();
         this.locale.addLanguage('en');
         this.locale.addLanguage('nl');
         this.locale.definePreferredLocale('nl', 'BE', 30);
@@ -80,7 +55,9 @@ export class WaltzMainComponent extends Locale implements OnInit {
         _appdata.userChange.subscribe(user => this.user = user);
 
         this.info = _appdata.info;
-        _appdata.infoChange.subscribe(info => this.info = info);
+        _appdata.infoChange.subscribe(info => {this.info = info;
+            console.debug("Info changed in main!", info)
+        });
 
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
@@ -95,6 +72,6 @@ export class WaltzMainComponent extends Locale implements OnInit {
     }
 
     ngOnInit() {
-        this._router.navigate(['/']);
+//        this._router.navigate(['/']);
     }
 }

@@ -2,27 +2,17 @@ import {Component}           from '@angular/core';
 import {OnInit}              from '@angular/core';
 import {Input}               from '@angular/core';
 import {EventEmitter}        from '@angular/core';
-import {CORE_DIRECTIVES}     from '@angular/common';
 
 import {Locale}              from 'angular2localization/angular2localization';
 import {LocaleService}       from 'angular2localization/angular2localization';
 import {LocalizationService} from 'angular2localization/angular2localization';
-import {TranslatePipe}       from 'angular2localization/angular2localization';
 
-import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
 
-import {AutoFocus}           from './autofocus.component';
 import {AppDataService}      from './app-data.service';
 
 @Component({
     selector      : 'editable-info',
-    templateUrl   : '/components/editable-info',
-    viewProviders : [ BS_VIEW_PROVIDERS ],
-    directives    : [
-                      CORE_DIRECTIVES,
-                      AutoFocus
-                    ],
-    pipes         : [ TranslatePipe ]
+    templateUrl   : '/components/editable-info'
 })
 
 export class EditableInfoComponent extends Locale implements OnInit {

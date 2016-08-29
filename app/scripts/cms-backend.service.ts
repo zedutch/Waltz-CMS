@@ -1,7 +1,11 @@
 import {Injectable}     from '@angular/core';
+
 import {Http}           from '@angular/http';
+import {Response}       from '@angular/http';
 import {Headers}        from '@angular/http';
 import {RequestOptions} from '@angular/http';
+
+import {Observable}     from 'rxjs/Observable';
 
 import {LocaleService}  from 'angular2localization/angular2localization';
 
@@ -29,24 +33,30 @@ export class CMSBackendService {
 
     private updateHeaders() {
         let headers = new Headers({
-            'Content-Type'    : 'application/json',
-            'Accept-Language' : this.locale.getCurrentLanguage()
+            'Accept-Language' : this.locale.getCurrentLanguage() || "nl"
         });
 
         this.options = new RequestOptions({headers: headers});
     }
+
+    private extractJSON(res : Response) {
+        if (res.status === 200) {
+            let body = res.json();
+            return body || {};
+        }
+    }
+
+    private handleError(error : any) {
+        let errMsg = (error.message) ? error.message :
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg);
+        return Observable.throw(errMsg);
+    }
     
-    getInfo(callback) {
-        var data = this.http.get(this.URL + this._epInfo, this.options);
-        data.subscribe(res => {
-            if (res.status === 200) {
-                var info = res.json();
-                console.log("[DEBUGGING] The info object:", info);
-                callback(info || {});
-            } else {
-                console.error("Error retrieving website info!", res)
-            }
-        });
+    getInfo() : Observable<any> {
+        return this.http.get(this.URL + this._epInfo, this.options)
+                        .map(this.extractJSON)
+                        .catch(this.handleError);
     }
 
     postInfo(info, callback = undefined) {

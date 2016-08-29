@@ -1,48 +1,42 @@
 import {Component}          from '@angular/core';
 import {OnInit}             from '@angular/core';
-import {RouteSegment}       from '@angular/router';
+import {OnDestroy}          from '@angular/core';
 
-import {TranslatePipe}      from 'angular2localization/angular2localization';
-import {LocaleDatePipe}     from 'angular2localization/angular2localization';
+import {ActivatedRoute}     from  '@angular/router';
+
+import {Subscription}       from 'rxjs/Subscription';
 
 import {CMSBackendService}  from './cms-backend.service';
 import {AppDataService}     from './app-data.service';
 
-import {EditorComponent}        from './editor.component';
-import {EditableLabelComponent} from './editable-label.component';
-
 @Component({
     selector    : 'dynamic-page',
-    templateUrl : '/views/dynamic-page',
-    providers   : [
-                    CMSBackendService
-                  ],
-    directives  : [
-                    EditorComponent,
-                    EditableLabelComponent
-                  ],
-    pipes       : [
-                    TranslatePipe,
-                    LocaleDatePipe
-                  ]
+    templateUrl : '/views/dynamic-page'
 })
 
-export class DynamicPageComponent implements OnInit {
+export class DynamicPageComponent implements OnInit, OnDestroy {
     page : any = {};
+    urlSubscription : Subscription;
 
     originalTitle : string;
 
     constructor(private _cmsBackendService : CMSBackendService,
-                private _currSegment       : RouteSegment,
+                private _currRoute         : ActivatedRoute,
                 private _appData           : AppDataService) {}
 
     ngOnInit () {
         let self = this;
-        let urlString = this._currSegment.getParam('urlString');
-        this._cmsBackendService.getPage(urlString, function(page) {
-            self.page = page;
-            self.originalTitle = page.title;
+        this.urlSubscription = this._currRoute.params.subscribe(params => {
+            let urlString = params['urlString']
+            self._cmsBackendService.getPage(urlString, function(page) {
+                self.page = page;
+                self.originalTitle = page.title;
+            });
         });
+    }
+
+    ngOnDestroy() {
+        this.urlSubscription.unsubscribe();
     }
 
     updatePage () {
