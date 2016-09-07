@@ -11,8 +11,6 @@ import {LocaleService}       from 'angular2localization/angular2localization';
 import {LocalizationService} from 'angular2localization/angular2localization';
 import {TranslatePipe}       from 'angular2localization/angular2localization';
 
-import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
-import {TOOLTIP_DIRECTIVES}  from 'ng2-bootstrap/ng2-bootstrap';
 
 import {Link}                from './link.component';
 import {AppDataService}      from './app-data.service';
@@ -20,13 +18,11 @@ import {AppDataService}      from './app-data.service';
 @Component({
     selector      : 'editor',
     templateUrl   : '/components/editor',
-    viewProviders : [ BS_VIEW_PROVIDERS ],
     providers     : [
                       TranslatePipe
                     ],
     directives    : [
                       CORE_DIRECTIVES,
-                      TOOLTIP_DIRECTIVES,
                       Link
                     ],
     pipes         : [ TranslatePipe ]

@@ -17,6 +17,7 @@ import {PostComponent}           from './post.component';
 import {DynamicPageComponent}    from './dynamic-page.component';
 import {LoginModalComponent}     from './login-modal.component';
 import {NotFoundComponent}       from './not-found.component';
+//import {WidgetCalendarComponent} from './widget-calendar.component';
 
 import {EditorComponent}         from './editor.component';
 import {EditableLabelComponent}  from './editable-label.component';
@@ -29,14 +30,8 @@ import {Link}                    from './link.component';
 import {CMSBackendService}       from './cms-backend.service';
 import {AppDataService}          from './app-data.service';
 
-// Temp. disabled until ng2-bootstrap is fixed
-//import {WidgetCalendarComponent} from './widget-calendar.component';
-//import {DATEPICKER_DIRECTIVES}   from 'ng2-bootstrap/ng2-bootstrap';
-
-import {BS_VIEW_PROVIDERS}   from 'ng2-bootstrap/ng2-bootstrap';
-import {MODAL_DIRECTVES}     from 'ng2-bootstrap/ng2-bootstrap';
-import {TAB_DIRECTIVES}      from 'ng2-bootstrap/ng2-bootstrap';
-import {AlertComponent}      from 'ng2-bootstrap/ng2-bootstrap';
+// Ng2-Bootstrap //
+import {Ng2BootstrapModule} from 'ng2-bootstrap/ng2-bootstrap';
 
 // Angular2 Localization //
 import {TranslatePipe}      from 'angular2localization/angular2localization';
@@ -52,15 +47,12 @@ import {LocalizationService}from 'angular2localization/angular2localization';
         HttpModule,
         JsonpModule,
         DeprecatedFormsModule,
-        Routing
+        Routing,
+        Ng2BootstrapModule
     ],
     declarations: [
         TranslatePipe,
         LocaleDatePipe,
-
-        MODAL_DIRECTVES,
-        TAB_DIRECTIVES,
-        AlertComponent,
 
         WaltzMainComponent,
         WaltzViewComponent,
@@ -69,6 +61,7 @@ import {LocalizationService}from 'angular2localization/angular2localization';
         DynamicPageComponent,
         LoginModalComponent,
         NotFoundComponent,
+//        WidgetCalendarComponent,
 
         EditorComponent,
         EditableLabelComponent,
@@ -76,9 +69,6 @@ import {LocalizationService}from 'angular2localization/angular2localization';
 
         AutoFocus,
         Link
-//        WidgetCalendarComponent,
-
-//        DATEPICKER_DIRECTIVES
     ],
     providers: [
         CMSBackendService,
@@ -87,9 +77,7 @@ import {LocalizationService}from 'angular2localization/angular2localization';
         AppRoutingProviders,
 
         LocaleService,
-        LocalizationService,
-
-        BS_VIEW_PROVIDERS
+        LocalizationService
     ],
     bootstrap: [
         WaltzMainComponent
