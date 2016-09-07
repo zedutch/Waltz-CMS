@@ -174,10 +174,11 @@ footer
     background-color alpha(color-main, 0.1)
     font-weight      normal
     color            text-main
-
     &.no-hover
         background-color    inherit
         cursor              inherit
+    & .post-edit
+        display             inherit
 
 .post-content
     margin-left    5px
@@ -185,9 +186,13 @@ footer
 .post-title
     font-weight     bold
     color           color-main-da
-    font-size       1.1em
-    margin-top      4px
-    margin-bottom   8px
+    font-size       1.2em
+    margin-bottom   4px
+
+.post-edit
+    font-size   0.85em
+    float       right
+    display     none
 
 .post-metadata
     text-align  right

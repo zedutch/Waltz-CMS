@@ -1,5 +1,6 @@
 a.post((click)='openPost()' '[ngClass]'="{'no-hover' : !info.usePostDetails}")
-    div.post-title   {{post?.title}}
+    div.post-title {{post?.title}}
+        a.post-edit(*ngIf='user?.isStaff || user?.isAdmin' '(click)'='openPost(true)') Edit
     div.post-content('[innerHTML]'='post?.content')
     div.post-metadata
         span.post-author(*ngIf='post?.author') {{'post.author' | translate:lang}} {{post?.author}} &bull;
