@@ -25,35 +25,15 @@ export class WaltzViewComponent extends Locale implements OnInit {
         super(locale, localization);
 
         this.user = _appData.user;
-        _appData.userChange.subscribe(this.userChange);
+        _appData.userChange.subscribe(newUser => this.user = newUser);
+
+        this.info = _appData.info;
+        _appData.infoChange.subscribe(newInfo => this.info = newInfo);
     }
 
     ngOnInit () {
-        var self = this;
-        this._cmsBackendService.getInfo()
-                   .subscribe(
-                        info => {
-                            console.debug("[DEBUGGING] The info object:", info);
-                            this.info = info;
-                            this._appData.setInfo(info);
-                            this._appData.infoChange
-                                         .subscribe(this.infoChange);
-                        },
-                        error => console
-                                    .error("Could not retrieve the info object!"));
-
-        this._cmsBackendService.getAllPosts(function(posts) {
-            self.posts = posts;
-        });
+        this._cmsBackendService.getAllPosts(posts => this.posts = posts);
     }
-
-    userChange = (newUser) => {
-        this.user = newUser;
-    };
-
-    infoChange = (newInfo) => {
-        this._cmsBackendService.postInfo(newInfo);
-    };
     
     toggleCalendar () {
         this.info.showCalendar = !this.info.showCalendar;

@@ -31,10 +31,11 @@ export class WaltzMainComponent extends Locale implements OnInit {
     };
     user : any;
 
-    constructor(public locale           : LocaleService,
-                public localization     : LocalizationService,
-                public viewContainerRef : ViewContainerRef,
-                private _appdata        : AppDataService) {
+    constructor(public locale               : LocaleService,
+                public localization         : LocalizationService,
+                public viewContainerRef     : ViewContainerRef,
+                private _cmsBackendService  : CMSBackendService,
+                private _appData            : AppDataService) {
         super(null, localization);
 
         this.locale.useLocalStorage();
@@ -45,25 +46,39 @@ export class WaltzMainComponent extends Locale implements OnInit {
         this.localization.translationProvider('../lang/locale-');
         this.localization.updateTranslation();
 
-        this.user = _appdata.user;
-        _appdata.userChange.subscribe(user => this.user = user);
+        this.user = _appData.user;
+        _appData.userChange.subscribe(user => this.user = user);
 
-        this.info = _appdata.info;
-        _appdata.infoChange.subscribe(info => this.info = info);
+        this.info = _appData.info;
+        _appData.infoChange.subscribe(info => this.info = info);
 
         // Hack needed for ng2-bootstrap modals
         this.viewContainerRef = viewContainerRef;
     }
 
     changeUserData(user) {
-        this._appdata.setUser(user);
+        this._appData.setUser(user);
     }
 
     changeInfoData(info) {
-        this._appdata.setInfo(info);
+        this._appData.setInfo(info);
     }
 
     ngOnInit() {
-//        this._router.navigate(['/']);
+        this._cmsBackendService.getInfo()
+               .subscribe(
+                    info => {
+                        console.debug("[DEBUGGING] The info object:", info);
+                        this.info = info;
+                        this._appData.setInfo(info);
+                        this._appData.infoChange
+                                     .subscribe(this.infoChange);
+                    },
+                    error => console
+                                .error("Could not retrieve the info object!"));
     }
+
+    infoChange = (newInfo) => {
+        this._cmsBackendService.postInfo(newInfo);
+    };
 }
