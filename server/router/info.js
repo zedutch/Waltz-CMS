@@ -1,5 +1,5 @@
 var express          = require('express'),
-    checkSession     = require('./helpers.js').checkSession,
+    checkSession     = require('./helpers.js').SessionManager.checkSession,
     getCorrectLocale = require('./helpers.js').getCorrectLocale,
     Info             = require('../models/info.js'),
     Page             = require('../models/page.js'),
@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', /*checkSession,*/ function(req, res) {
+router.post('/', checkSession, function(req, res) {
     var locale = getCorrectLocale(req);
 
     Info.findOne({}, function(err, info) {
