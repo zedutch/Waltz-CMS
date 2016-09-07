@@ -387,4 +387,11 @@ yearpicker:focus
         width       5%
 
 .editor-tooltip
-    background-color    red
+    & .tooltip-inner
+        background-color    editor-bar-bg
+        border              1px solid editor-border
+        border-right-width  2px
+        border-bottom-width 2px
+        color               black
+    & .tooltip-arrow
+        border-top-color    editor-border !important
