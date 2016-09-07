@@ -17,7 +17,11 @@ export class PostComponent implements OnInit {
                 private _appData : AppDataService) {}
 
     openPost() {
-        this._router.navigate( ['/posts', this.post.urlString] );
+        if (this.info.usePostDetails) {
+            this._router.navigate( ['/posts', this.post.urlString] );
+        } else {
+            console.debug("Post details are disabled.");
+        }
     }
 
     ngOnInit() {

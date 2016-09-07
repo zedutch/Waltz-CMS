@@ -1,4 +1,4 @@
-a.post((click)='openPost()' '*ngIf'='info.usePostDetails')
+a.post((click)='openPost()' '[ngClass]'="{'no-hover' : !info.usePostDetails}")
     div.post-title   {{post?.title}}
     div.post-content('[innerHTML]'='post?.content')
     div.post-metadata
