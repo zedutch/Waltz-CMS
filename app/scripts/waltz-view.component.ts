@@ -34,6 +34,10 @@ export class WaltzViewComponent extends Locale implements OnInit {
     ngOnInit () {
         this._cmsBackendService.getAllPosts(posts => this.posts = posts);
     }
+
+    saveOptions () {
+        this._appData.setInfo(this.info);
+    }
     
     toggleCalendar () {
         this.info.showCalendar = !this.info.showCalendar;

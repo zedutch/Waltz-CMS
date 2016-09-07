@@ -35,6 +35,8 @@
 
     "page.home"   : "Home",
 
+    "options.toggleDetails" : "Toon Post Details",
+
     "widget.upcoming" : "Aankomende evenementen",
 
     "editor.link.message"  : "Geef een URL in:",

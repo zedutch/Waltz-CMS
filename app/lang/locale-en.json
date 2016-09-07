@@ -35,6 +35,8 @@
 
     "page.home"   : "Home",
 
+    "options.toggleDetails" : "Toggle Post Details",
+
     "widget.upcoming" : "Upcoming Events",
 
     "editor.link.message" : "Please enter a URL:",

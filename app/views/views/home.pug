@@ -5,6 +5,9 @@ div.row
                 editable-info(attribute='welcomeTitle' '[adminonly]'="true")
             editable-info(attribute='welcomeText' '[adminonly]'="true")
         div.main-widget
+            div.main-widget-options(*ngIf='user.isAdmin')
+                input(type='checkbox' id='toggleDetails' '[ngModel]'='info.usePostDetails' '(ngModelChange)'='info.usePostDetails=$event;saveOptions()')
+                label(for='toggleDetails') {{'options.toggleDetails' | translate:lang}}
             ul.posts-list
                 li(*ngFor="let post of posts")
                     post([post]='post')
