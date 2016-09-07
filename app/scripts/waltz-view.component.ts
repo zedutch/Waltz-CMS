@@ -25,10 +25,10 @@ export class WaltzViewComponent extends Locale implements OnInit {
         super(locale, localization);
 
         this.user = _appData.user;
-        _appData.userChange.subscribe(newUser => this.user = newUser);
+        _appData.userChange.subscribe(user => this.user = user);
 
         this.info = _appData.info;
-        _appData.infoChange.subscribe(newInfo => this.info = newInfo);
+        _appData.infoChange.subscribe(info => this.info = info);
     }
 
     ngOnInit () {
