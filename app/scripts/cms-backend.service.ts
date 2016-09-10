@@ -115,6 +115,12 @@ export class CMSBackendService {
         });
     }
 
+    deletePost(urlString) : Observable<any> {
+        return this.http.delete(this.URL + this._epPosts + '/' + urlString,
+                                this.options)
+                        .catch(this.handleError);
+    }
+
     register(userData, callback) {
         var data = this.http.post(this.URL + this._epUsers, userData, this.options);
         data.subscribe(res => {

@@ -32,6 +32,8 @@
     "post.lastEditBy" : "Laatst bewerkt door",
     "post.lastEditAt" : "om",
     "post.lastEditOn" : "op",
+    "post.edit"       : "Bewerk",
+    "post.remove"     : "Verwijder",
 
     "page.home"   : "Home",
 

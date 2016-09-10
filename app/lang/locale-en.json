@@ -32,6 +32,8 @@
     "post.lastEditBy" : "Last edited by",
     "post.lastEditAt" : "at",
     "post.lastEditOn" : "on",
+    "post.edit"       : "Edit",
+    "post.remove"     : "Remove",
 
     "page.home"   : "Home",
 
