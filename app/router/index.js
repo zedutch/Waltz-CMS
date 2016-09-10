@@ -12,7 +12,8 @@ var envVariables = {
             var envConf = require(file);
             return envConf[variable.substr(fileEnd + 1)];
         }
-    }
+    },
+    doctype : 'html'
 };
 
 router.get('/modals/:name', function(req, res) {
