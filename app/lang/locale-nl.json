@@ -1,8 +1,9 @@
 {
     "waltz"  : "Waltz",
 
-    "save"   : "Opslaan",
-    "cancel" : "Annuleer",
+    "save"    : "Opslaan",
+    "cancel"  : "Annuleer",
+    "warning" : "Opgepast!",
 
     "login.button"    : "Aanmelden / Registreren",
     "login.title"     : "Aanmelden",
@@ -34,6 +35,9 @@
     "post.lastEditOn" : "op",
     "post.edit"       : "Bewerk",
     "post.remove"     : "Verwijder",
+
+    "post.remove.confirmation"  : "Ben je zeker dat je deze post permanent wilt verwijderen?",
+    "post.remove.warning" : "Dit kan niet meer ongedaan gemaakt worden.",
 
     "page.home"   : "Home",
 

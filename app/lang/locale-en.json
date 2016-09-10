@@ -1,8 +1,9 @@
 {
     "waltz"  : "Waltz",
 
-    "save"   : "Save",
-    "cancel" : "Cancel",
+    "save"    : "Save",
+    "cancel"  : "Cancel",
+    "warning" : "Warning!",
 
     "login.button"    : "Log In / Register",
     "login.title"     : "Log In",
@@ -34,6 +35,9 @@
     "post.lastEditOn" : "on",
     "post.edit"       : "Edit",
     "post.remove"     : "Remove",
+
+    "post.remove.confirmation"  : "Are you sure you want to permanently delete this post?",
+    "post.remove.warning"       : "This cannot be undone.",
 
     "page.home"   : "Home",
 

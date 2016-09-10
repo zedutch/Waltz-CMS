@@ -27,8 +27,11 @@ export class PostComponent implements OnInit {
         }
     }
 
-    deletePost() {
-        if (this.user.isStaff || this.user.isAdmin) {
+    deletePost(shouldDelete = true) {
+        console.log("Delete post?", shouldDelete);
+        if (shouldDelete && (this.user.isStaff || this.user.isAdmin)) {
+            console.log("BAM! Post deleted!")
+            /*
             this._cmsBackendService.deletePost(this.post.urlString)
                 .subscribe(
                     status => {
@@ -40,7 +43,8 @@ export class PostComponent implements OnInit {
                     },
                     error => console
                                 .error("Could not delete the post!"));
-        } else {
+            */
+        } else if(shouldDelete) {
             console.error("User not authorized to delete posts");
         }
     }

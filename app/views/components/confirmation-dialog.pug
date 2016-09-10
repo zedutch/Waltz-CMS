@@ -1,0 +1,12 @@
+template(#confirmationTemplate let-model='model')
+    div.confirmation-box
+        div.confirmation-title {{'post.remove.confirmation' | translate:lang}}
+        div.confirmation-warning
+            div {{'warning' | translate:lang}}
+            div {{'post.remove.warning' | translate:lang}}
+        div.confirmation-buttons.btn-group.btn-group-justified(role='group')
+            a.btn.btn-danger.btn-xs {{'post.remove' | translate:lang}}
+            a.btn.btn-default.btn-xs {{'cancel' | translate:lang}}
+
+a('[tooltipHtml]'='confirmationTemplate' '[tooltipEnable]'='tooltipEnabled' '(click)'='toggleTooltip()')
+    ng-content

@@ -3,7 +3,7 @@ a.post((click)='openPost()' '[ngClass]'="{'no-hover' : !info.usePostDetails}" '*
         span.post-menu(*ngIf='user?.isStaff || user?.isAdmin')
             a.post-edit('(click)'='openPost(true)') {{'post.edit' | translate:lang}}
             | • 
-            a.post-delete('(click)'='deletePost()') {{'post.remove' | translate:lang}}
+            waltz-confirm.post-delete('(onConfirm)'='deletePost($event)') {{'post.remove' | translate:lang}}
     div.post-content('[innerHTML]'='post?.content')
     div.post-metadata
         span.post-author(*ngIf='post?.author') {{'post.author' | translate:lang}} {{post?.author}} &bull;

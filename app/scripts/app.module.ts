@@ -25,6 +25,7 @@ import {EditableInfoComponent}   from './editable-info.component';
 
 import {AutoFocus}               from './auto-focus.component';
 import {Link}                    from './link.component';
+import {ConfirmationDialog}      from './confirmation-dialog.component';
 
 // Waltz Services //
 import {CMSBackendService}       from './cms-backend.service';
@@ -68,7 +69,8 @@ import {LocalizationService}from 'angular2localization/angular2localization';
         EditableInfoComponent,
 
         AutoFocus,
-        Link
+        Link,
+        ConfirmationDialog
     ],
     providers: [
         CMSBackendService,
