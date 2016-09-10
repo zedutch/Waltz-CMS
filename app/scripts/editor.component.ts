@@ -11,8 +11,6 @@ import {LocaleService}       from 'angular2localization/angular2localization';
 import {LocalizationService} from 'angular2localization/angular2localization';
 import {TranslatePipe}       from 'angular2localization/angular2localization';
 
-
-import {Link}                from './link.component';
 import {AppDataService}      from './app-data.service';
 
 @Component({
@@ -22,8 +20,7 @@ import {AppDataService}      from './app-data.service';
                       TranslatePipe
                     ],
     directives    : [
-                      CORE_DIRECTIVES,
-                      Link
+                      CORE_DIRECTIVES
                     ],
     pipes         : [ TranslatePipe ]
 })
