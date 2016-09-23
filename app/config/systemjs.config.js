@@ -12,7 +12,8 @@
         'rxjs'                 : 'lib/rxjs',
         '@angular'             : 'lib/@angular',
         'moment'               : 'lib/moment/moment.js',
-        'angular2localization' : 'lib/angular2localization'
+        'angular2localization' : 'lib/angular2localization',
+        'ng2-bootstrap'        : 'lib/ng2-bootstrap'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -30,6 +31,10 @@
         },
         'angular2localization': {
             main             : 'bundles/angular2localization.umd.min.js',
+            defaultExtension : 'js'
+        },
+		'ng2-bootstrap': {
+            main             : 'bundles/ng2-bootstrap.min.js',
             defaultExtension : 'js'
         }
     };
