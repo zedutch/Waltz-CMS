@@ -2,7 +2,7 @@ import {Component}      from '@angular/core';
 import {OnInit}         from '@angular/core';
 import {OnDestroy}      from '@angular/core';
 
-import {ActivatedRoute} from  '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 import {Subscription}   from 'rxjs/Subscription';
 
