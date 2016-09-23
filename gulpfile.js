@@ -88,7 +88,7 @@ gulp.task('tests-typescript', ['clean'], function() {
 });
 
 var fnTypescript = function() {
-    return tsProject.src()
+    return gulp.src(['app/scripts/**/*.ts', 'typings/main/**/*.d.ts'], { base : 'app/scripts'})
                .pipe(tsMaps.init())
                .pipe(ts(tsProject)).js
                .pipe(tsMaps.write('.'))
