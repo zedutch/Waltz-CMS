@@ -1,9 +1,18 @@
+var DB_NAME		= "DATABASE-NAME";
+
 exports.port    = 80;
 exports.env     = "development";
-exports.dburl   = "localhost:27017/DATABASE-NAME";
-exports.logDir  = "./logs/";
 
+exports.dbName  = DB_NAME;
+exports.dburl   = "localhost:27017/" + DB_NAME;
+exports.logDir  = "./logs/";
 exports.dbData  = "./data";
 exports.dbLog   = "mongo.log";
 
+exports.dbInitialFiles = "server/db-initial/*.json";
+
 exports.secret  = "REPLACE_WITH_A_RANDOM_STRING";
+
+exports.report	= {
+	'path'	:	"coverage/"
+};
