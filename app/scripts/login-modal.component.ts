@@ -61,7 +61,7 @@ export class LoginModalComponent {
         this.modal.hide();
     }
 
-	private handleAccountData(response) {
+	handleAccountData = response => {
 		this._cmsBackendService.setToken(response.token);
 		this.user = response.user;
 		this._appData.setUser(this.user);
