@@ -1,5 +1,10 @@
-var bcrypt = require('bcrypt-nodejs'),
+var jwt    = require('express-jwt'),
     config = require('../config/waltz.conf');
+
+exports.auth = jwt({
+	secret       : config.hashSecret,
+	userProperty : 'session'
+})
 
 exports.getCorrectLocale = function(req) {
     var locale_req = req.headers["accept-language"].substring(0, 2);
@@ -58,43 +63,4 @@ exports.checkBody = function (body, requiredFields, objectName, res) {
         }
     }
     return true;
-};
-
-var sessions = {};
-
-exports.SessionManager = {
-    createSession : function (req, userId, username, callback) {
-        var sid = bcrypt.genSaltSync(10).substring(7);
-        req.session.regenerate(function() {
-            req.session.user = userId;
-            req.session.sid  = sid;
-            req.session.name = username;
-            sessions[userId] = sid;
-            callback();
-        });
-    },
-    checkSession : function (req, res, callback) {
-        var authorized = false;
-        if (req.session.user) {
-            var sid = sessions[req.session.user];
-            authorized = sid == req.session.sid;
-        }
-
-        if (authorized) {
-            callback();
-        } else {
-            res.status(401).send({
-                error : "Authorization failed."
-            });
-        }
-    },
-    destroySession : function (req, callback) {
-        var userId = req.session.user;
-        req.session.destroy(function () {
-            if (userId) {
-                delete sessions[userId];
-            }
-            callback();
-        });
-    }
 };

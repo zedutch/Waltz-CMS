@@ -1,9 +1,9 @@
-var express          = require('express'),
-    checkSession     = require('./helpers.js').SessionManager.checkSession,
-    getCorrectLocale = require('./helpers.js').getCorrectLocale,
-    Info             = require('../models/info.js'),
-    Page             = require('../models/page.js'),
-    config           = require('../config/waltz.conf');
+var express         = require('express'),
+    auth            = require('./_helpers.js').auth,
+    getCorrectLocale= require('./_helpers.js').getCorrectLocale,
+    Info            = require('../models/info.js'),
+    Page            = require('../models/page.js'),
+    config          = require('../config/waltz.conf');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -37,7 +37,11 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', checkSession, function(req, res) {
+router.post('/', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var locale = getCorrectLocale(req);
 
     Info.findOne({}, function(err, info) {

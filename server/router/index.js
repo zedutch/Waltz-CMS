@@ -1,6 +1,5 @@
 var express   = require('express'),
     mongoose  = require('mongoose'),
-    bcrypt    = require('bcrypt-nodejs'),
     config    = require('../config/waltz.conf');
 var router = express.Router();
 
@@ -36,6 +35,17 @@ router.use('*', function (req, res){
     res.status(404).send({
         "error" : "Page not found."
     });
+});
+
+router.use(function(err, req, res, next){
+	if (err.name === "UnauthorizedError") {
+		res.status(401);
+		res.json({
+			error : err.name + ": " + err.message
+		});
+	} else {
+		res.status(err.status || 500);
+	}
 });
 
 module.exports = router;

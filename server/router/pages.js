@@ -1,8 +1,8 @@
 var express           = require('express'),
-    checkSession      = require('./helpers.js').SessionManager.checkSession,
-    getCorrectLocale  = require('./helpers.js').getCorrectLocale,
-    shouldLocalize    = require('./helpers.js').shouldLocalize,
-    sanitizeUrlString = require('./helpers.js').sanitizeUrlString,
+    auth              = require('./_helpers.js').auth,
+    getCorrectLocale  = require('./_helpers.js').getCorrectLocale,
+    shouldLocalize    = require('./_helpers.js').shouldLocalize,
+    sanitizeUrlString = require('./_helpers.js').sanitizeUrlString,
     Page              = require('../models/page.js'),
     config            = require('../config/waltz.conf');
 var router = express.Router();
@@ -24,7 +24,11 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', checkSession, function(req, res) {
+router.post('/', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var title = req.body.title;
     var urlString = sanitizeUrlString(title);
     var now = new Date().toISOString();
@@ -69,7 +73,11 @@ router.get('/:urlString', function(req, res) {
     });
 });
 
-router.put('/:urlString', checkSession, function(req, res) {
+router.put('/:urlString', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var urlString = req.params.urlString;
     var locale = getCorrectLocale(req);
     var now = new Date().toISOString();
@@ -113,7 +121,11 @@ router.put('/:urlString', checkSession, function(req, res) {
     });
 });
 
-router.delete('/:urlString', checkSession, function(req, res) {
+router.delete('/:urlString', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var urlString = req.params.urlString;
 
     Page.remove({

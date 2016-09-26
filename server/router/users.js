@@ -1,20 +1,17 @@
 var express        = require('express'),
-    bcrypt         = require('bcrypt-nodejs'),
+	auth            = require('./_helpers.js').auth,
+	passport	   = require('passport'),
     User           = require('../models/user.js'),
-    config         = require('../config/waltz.conf'),
-    SessionManager = require('./helpers.js').SessionManager;
+    config         = require('../config/waltz.conf');
 var router = express.Router();
 
 router.post('/', function(req, res) {
-    var password = req.body.password,
-        salt     = bcrypt.genSaltSync(10),
-        hash     = bcrypt.hashSync(password, salt);
+    var password = req.body.password;
 
     if (req.body.username && req.body.email && req.body.password) {
         var newUser = new User({
             username       : req.body.username,
             username_lower : req.body.username.toLowerCase(),
-            password       : hash,
             email          : req.body.email.toLowerCase(),
             first_name     : req.body.first_name,
             last_name      : req.body.last_name,
@@ -25,9 +22,15 @@ router.post('/', function(req, res) {
             telephone      : req.body.telephone
         });
 
+		newUser.setPassword(password);
+
         newUser.save(function(err, user) {
             if (!err) {
-                return res.status(200).send(user);
+				var token = user.generateToken();
+                return res.status(200).send({
+					"token" : token,
+					"user"  : user
+				});
             } else {
                 err = err.toJSON();
                 delete err.op;
@@ -41,7 +44,11 @@ router.post('/', function(req, res) {
     }
 });
 
-router.get('/', function(req, res) {
+router.get('/', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     User.find({}, function(err, users) {
         if (!err) {
             return res.status(200).send(users);
@@ -51,8 +58,12 @@ router.get('/', function(req, res) {
     });
 });
 
-router.get('/:username', function(req, res) {
+router.get('/:username', auth, function(req, res) {
     var username = req.params.username.toLowerCase();
+
+	if (req.session.username !== username && !req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
 
     User.findOne({
         username_lower : username
@@ -67,57 +78,34 @@ router.get('/:username', function(req, res) {
     });
 });
 
-router.post(config.epLogin, function(req, res) {
-    var username = req.body.username,
-        password = req.body.password,
-        email    = req.body.email;
+router.post(config.epLogin, function(req, res) {	
+	if (!req.body.username || !req.body.password) {
+		return res.status(400).send({
+			error : "No valid login credentials found! Provide at least a 'username' field and the matching password in a 'password' field."
+		})
+	} else if (req.body.username) {
+		req.body.username_lower = req.body.username.toLowerCase();
+	}
+	
+	passport.authenticate('local', function (error, user, info) {
+		if (error) {
+			return res.status(400).send(error);
+		}
 
-    if (username) {
-        username = username.toLowerCase();
-    }
-
-    if (email) {
-        email = email.toLowerCase();
-    }
-
-    var validateCredentials = function(err, data) {
-        if (err || data === null) {
-            return res.status(401).send({
-                error : "Invalid username and/or password!"
-            });
-        }
-
-        if ((username == data.username_lower || email == data.email) && password !== undefined &&
-            bcrypt.compareSync(password, data.password)) {
-                SessionManager.createSession(req, data._id, username, function() {
-                    return res.send(data);
-                });
-        } else {
-            return res.status(401).send({
-                error : "Invalid username and/or password!"
-            });
-        }
-    };
-
-    if (username && password) {
-        User.findOne({
-            username_lower : username
-        }, validateCredentials);
-    } else if(email && password) {
-        User.findOne({
-            email : email
-        }, validateCredentials);
-    } else {
-        return res.status(400).send({
-            error : "No valid login credentials found! Provide at least either a 'username' or 'email' field and the matching password in a 'password' field."
-        });
-    }
+		if (user) {
+			var token = user.generateToken();
+			return res.status(200).send({
+				"token" : token,
+				"user"  : user
+			});
+		} else {
+			return res.status(401).send(info);
+		}
+	})(req, res);
 });
 
 router.get(config.epLogout, function(req, res) {
-    SessionManager.destroySession(req, function() {
-        return res.send(204);
-    });
+    // TODO : Implement
 });
 
 module.exports = router;

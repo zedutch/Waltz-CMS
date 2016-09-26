@@ -1,5 +1,5 @@
 var express      = require('express'),
-    checkSession = require('./helpers.js').SessionManager.checkSession;
+    auth         = require('./_helpers.js').auth;
     Event        = require('../models/event.js');
 var router = express.Router();
 
@@ -13,7 +13,11 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/', checkSession, function(req, res) {
+router.post('/', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var event = new Event({
         title        : req.body.title,
         date         : req.body.date,
@@ -47,7 +51,11 @@ router.get('/:id', function(req, res) {
     })
 });
 
-router.put('/:id', checkSession, function(req, res) {
+router.put('/:id', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var id = req.params.id;
 
     Event.update({
@@ -67,7 +75,11 @@ router.put('/:id', checkSession, function(req, res) {
     return res.sendStatus(204);
 });
 
-router.delete('/:id', checkSession, function(req, res) {
+router.delete('/:id', auth, function(req, res) {
+	if (!req.session.isAdmin && !req.session.isStaff) {
+		return res.status(401).send();
+	}
+
     var id = req.params.id;
 
     Event.remove({

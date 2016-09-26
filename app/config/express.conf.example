@@ -1,7 +1,7 @@
 var DB_NAME		= "DATABASE-NAME";
 
 exports.port    = 80;
-exports.env     = "development";
+exports.env     = "development"; // set this to anything else to disable the error logger
 
 exports.dbName  = DB_NAME;
 exports.dburl   = "localhost:27017/" + DB_NAME;

@@ -40,6 +40,13 @@ import {LocaleDatePipe}     from 'angular2localization/angular2localization';
 import {LocaleService}      from 'angular2localization/angular2localization';
 import {LocalizationService}from 'angular2localization/angular2localization';
 
+// Angular2 LocalStorage //
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+
+let localStorageServiceConfig = {
+    prefix: 'waltz',
+    storageType: 'localStorage'
+};
 
 @NgModule({
     imports: [
@@ -77,6 +84,11 @@ import {LocalizationService}from 'angular2localization/angular2localization';
         AppDataService,
 
         AppRoutingProviders,
+
+		LocalStorageService,
+        {
+            provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
+        },
 
         LocaleService,
         LocalizationService

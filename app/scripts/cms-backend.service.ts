@@ -9,9 +9,12 @@ import {Observable}     from 'rxjs/Observable';
 
 import {LocaleService}  from 'angular2localization/angular2localization';
 
+import {LocalStorageService} from 'angular-2-local-storage';
+
 @Injectable()
 export class CMSBackendService {
-    URL = 'http://localhost:8080/api';
+	LS_TOKEN = 'Waltz_LS_CMS_Token';
+    URL   = 'http://localhost:8080/api';
     _epPosts  = '/posts';
     _epInfo   = '/info';
     _epUsers  = '/users';
@@ -19,21 +22,25 @@ export class CMSBackendService {
     _epLogin  = this._epUsers + '/login';
     _epLogout = this._epUsers + '/logout';
     options : RequestOptions;
+	token = '';
 
     constructor(private http : Http,
-                private locale : LocaleService) {
+                private locale : LocaleService,
+				private localStorage : LocalStorageService) {
 
         this.locale.languageCodeChanged.subscribe(function(newLang) {
             console.log("Language changed: " + newLang);
             this.updateHeaders();
         });
 
+		this.token = this.localStorage.get(this.LS_TOKEN);
         this.updateHeaders();
     }
 
     private updateHeaders() {
         let headers = new Headers({
-            'Accept-Language' : this.locale.getCurrentLanguage() || "nl"
+            'Accept-Language' : this.locale.getCurrentLanguage() || "nl",
+			'Authorization'   : 'Bearer ' + this.token
         });
 
         this.options = new RequestOptions({headers: headers});
@@ -52,6 +59,12 @@ export class CMSBackendService {
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
+
+	setToken(token) {
+		this.localStorage.set(this.LS_TOKEN, token);
+		this.token = token;
+		this.updateHeaders();
+	}
     
     getInfo() : Observable<any> {
         return this.http.get(this.URL + this._epInfo, this.options)

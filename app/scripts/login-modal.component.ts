@@ -64,9 +64,10 @@ export class LoginModalComponent {
         if (!this.loginData.username || !this.loginData.password) {
             this.showError("error.invalidLoginData");
         } else {
-            this._cmsBackendService.login(this.loginData, user => {
-                this.user = user;
-                this.userDataChange.emit(user);
+            this._cmsBackendService.login(this.loginData, response => {
+				this._cmsBackendService.setToken(response.token);
+                this.user = response.user;
+                this.userDataChange.emit(this.user);
                 this.close();
             });
         }
