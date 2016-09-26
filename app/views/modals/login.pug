@@ -3,7 +3,7 @@ a((click)='loginModal.show();' '*ngIf'='!user.username')
 span('*ngIf'='user.username')
     a {{user.username}}
     | &nbsp;|&nbsp;
-    a {{'logout.button' | translate:lang}}
+    a((click)="logout()") {{'logout.button' | translate:lang}}
 div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #loginModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true")
     div.modal-dialog.modal-sm(*ngIf="renderContent")
         div.modal-content

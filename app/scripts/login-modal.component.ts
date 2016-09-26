@@ -66,6 +66,11 @@ export class LoginModalComponent {
 		this.user = response.user;
 		this._appData.setUser(this.user);
 		this.close();
+	};
+
+	logout () {
+		this._cmsBackendService.setToken('');
+		this._appData.setUser({});
 	}
 
     login () {
