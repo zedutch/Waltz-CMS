@@ -8,3 +8,4 @@ typings/
 *.log
 coverage/
 test/*.js*
+server/config/waltz.conf
