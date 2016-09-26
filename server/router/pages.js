@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 
@@ -37,7 +37,7 @@ router.post('/', auth, function(req, res) {
         title      : title,
         content    : req.body.content,
         urlString  : urlString,
-        lastEditBy : req.session.name,
+        lastEditBy : req.session.user.name,
         lastEditOn : now
     });
 
@@ -74,7 +74,7 @@ router.get('/:urlString', function(req, res) {
 });
 
 router.put('/:urlString', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 
@@ -100,7 +100,7 @@ router.put('/:urlString', auth, function(req, res) {
             page.content = req.body.content;
         }
 
-        page.lastEditBy = req.session.name;
+        page.lastEditBy = req.session.user.name;
         page.lastEditOn = now;
 
         page.save(function(err) {
@@ -122,7 +122,7 @@ router.put('/:urlString', auth, function(req, res) {
 });
 
 router.delete('/:urlString', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 

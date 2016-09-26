@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 
@@ -52,7 +52,7 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 
@@ -76,7 +76,7 @@ router.put('/:id', auth, function(req, res) {
 });
 
 router.delete('/:id', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 

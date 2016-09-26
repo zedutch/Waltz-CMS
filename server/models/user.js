@@ -80,12 +80,9 @@ userSchema.methods.generateToken = function() {
 	exp.setDate(exp.getDate() + config.sessionLength);
 
 	return jwt.sign({
-		_id      : this._id,
-		email    : this.email,
-		username : this.username_lower,
-		isStaff  : this.isStaff,
-		isAdmin  : this.isAdmin,
-		exp      : parseInt(exp.getTime() / 1000)
+		_id  : this._id,
+		user : this.toJSON(),
+		exp  : parseInt(exp.getTime() / 1000)
 	}, config.hashSecret);
 };
 

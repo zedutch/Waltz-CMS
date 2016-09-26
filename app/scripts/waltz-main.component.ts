@@ -65,6 +65,21 @@ export class WaltzMainComponent extends Locale implements OnInit {
     }
 
     ngOnInit() {
+		if (this._cmsBackendService.hasSession()) {
+			this.user = this._cmsBackendService.getPrevSessionUser();
+			this.changeUserData(this.user);
+
+			this._cmsBackendService.getUser(this.user.url)
+               .subscribe(
+                    user => {
+                        console.debug("[DEBUGGING] The user object:", user);
+                        this.user = user;
+                        this.changeUserData(user);
+                    },
+                    error => console
+                                .error("Could not retrieve the logged in user object!"));
+		}
+		
         this._cmsBackendService.getInfo()
                .subscribe(
                     info => {

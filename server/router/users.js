@@ -45,7 +45,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/', auth, function(req, res) {
-	if (!req.session.isAdmin && !req.session.isStaff) {
+	if (!req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 
@@ -61,7 +61,7 @@ router.get('/', auth, function(req, res) {
 router.get('/:username', auth, function(req, res) {
     var username = req.params.username.toLowerCase();
 
-	if (req.session.username !== username && !req.session.isAdmin && !req.session.isStaff) {
+	if (req.session.user.username !== username && !req.session.user.isAdmin && !req.session.user.isStaff) {
 		return res.status(401).send();
 	}
 
@@ -76,6 +76,10 @@ router.get('/:username', auth, function(req, res) {
             return console.error(err);
         }
     });
+});
+
+router.get(config.epLogin, auth, function(req, res) {
+	
 });
 
 router.post(config.epLogin, function(req, res) {	

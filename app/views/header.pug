@@ -6,6 +6,6 @@ div.navbar
         div.navbar-menu
             a('[routerLink]'="['/']") {{'page.home' | translate:lang}}
             a('*ngFor'="let page of info.pages" '[routerLink]'="[page.url]") {{ page.title }}
-            login-modal('(userDataChange)'='changeUserData($event)')
+            login-modal
 
 div.navbar-border

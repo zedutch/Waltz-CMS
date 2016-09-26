@@ -22,7 +22,7 @@ export class CMSBackendService {
     _epLogin  = this._epUsers + '/login';
     _epLogout = this._epUsers + '/logout';
     options : RequestOptions;
-	token = '';
+	token : any = {};
 
     constructor(private http : Http,
                 private locale : LocaleService,
@@ -34,6 +34,15 @@ export class CMSBackendService {
         });
 
 		this.token = this.localStorage.get(this.LS_TOKEN);
+		if(this.token){
+			var payload = this.token.split('.')[1];
+			payload = atob(payload);
+			payload = JSON.parse(payload);
+			if (payload.exp <= Date.now() / 1000) {
+				// Token is invalid
+				this.token = '';
+			}
+		  }
         this.updateHeaders();
     }
 
@@ -45,6 +54,27 @@ export class CMSBackendService {
 
         this.options = new RequestOptions({headers: headers});
     }
+
+	hasSession() {
+		return this.token && true;
+	}
+
+	setToken(token) {
+		this.localStorage.set(this.LS_TOKEN, token);
+		this.token = token;
+		this.updateHeaders();
+	}
+
+	getPrevSessionUser() {
+		if(this.token){
+			var payload = this.token.split('.')[1];
+			payload = atob(payload);
+			payload = JSON.parse(payload);
+			return payload.user;
+		} else {
+			return undefined;
+		}
+	}
 
     private extractJSON(res : Response) {
         if (res.status === 200) {
@@ -59,12 +89,6 @@ export class CMSBackendService {
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
-
-	setToken(token) {
-		this.localStorage.set(this.LS_TOKEN, token);
-		this.token = token;
-		this.updateHeaders();
-	}
     
     getInfo() : Observable<any> {
         return this.http.get(this.URL + this._epInfo, this.options)
@@ -154,6 +178,12 @@ export class CMSBackendService {
                 console.error("Error during login in for user with user data", data, "Error message:", res);
             }
         })
+    }
+
+	getUser(urlString) : Observable<any> {
+        return this.http.get(this.URL + urlString, this.options)
+                        .map(this.extractJSON)
+                        .catch(this.handleError);
     }
 
      getPage(urlString, callback) {
