@@ -3,8 +3,7 @@ import {NgModule}        from '@angular/core';
 import {BrowserModule}   from '@angular/platform-browser';
 import {HttpModule}      from '@angular/http';
 import {JsonpModule}     from '@angular/http';
-//import {FormsModule}    from '@angular/forms';
-import {DeprecatedFormsModule} from '@angular/common';
+import {FormsModule}     from '@angular/forms';
 
 import {Routing}                from './app.routing';
 import {AppRoutingProviders}    from './app.routing';
@@ -51,10 +50,9 @@ let localStorageServiceConfig = {
 @NgModule({
     imports: [
         BrowserModule,
-//        FormsModule,
+        FormsModule,
         HttpModule,
         JsonpModule,
-        DeprecatedFormsModule,
         Routing,
         Ng2BootstrapModule
     ],

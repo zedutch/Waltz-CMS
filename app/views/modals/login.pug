@@ -23,13 +23,13 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                         form((submit)="login()")
                             fieldset.form-group
                                 label.sr-only(for="UsernameInput") {{'login.username' | translate:lang}}:
-                                input.form-control#UsernameInput([(ngModel)]="loginData.username" type="text" placeholder="{{'login.username' | translate:lang}}" autofocus required)
+                                input.form-control#UsernameInput([(ngModel)]="loginData.username" name="login-username" type="text" placeholder="{{'login.username' | translate:lang}}" autofocus required)
                             fieldset.form-group
                                 label.sr-only(for="PasswordInput") {{'login.password' | translate:lang}}:
-                                input.form-control#PasswordInput([(ngModel)]="loginData.password" type="password" placeholder="{{'login.password' | translate:lang}}" required)
+                                input.form-control#PasswordInput([(ngModel)]="loginData.password" name="login-password" type="password" placeholder="{{'login.password' | translate:lang}}" required)
                             fieldset.form-group.checkbox
                                 label
-                                    input([(ngModel)]="loginData.rememberMe" type="checkbox")
+                                    input([(ngModel)]="loginData.rememberMe" name="login-remember" type="checkbox")
                                     | {{'login.remember' | translate:lang}}
                             fieldset.form-group.text-center
                                 button.btn.btn-primary(type="submit") {{'login.submit' | translate:lang}}
@@ -45,23 +45,23 @@ div.modal.fade((onShown)="onShow($event)" '(onHide)'="onHide($event)" bsModal #l
                             fieldset.form-group.row
                                 div.col-xs-12.col-sm-6
                                     label.sr-only.col-xs-12(for="FirstNameInput") {{'register.firstName' | translate:lang}}:
-                                    input.form-control#FirstNameInput([(ngModel)]="registrationData.firstName" type="text" placeholder="{{'register.firstName' | translate:lang}}" autofocus required)
+                                    input.form-control#FirstNameInput([(ngModel)]="registrationData.firstName" name="register-firstName" type="text" placeholder="{{'register.firstName' | translate:lang}}" autofocus required)
                                 div.col-xs-12.col-sm-6
                                     label.sr-only.col-xs-12(for="LastNameInput") {{'register.lastName' | translate:lang}}:
-                                    input.form-control#LastNameInput([(ngModel)]="registrationData.lastName" type="text" placeholder="{{'register.lastName' | translate:lang}}" required)
+                                    input.form-control#LastNameInput([(ngModel)]="registrationData.lastName" name="register-lastName" type="text" placeholder="{{'register.lastName' | translate:lang}}" required)
                             fieldset.form-group
                                 label.sr-only(for="EmailInput") {{'register.email' | translate:lang}}:
-                                input.form-control#EmailInput([(ngModel)]="registrationData.email" type="email" placeholder="{{'register.email' | translate:lang}}" required)
+                                input.form-control#EmailInput([(ngModel)]="registrationData.email" name="register-email" type="email" placeholder="{{'register.email' | translate:lang}}" required)
                             hr
                             label {{'register.loginData' | translate:lang}}
                             fieldset.form-group
                                 label.sr-only(for="UsernameInput") {{'register.username' | translate:lang}}:
-                                input.form-control#UsernameInput([(ngModel)]="registrationData.username" type="text" placeholder="{{'register.username' | translate:lang}}" required)
+                                input.form-control#UsernameInput([(ngModel)]="registrationData.username" name="register-username" type="text" placeholder="{{'register.username' | translate:lang}}" required)
                             fieldset.form-group
                                 label.sr-only(for="PasswordInput") {{'register.password' | translate:lang}}:
-                                input.form-control#PasswordInput([(ngModel)]="registrationData.password" type="password" placeholder="{{'register.password' | translate:lang}}" required)
+                                input.form-control#PasswordInput([(ngModel)]="registrationData.password" name="register-password" type="password" placeholder="{{'register.password' | translate:lang}}" required)
                             fieldset.form-group
                                 label.sr-only(for="PasswordRepeatInput") {{'register.passwordRepeat' | translate:lang}}:
-                                input.form-control#PasswordRepeatInput([(ngModel)]="registrationData.passwordRepeat" type="password" placeholder="{{'register.passwordRepeat' | translate:lang}}" required)
+                                input.form-control#PasswordRepeatInput([(ngModel)]="registrationData.passwordRepeat" name="register-passwordAgain" type="password" placeholder="{{'register.passwordRepeat' | translate:lang}}" required)
                             fieldset.form-group.text-center
                                 button.btn.btn-primary(type="submit") {{'register.submit' | translate:lang}}
