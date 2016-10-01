@@ -50,9 +50,11 @@ If it's a small feature however, feel free to implement it yourself and to [subm
 5. Copy `app/config/express.conf.example` to `app/config/express.conf` and edit it according to the configuration you want to use on your machine.
 
 ## <a name="running"></a> Do you want to Run Waltz Locally?
-1. Open a terminal window and start the application:
+1. Open a terminal window and start the backend application:
 	`gulp`
-2. Open a browser window and navigate to `localhost:8080`.
+2. Open another terminal window to start the frontend application:
+    `npm start`
+3. Open a browser window and navigate to `localhost:8080`.
 
 You can install the [LiveReload browser extension](http://livereload.com/extensions/) to automatically reload the browser window whenever a file changes.
 
